@@ -32,14 +32,18 @@
     <!--Fazer Pelo aplicativo-->
     <form method="POST">
         {{ template_form.hidden_tag() }}
-        <p>{{ template_form.nome.label }}
-        {{ template_form.nome() }}</p>
-
-        <p>{{ template_form.curso.label }}
-            {{ template_form.curso() }}</p>
-
-        <p>{{ template_form.idade.label }}
-            {{ template_form.idade() }}</p>
+        <p>
+            {{ template_form.nome.label }}
+            {{ template_form.nome() }}
+        </p>
+        <p>
+            {{ template_form.curso.label }}
+            {{ template_form.curso() }}
+        </p>
+        <p>
+            {{ template_form.idade.label }}
+            {{ template_form.idade() }}
+        </p>
         <p>{{ template_form.submit() }}</p>
     </form>
 
