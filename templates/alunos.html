@@ -1,0 +1,8 @@
+{%extends "navigation.html"%}
+{% block content %} 
+    <h3>Teste de Página! <br><br> Dados do aluno: {{template_nome_aluno}}</h3>
+    <p>
+        Curso: {{template_alunos[template_nome_aluno][0]}} <br>
+        Idade: {{template_alunos[template_nome_aluno][1]}}
+    </p>
+{%endblock%} 

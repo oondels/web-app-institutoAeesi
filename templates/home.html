@@ -1,0 +1,17 @@
+{%extends "navigation.html"%}
+{%block content%}
+    <div>
+        <h3>Alunos</h3>
+        <ul>
+        {% for aluno in template_alunos %}
+            <li> <a href="aluno/{{ aluno }}">{{ aluno }}</a> </li>
+        {% endfor %}
+        </ul>
+
+        <p><a href="/cadastrar-aluno"><strong>Cadastrar Aluno</strong></a></p>
+        <p>Teste de organização de itens em lisa:</p>
+        {% for ordem, faixa in template_faixa|dictsort %}
+            <li>{{ ordem }} : {{ faixa }}</li>
+        {% endfor %}
+    </div>
+{%endblock%}
