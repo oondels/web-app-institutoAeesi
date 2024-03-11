@@ -5,6 +5,9 @@
 </div>
 
 <div>
+    <!--
+    Forma de fazer Formulário pelo HTML
+
     <form action="/cadastrar-aluno" method="POST">
         <h3>Adicione um novo Aluno!</h3>
 
@@ -24,5 +27,21 @@
         </p>
         <p><input type="submit" name="submit_cadastro"/></p>
     </form>
+    -->
+
+    <!--Fazer Pelo aplicativo-->
+    <form method="POST">
+        {{ template_form.hidden_tag() }}
+        <p>{{ template_form.nome.label }}
+        {{ template_form.nome() }}</p>
+
+        <p>{{ template_form.curso.label }}
+            {{ template_form.curso() }}</p>
+
+        <p>{{ template_form.idade.label }}
+            {{ template_form.idade() }}</p>
+        <p>{{ template_form.submit() }}</p>
+    </form>
+
 </div>
 {%endblock%}

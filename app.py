@@ -1,13 +1,30 @@
 from flask import Flask, render_template, request
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField
+
 app = Flask(__name__)
+app.config["SECRET_KEY"] = "mysecret"
 
 alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
 
+class Cadastro_Form(FlaskForm):
+    nome = StringField("Nome:")
+    curso = StringField("Curso:")
+    idade = StringField("Idade:")
+    submit = SubmitField("Cadastrar")
 
 @app.route('/')
-def index():
+def home():
     lista_faixas_teste = {1:"branca",3:"Roxa",4:"Marrom",2:"Azul",5:"Preta"}
     return render_template('home.html', template_faixa=lista_faixas_teste, template_alunos=alunos_teste)
+
+@app.route("/login")
+def login():
+    return render_template("login.html")
+
+@app.route("/register")
+def register():
+    return render_template("register.html")
 
 @app.route("/aluno/<aluno_name>")
 def alunos(aluno_name):
@@ -19,9 +36,18 @@ def contato():
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 def cadastro_aluno():
-    if request.form:
-        alunos_teste[request.form["nome"]] = [request.form["curso"], request.form["idade"]]
-    return render_template("cadastro.html")
+    # Formulario pelo Flask e HTML
+    # if request.form:
+        # alunos_teste[request.form["nome"]] = [request.form["curso"], request.form["idade"]]
+    cadastrar_form = Cadastro_Form()
+    new_aluno = cadastrar_form.nome.data
+    new_curso = cadastrar_form.curso.data
+    new_idade = cadastrar_form.idade.data
+
+    if new_aluno:
+        alunos_teste[new_aluno] = [new_curso, new_idade]
+
+    return render_template("cadastro.html", template_form=cadastrar_form)
 
 if __name__ == "__main__":
     app.run(debug=True)
