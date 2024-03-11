@@ -51,3 +51,5 @@ def cadastro_aluno():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+# teste mudança
