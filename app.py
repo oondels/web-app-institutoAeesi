@@ -1,17 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
+from wtforms.validators import DataRequired
+from forms import Cadastro_Form
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecret"
 
 alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
-
-class Cadastro_Form(FlaskForm):
-    nome = StringField("Nome:")
-    curso = StringField("Curso:")
-    idade = StringField("Idade:")
-    submit = SubmitField("Cadastrar")
 
 @app.route('/')
 def home():
@@ -43,9 +39,10 @@ def cadastro_aluno():
     new_aluno = cadastrar_form.nome.data
     new_curso = cadastrar_form.curso.data
     new_idade = cadastrar_form.idade.data
-
-    if new_aluno:
-        alunos_teste[new_aluno] = [new_curso, new_idade]
+    
+    if cadastrar_form.validate_on_submit():
+        if new_aluno:
+            alunos_teste[new_aluno] = [new_curso, new_idade]
 
     return render_template("cadastro.html", template_form=cadastrar_form)
 
