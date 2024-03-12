@@ -37,12 +37,13 @@ def cadastro_aluno():
         # alunos_teste[request.form["nome"]] = [request.form["curso"], request.form["idade"]]
     cadastrar_form = Cadastro_Form()
     new_aluno = cadastrar_form.nome.data
+    new_nascimento = cadastrar_form.data_nascimento.data
     new_curso = cadastrar_form.curso.data
     new_idade = cadastrar_form.idade.data
     
     if cadastrar_form.validate_on_submit():
         if new_aluno:
-            alunos_teste[new_aluno] = [new_curso, new_idade]
+            alunos_teste[new_aluno] = [new_curso, new_idade, new_nascimento]
 
     return render_template("cadastro.html", template_form=cadastrar_form)
 
