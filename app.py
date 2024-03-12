@@ -40,10 +40,12 @@ def cadastro_aluno():
     new_telefone = cadastrar_form.telefone.data
     new_curso = cadastrar_form.curso.data
     new_idade = cadastrar_form.idade.data
+    new_descricao = cadastrar_form.descricao.data
+    new_bolsista = cadastrar_form.bolsista.data
     
     if cadastrar_form.validate_on_submit():
         if new_aluno:
-            alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone]
+            alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone, new_descricao, new_bolsista]
 
     return render_template("cadastro.html", template_form=cadastrar_form)
 
