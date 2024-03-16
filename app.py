@@ -6,7 +6,8 @@ from werkzeug.utils import secure_filename
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecret"
-app.config['UPLOAD_FOLDER'] = path
+# Corrigir
+# app.config['UPLOAD_FOLDER'] = "banco-dados/fidwdwdes/"
 
 alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
 
@@ -47,13 +48,15 @@ def cadastro_aluno():
             return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
 
+# Corrigir
 @app.route("/upload-arquivos", methods=["GET", "POST"])
 def upload_files():
     file_form = Upload_File()
 
     if file_form.validate_on_submit():
         arquivo = file_form.file_up.data
-        arquivo.save(os.path.join(path, secure_filename(arquivo.filename)))
+        filename = secure_filename(arquivo.filename)
+        arquivo.save(filename)
         return 'Arquivo enviado'
     return render_template("upload.html", file_form=file_form)
 
