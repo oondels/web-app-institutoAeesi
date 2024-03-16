@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload</title>
+</head>
+<body>
+    <h1>Upload de Arquivos</h1>
+    <form method="POST">
+        {{ file_form.hidden_tag() }}
+        <p>{{ file_form.file_up() }}</p>
+        <p>{{ file_form.submit() }}</p>
+    </form>
+</body>
+</html>
