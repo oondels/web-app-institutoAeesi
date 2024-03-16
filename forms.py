@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, TextAreaField, RadioField, BooleanField
+from flask_wtf.file import FileRequired
+from wtforms import StringField, SubmitField, TextAreaField, RadioField, BooleanField, FileField
 from wtforms.validators import DataRequired, Length
 cursos = [("Jiu-Jitsu","Jius-Jitsu"), ("RitBox", "RitBox"), ("Box", "Box"), ("Academia", "Academia")]
 class Cadastro_Form(FlaskForm):
@@ -10,4 +11,7 @@ class Cadastro_Form(FlaskForm):
     descricao = TextAreaField("Descricao:")
     bolsista = BooleanField("Possui Bolsa?")
     submit = SubmitField("Cadastrar")
-    
+
+class Upload_File(FlaskForm):
+    file_up = FileField("Arquivo", validators=[FileRequired()])
+    submit = SubmitField("Enviar")
