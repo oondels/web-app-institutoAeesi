@@ -1,11 +1,12 @@
+import os
 from flask import Flask, render_template, redirect, url_for, request
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
-from forms import Cadastro_Form
+from forms import Cadastro_Form, Upload_File
+from werkzeug.utils import secure_filename
 
+path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "mysecret"
+app.config['UPLOAD_FOLDER'] = path
 
 alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
 
@@ -32,23 +33,29 @@ def contato():
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 def cadastro_aluno():
-    # Formulario pelo Flask e HTML
-    # if request.form:
-        # alunos_teste[request.form["nome"]] = [request.form["curso"], request.form["idade"]]
     cadastrar_form = Cadastro_Form()
     
     if cadastrar_form.validate_on_submit():
         new_aluno = cadastrar_form.nome.data
-        #new_telefone = cadastrar_form.telefone.data
-        #new_idade = cadastrar_form.idade.data
-        #new_curso = cadastrar_form.curso.data
+        new_telefone = cadastrar_form.telefone.data
+        new_idade = cadastrar_form.idade.data
+        new_curso = cadastrar_form.curso.data
         #new_descricao = cadastrar_form.descricao.data
         #new_bolsista = cadastrar_form.bolsista.data
         if new_aluno:
-            alunos_teste[new_aluno] = [request.form['curso'], request.form['idade'], request.form['telefone']]
-            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http')) #Adicionar depois
-
+            alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone]
+            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
+
+@app.route("/upload-arquivos", methods=["GET", "POST"])
+def upload_files():
+    file_form = Upload_File()
+
+    if file_form.validate_on_submit():
+        arquivo = file_form.file_up.data
+        arquivo.save(os.path.join(path, secure_filename(arquivo.filename)))
+        return 'Arquivo enviado'
+    return render_template("upload.html", file_form=file_form)
 
 if __name__ == "__main__":
     app.run(debug=True)
