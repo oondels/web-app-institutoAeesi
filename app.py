@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, request
+from flask import Flask, render_template, redirect, url_for, request, flash
 from forms import Cadastro_Form, Upload_File
 from werkzeug.utils import secure_filename
 
@@ -57,7 +57,6 @@ def upload_files():
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
         arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(arquivo.filename)))
-        return 'Arquivo enviado'
     return render_template("upload.html", file_form=file_form)
 
 if __name__ == "__main__":

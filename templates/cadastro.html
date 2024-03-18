@@ -5,31 +5,6 @@
 </div>
 
 <div>
-    <!--
-    Forma de fazer Formulário pelo HTML
-
-    <form action="/cadastrar-aluno" method="POST">
-        <h3>Adicione um novo Aluno!</h3>
-
-        <p>
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome">
-        </p>
-
-        <p>
-            <label for="curso">Curso:</label>
-            <input type="text" name="curso">
-        </p>
-
-        <p>
-            <label for="idade">Idade</label>
-            <input type="text" name="idade">
-        </p>
-        <p><input type="submit" name="submit_cadastro"/></p>
-    </form>
-    -->
-
-    <!--Fazer Pelo aplicativo-->
     <form method="POST">
         {{ template_form.hidden_tag() }}
         <p>
@@ -48,19 +23,6 @@
             {{ template_form.curso.label }}
             {{ template_form.curso() }}
         </p>
-
-        <!--
-            Adicionar apos finalização de testes
-        <p>
-            {{ template_form.descricao.label }}
-            {{ template_form.descricao() }}
-        </p>
-        <p>
-            {{ template_form.bolsista.label }}
-            {{ template_form.bolsista()}}
-        </p> 
-        -->
-
         <p>{{ template_form.submit() }}</p>
     </form>
 
