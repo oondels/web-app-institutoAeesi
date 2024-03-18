@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>Upload de Arquivos</h1>
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {{ file_form.hidden_tag() }}
         <p>{{ file_form.file_up() }}</p>
         <p>{{ file_form.submit() }}</p>
