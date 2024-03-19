@@ -57,13 +57,11 @@ def alunos(aluno_name):
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
-    
     if cadastrar_form.validate_on_submit():
         new_aluno = cadastrar_form.nome.data
         new_telefone = cadastrar_form.telefone.data
         new_idade = cadastrar_form.idade.data
         new_curso = cadastrar_form.curso.data
-
         if new_aluno:
             #alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone]
             return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
@@ -100,8 +98,19 @@ def login():
         if user:
             if check_password_hash(user.password_hash, login_form.password.data):
                 login_user(user)
-                return "Logado com sucesso"
+                return redirect(url_for('user_page', user_id=user.id))
     return render_template("login.html", login_form=login_form)
+
+@app.route('/user_page/<user_id>')
+@login_required
+def user_page(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    return render_template('user_page.html', user=user)
+
+@app.route("/logout")
+def logout():
+   logout_user()
+   return redirect(url_for('login'))
 
 if __name__ == "__main__":
     app.run(debug=True)
