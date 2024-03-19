@@ -56,16 +56,16 @@ class Aluno(db.Model):
     def __repr__(self):
         return f"{self.nome}"
 
-alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
-
 @app.route('/')
 def home():
-    return render_template('home.html', template_alunos=alunos_teste)
+    alunos = Aluno.query.all()
+    return render_template('home.html', alunos=alunos)
 
-@app.route("/aluno/<aluno_name>")
+@app.route("/aluno/<aluno_id>")
 @login_required
-def alunos(aluno_name):
-    return render_template("alunos.html", template_nome_aluno=aluno_name, template_alunos=alunos_teste)
+def alunos(aluno_id):
+    alunos = Aluno.query.filter_by(id=aluno_id).first()
+    return render_template("alunos.html", alunos=alunos)
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 @login_required
@@ -83,6 +83,10 @@ def cadastro_aluno():
         db.session.commit()
         return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
+
+@app.route('/editar_aluno/<aluno_name>/<aluno_id>')
+def editar_aluno(aluno_name, aluno_id):
+    pass
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
 @login_required

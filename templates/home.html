@@ -3,8 +3,8 @@
     <div>
         <h3>Alunos</h3>
         <ul>
-        {% for aluno in template_alunos %}
-            <li> <a href=" {{ url_for('alunos', aluno_name=aluno) }}">{{ aluno }}</a> </li>
+        {% for aluno in alunos %}
+            <li> <a href=" {{ url_for('alunos', aluno_id=aluno.id) }}">{{ aluno.nome }}</a> </li>
         {% endfor %}
         </ul>
 
