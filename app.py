@@ -63,10 +63,12 @@ def home():
     return render_template('home.html', template_alunos=alunos_teste)
 
 @app.route("/aluno/<aluno_name>")
+@login_required
 def alunos(aluno_name):
     return render_template("alunos.html", template_nome_aluno=aluno_name, template_alunos=alunos_teste)
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
+@login_required
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
     if cadastrar_form.validate_on_submit():
@@ -83,6 +85,7 @@ def cadastro_aluno():
     return render_template("cadastro.html", template_form=cadastrar_form)
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
+@login_required
 def upload_files():
     file_form = Upload_File()
 
