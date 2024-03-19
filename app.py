@@ -12,12 +12,12 @@ app.config["SECRET_KEY"] = "mysecret" #Editar senha depois
 folder = os.path.join(path, "database/files")
 
 app.config['UPLOAD_FOLDER'] = folder
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/alunos_databse.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_BINDS'] = {
-   'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db')
+   'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db'),
+   'alunos_database': 'sqlite:///' + os.path.join(path, 'database/alunos_database.db')
 }
-
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -44,6 +44,18 @@ class User(UserMixin, db.Model):
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
+class Aluno(db.Model):
+    __bind_key__ =  "alunos_database"
+    id = db.Column(db.Integer, primary_key = True)
+    nome = db.Column(db.String(20))
+    sobrenome = db.Column(db.String(128))
+    idade = db.Column(db.Integer())
+    curso = db.Column(db.String(128))
+    bolsa = db.Column(db.Boolean())
+
+    def __repr__(self):
+        return f"{self.nome}"
+
 alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
 
 @app.route('/')
@@ -58,13 +70,16 @@ def alunos(aluno_name):
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
     if cadastrar_form.validate_on_submit():
-        new_aluno = cadastrar_form.nome.data
-        new_telefone = cadastrar_form.telefone.data
-        new_idade = cadastrar_form.idade.data
-        new_curso = cadastrar_form.curso.data
-        if new_aluno:
-            #alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone]
-            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
+        nome = cadastrar_form.nome.data
+        sobrenome = cadastrar_form.sobrenome.data
+        idade = cadastrar_form.idade.data
+        curso = cadastrar_form.curso.data
+        bolsa = cadastrar_form.bolsa.data
+
+        aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
+        db.session.add(aluno)
+        db.session.commit()
+        return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])

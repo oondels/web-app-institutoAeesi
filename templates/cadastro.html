@@ -6,14 +6,14 @@
 
 <div>
     <form method="POST">
-        {{ template_form.hidden_tag() }}
+            {{ template_form.hidden_tag() }}
         <p>
             {{ template_form.nome.label }}
             {{ template_form.nome() }}
         </p>
         <p>
-            {{ template_form.telefone.label }}
-            {{ template_form.telefone() }}
+            {{ template_form.sobrenome.label }}
+            {{ template_form.sobrenome() }}
         </p>
         <p>
             {{ template_form.idade.label }}
@@ -22,6 +22,10 @@
         <p>
             {{ template_form.curso.label }}
             {{ template_form.curso() }}
+        </p>
+        <p>
+            {{template_form.bolsa.label}}
+            {{template_form.bolsa()}}
         </p>
         <p>{{ template_form.submit() }}</p>
     </form>
