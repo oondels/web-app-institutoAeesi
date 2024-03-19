@@ -1,4 +1,14 @@
 {%extends "navigation.html"%}
 {%block content%}
     <h1>Página de Regsitro</h1>
+    <form method="POST">
+        {{register_form.hidden_tag()}}
+        <p>{{register_form.nome()}}</p>
+        <p>{{register_form.sobrenome()}}</p>
+        <p>{{register_form.email()}}</p>
+        <p>{{register_form.password()}}</p>
+        <p>{{register_form.password_repeat()}}</p>
+        <p>{{register_form.submit()}}</p>
+    </form>
+    
 {%endblock%}

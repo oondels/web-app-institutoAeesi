@@ -10,7 +10,7 @@
     <form method="POST" enctype="multipart/form-data">
         {{ file_form.hidden_tag() }}
         <p>{{ file_form.file_up() }}</p>
-        <p>{{ file_form.submit() }}</p>
+        <p onclick="alert('Arquivo Enviado!')">{{ file_form.submit() }}</p>
     </form>
 </body>
 </html>

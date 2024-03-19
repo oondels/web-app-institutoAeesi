@@ -8,10 +8,6 @@
         {% endfor %}
         </ul>
 
-        <p><a href="{{ url_for('cadastro_aluno') }}"><strong>Cadastrar Aluno</strong></a></p>
-        <p>Teste de organização de itens em lisa:</p>
-        {% for ordem, faixa in template_faixa|dictsort %}
-            <li>{{ ordem }} : {{ faixa }}</li>
-        {% endfor %}
+        <p><a href="{{ url_for('cadastro_aluno') }}"><strong>Cadastrar Aluno</strong></a></p>   
     </div>
 {%endblock%}
