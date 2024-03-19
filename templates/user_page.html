@@ -1,0 +1,5 @@
+{%extends "navigation.html"%}
+{%block content%}
+<h1>Olá {{user.nome}} {{user.sobrenome}}</h1>
+<p><a href="{{url_for('logout')}}">Sair</a></p>
+{%endblock%}
