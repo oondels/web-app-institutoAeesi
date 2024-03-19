@@ -1,16 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload</title>
-</head>
-<body>
+{%extends "navigation.html"%}
+{%block content%}
     <h1>Upload de Arquivos</h1>
     <form method="POST" enctype="multipart/form-data">
         {{ file_form.hidden_tag() }}
         <p>{{ file_form.file_up() }}</p>
         <p onclick="alert('Arquivo Enviado!')">{{ file_form.submit() }}</p>
     </form>
-</body>
-</html>
+{%endblock%}
