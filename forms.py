@@ -1,8 +1,7 @@
-import os
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired
 from wtforms import StringField, SubmitField, TextAreaField, RadioField, BooleanField, FileField, PasswordField
-from wtforms.validators import DataRequired, Email, EqualTo, ValidationError, Length
+from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 cursos = [("Jiu-Jitsu","Jius-Jitsu"), ("RitBox", "RitBox"), ("Box", "Box"), ("Academia", "Academia")]
 class Cadastro_Form(FlaskForm):
