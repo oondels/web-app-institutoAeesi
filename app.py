@@ -83,7 +83,7 @@ def register():
     register_form = Register_User(csrf_enabled=False)
     if register_form.validate_on_submit():
         user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                    email=register_form.email.data,password=register_form.password.data)
+                    email=register_form.email.data)
         user.set_password(register_form.password.data)
         db.session.add(user)
         db.session.commit()
