@@ -15,11 +15,15 @@
         |
         <a href="{{url_for('upload_files')}}">Upload</a>
         |
-        <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
-    </div>
+        {% if current_user.is_authenticated %}
+            <a href="{{url_for('user_page',user_id=current_user.get_id())}}">Página do Usuário</a>
+        {%else%}
+            <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
+        {%endif%}
 
+    </div>
     <h1>Aplicativo de Controle AEESI!</h1>
-    
+
     {% block content %}
     {% endblock %}
 
