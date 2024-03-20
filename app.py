@@ -123,7 +123,7 @@ def upload_files():
     if file_form.validate_on_submit():
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
-        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER']+"\comprovantes", filename))
         return redirect(url_for('upload_files'))
     return render_template("upload.html", file_form=file_form)
 
