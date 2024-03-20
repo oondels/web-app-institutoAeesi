@@ -27,6 +27,10 @@ login_manager.login_view = "login"
 def load_user(user_id):
     return User.query.get(int(user_id))
 
+@login_manager.unauthorized_handler
+def unauthorized():
+  return "Desculpa. Você precisa estar logado para acessar esta página!"
+
 db = SQLAlchemy(app)
 
 # Classe para databse do usuário
@@ -37,6 +41,8 @@ class User(UserMixin, db.Model):
     sobrenome = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    dev = db.Column(db.Boolean())
+    admin = db.Column(db.Boolean())
 
     def __repr__(self):
         return f'{self.nome}'
@@ -44,6 +50,12 @@ class User(UserMixin, db.Model):
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
+def is_admin(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user.admin == True:
+        print("Admin")
+    else: print("Not Admin")
+    
 class Aluno(db.Model):
     __bind_key__ =  "alunos_database"
     id = db.Column(db.Integer, primary_key = True)
@@ -87,8 +99,7 @@ def cadastro_aluno():
 @app.route('/editar_aluno/<aluno_name>/<aluno_id>')
 def editar_aluno(aluno_name, aluno_id):
     aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
-
-    pass
+    return "editando..."
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
 @login_required
