@@ -7,5 +7,7 @@
         <p>{{login_form.password()}}</p>
         <p>{{login_form.submit()}}</p>
     </form>
-    
+    {% for category, message in get_flashed_messages(with_categories=true) %}
+      <div class="flash {{ category }}"><strong>{{ message }}</strong></div>
+    {% endfor %}
 {%endblock%}
