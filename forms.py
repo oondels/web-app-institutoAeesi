@@ -13,6 +13,15 @@ class Cadastro_Form(FlaskForm):
 
     submit = SubmitField("Cadastrar")
 
+class Edite_Form(FlaskForm):
+    nome = StringField("Nome:", validators=[DataRequired()])
+    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
+    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
+    curso = RadioField("Curso:", choices=cursos)
+    bolsa = BooleanField("Possui Bolsa?")
+
+    submit = SubmitField("Cadastrar")   
+
 class Upload_File(FlaskForm):
     file_up = FileField("Arquivo", validators=[FileRequired()])
     submit = SubmitField("Enviar")
