@@ -29,7 +29,7 @@ def load_user(user_id):
 
 @login_manager.unauthorized_handler
 def unauthorized():
-  return "Desculpa. Você precisa estar logado para acessar esta página!"
+  return redirect(url_for('login'))
 
 db = SQLAlchemy(app)
 
@@ -50,11 +50,12 @@ class User(UserMixin, db.Model):
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
-def is_admin(user_id):
-    user = User.query.filter_by(id=user_id).first()
-    if user.admin == True:
-        print("Admin")
-    else: print("Not Admin")
+    @property
+    def is_admin(self):
+        return self.admin
+    @property
+    def is_dev(self):
+        return self.dev
     
 class Aluno(db.Model):
     __bind_key__ =  "alunos_database"
@@ -68,6 +69,13 @@ class Aluno(db.Model):
     def __repr__(self):
         return f"{self.nome}"
 
+def admin_acces():
+    if current_user.is_authenticated:
+        user = User.query.filter_by(id=current_user.get_id()).first()
+        if user.is_admin:
+            return True
+        else: return False
+
 @app.route('/')
 def home():
     alunos = Aluno.query.all()
@@ -76,29 +84,35 @@ def home():
 @app.route("/aluno/<aluno_id>")
 @login_required
 def alunos(aluno_id):
-    alunos = Aluno.query.filter_by(id=aluno_id).first()
-    return render_template("alunos.html", alunos=alunos)
+    if admin_acces():
+        alunos = Aluno.query.filter_by(id=aluno_id).first()
+        return render_template("alunos.html", alunos=alunos)
+    return "Acesso Bloqueado"
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 @login_required
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
-    if cadastrar_form.validate_on_submit():
-        nome = cadastrar_form.nome.data
-        sobrenome = cadastrar_form.sobrenome.data
-        idade = cadastrar_form.idade.data
-        curso = cadastrar_form.curso.data
-        bolsa = cadastrar_form.bolsa.data
+    if admin_acces():
+        if cadastrar_form.validate_on_submit():
+            nome = cadastrar_form.nome.data
+            sobrenome = cadastrar_form.sobrenome.data
+            idade = cadastrar_form.idade.data
+            curso = cadastrar_form.curso.data
+            bolsa = cadastrar_form.bolsa.data
 
-        aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
-        db.session.add(aluno)
-        db.session.commit()
-        return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
+            aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
+            db.session.add(aluno)
+            db.session.commit()
+            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
+    else: return "Acesso Bloqueado"
     return render_template("cadastro.html", template_form=cadastrar_form)
 
+# Finalizar Route
 @app.route('/editar_aluno/<aluno_name>/<aluno_id>')
 def editar_aluno(aluno_name, aluno_id):
-    aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
+    if admin_acces():
+        aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
     return "editando..."
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
@@ -118,7 +132,7 @@ def register():
     register_form = Register_User(csrf_enabled=False)
     if register_form.validate_on_submit():
         user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                    email=register_form.email.data)
+                    email=register_form.email.data, admin=False, dev=False)
         user.set_password(register_form.password.data)
         db.session.add(user)
         db.session.commit()
