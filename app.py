@@ -155,8 +155,11 @@ def login():
 @app.route('/user_page/<user_id>')
 @login_required
 def user_page(user_id):
-    user = User.query.filter_by(id=user_id).first()
-    return render_template('user_page.html', user=user)
+    if current_user.get_id() == user_id:
+        user = User.query.filter_by(id=user_id).first()
+        return render_template('user_page.html', user=user)
+    else: 
+        return redirect(url_for('home'))
 
 @app.route("/logout")
 def logout():
