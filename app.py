@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -86,6 +86,8 @@ def cadastro_aluno():
 
 @app.route('/editar_aluno/<aluno_name>/<aluno_id>')
 def editar_aluno(aluno_name, aluno_id):
+    aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
+
     pass
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
@@ -117,10 +119,12 @@ def login():
 
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
-        if user:
-            if check_password_hash(user.password_hash, login_form.password.data):
-                login_user(user)
-                return redirect(url_for('user_page', user_id=user.id))
+        if user and check_password_hash(user.password_hash, login_form.password.data):
+            login_user(user)
+            return redirect(url_for('user_page', user_id=user.id))
+        else:
+            flash("Falha ao efetuar login.\nVerifique erro de digitação ou se já esta cadastrado no sistema!")
+            return redirect(url_for('login'))
     return render_template("login.html", login_form=login_form)
 
 @app.route('/user_page/<user_id>')
