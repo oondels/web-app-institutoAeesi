@@ -6,12 +6,21 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length
 cursos = [("Jiu-Jitsu","Jius-Jitsu"), ("RitBox", "RitBox"), ("Box", "Box"), ("Academia", "Academia")]
 class Cadastro_Form(FlaskForm):
     nome = StringField("Nome:", validators=[DataRequired()])
+    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
     idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
-    telefone = StringField("Telefone: ", validators=[Length(min=9, max=14)])
     curso = RadioField("Curso:", choices=cursos)
-    descricao = TextAreaField("Descricao:")
-    bolsista = BooleanField("Possui Bolsa?")
+    bolsa = BooleanField("Possui Bolsa?")
+
     submit = SubmitField("Cadastrar")
+
+class Edite_Form(FlaskForm):
+    nome = StringField("Nome:", validators=[DataRequired()])
+    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
+    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
+    curso = RadioField("Curso:", choices=cursos)
+    bolsa = BooleanField("Possui Bolsa?")
+
+    submit = SubmitField("Cadastrar")   
 
 class Upload_File(FlaskForm):
     file_up = FileField("Arquivo", validators=[FileRequired()])

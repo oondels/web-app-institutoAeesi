@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
@@ -12,12 +12,12 @@ app.config["SECRET_KEY"] = "mysecret" #Editar senha depois
 folder = os.path.join(path, "database/files")
 
 app.config['UPLOAD_FOLDER'] = folder
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/alunos_databse.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_BINDS'] = {
-   'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db')
+   'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db'),
+   'alunos_database': 'sqlite:///' + os.path.join(path, 'database/alunos_database.db')
 }
-
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -26,6 +26,10 @@ login_manager.login_view = "login"
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+@login_manager.unauthorized_handler
+def unauthorized():
+  return "Desculpa. Você precisa estar logado para acessar esta página!"
 
 db = SQLAlchemy(app)
 
@@ -37,6 +41,8 @@ class User(UserMixin, db.Model):
     sobrenome = db.Column(db.String(120))
     email = db.Column(db.String(120), unique=True, index=True)
     password_hash = db.Column(db.String(128))
+    dev = db.Column(db.Boolean())
+    admin = db.Column(db.Boolean())
 
     def __repr__(self):
         return f'{self.nome}'
@@ -44,30 +50,59 @@ class User(UserMixin, db.Model):
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
-alunos_teste = {"Hendrius":["Jiu-Jitsu",24], "Bruce":["Jiu-Jitsu",25], "Christopher":["Box",24]}
+def is_admin(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    if user.admin == True:
+        print("Admin")
+    else: print("Not Admin")
+    
+class Aluno(db.Model):
+    __bind_key__ =  "alunos_database"
+    id = db.Column(db.Integer, primary_key = True)
+    nome = db.Column(db.String(20))
+    sobrenome = db.Column(db.String(128))
+    idade = db.Column(db.Integer())
+    curso = db.Column(db.String(128))
+    bolsa = db.Column(db.Boolean())
+
+    def __repr__(self):
+        return f"{self.nome}"
 
 @app.route('/')
 def home():
-    return render_template('home.html', template_alunos=alunos_teste)
+    alunos = Aluno.query.all()
+    return render_template('home.html', alunos=alunos)
 
-@app.route("/aluno/<aluno_name>")
-def alunos(aluno_name):
-    return render_template("alunos.html", template_nome_aluno=aluno_name, template_alunos=alunos_teste)
+@app.route("/aluno/<aluno_id>")
+@login_required
+def alunos(aluno_id):
+    alunos = Aluno.query.filter_by(id=aluno_id).first()
+    return render_template("alunos.html", alunos=alunos)
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
+@login_required
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
     if cadastrar_form.validate_on_submit():
-        new_aluno = cadastrar_form.nome.data
-        new_telefone = cadastrar_form.telefone.data
-        new_idade = cadastrar_form.idade.data
-        new_curso = cadastrar_form.curso.data
-        if new_aluno:
-            #alunos_teste[new_aluno] = [new_curso, new_idade, new_telefone]
-            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
+        nome = cadastrar_form.nome.data
+        sobrenome = cadastrar_form.sobrenome.data
+        idade = cadastrar_form.idade.data
+        curso = cadastrar_form.curso.data
+        bolsa = cadastrar_form.bolsa.data
+
+        aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
+        db.session.add(aluno)
+        db.session.commit()
+        return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
 
+@app.route('/editar_aluno/<aluno_name>/<aluno_id>')
+def editar_aluno(aluno_name, aluno_id):
+    aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
+    return "editando..."
+
 @app.route("/upload-arquivos", methods=["GET", "POST"])
+@login_required
 def upload_files():
     file_form = Upload_File()
 
@@ -95,10 +130,12 @@ def login():
 
     if login_form.validate_on_submit():
         user = User.query.filter_by(email=login_form.email.data).first()
-        if user:
-            if check_password_hash(user.password_hash, login_form.password.data):
-                login_user(user)
-                return redirect(url_for('user_page', user_id=user.id))
+        if user and check_password_hash(user.password_hash, login_form.password.data):
+            login_user(user)
+            return redirect(url_for('user_page', user_id=user.id))
+        else:
+            flash("Falha ao efetuar login. Verifique erro de digitação ou se já esta cadastrado no sistema!")
+            return redirect(url_for('login'))
     return render_template("login.html", login_form=login_form)
 
 @app.route('/user_page/<user_id>')
