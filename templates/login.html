@@ -7,7 +7,14 @@
         <p>{{login_form.password()}}</p>
         <p>{{login_form.submit()}}</p>
     </form>
-    {% for category, message in get_flashed_messages(with_categories=true) %}
-      <div class="flash {{ category }}"><strong>{{ message }}</strong></div>
-    {% endfor %}
+    {%with messages = get_flashed_messages()%}
+      {%if messages%}
+        {%for message in messages%}
+          <strong>{{message}}</strong><br>
+          Caso ainda não tenha cadastro: 
+          <a href="{{url_for('register')}}">Regitre-se</a>
+        {%endfor%}
+      {%endif%}
+    {%endwith%}
+
 {%endblock%}

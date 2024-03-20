@@ -123,7 +123,7 @@ def login():
             login_user(user)
             return redirect(url_for('user_page', user_id=user.id))
         else:
-            flash("Falha ao efetuar login.\nVerifique erro de digitação ou se já esta cadastrado no sistema!")
+            flash("Falha ao efetuar login. Verifique erro de digitação ou se já esta cadastrado no sistema!")
             return redirect(url_for('login'))
     return render_template("login.html", login_form=login_form)
 
