@@ -10,7 +10,6 @@ class Cadastro_Form(FlaskForm):
     idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
     curso = RadioField("Curso:", choices=cursos)
     bolsa = BooleanField("Possui Bolsa?")
-
     submit = SubmitField("Cadastrar")
 
 class Edite_Form(FlaskForm):
@@ -19,7 +18,6 @@ class Edite_Form(FlaskForm):
     idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
     curso = RadioField("Curso:", choices=cursos)
     bolsa = BooleanField("Possui Bolsa?")
-
     submit = SubmitField("Cadastrar")   
 
 class Upload_File(FlaskForm):
@@ -32,11 +30,13 @@ class Register_User(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email"})
     password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha"})
     password_repeat = PasswordField("Repetir Senha", validators=[DataRequired(),  EqualTo('password')], render_kw={"placeholder":"Repetir Senha"})
-    
     submit = SubmitField("Criar Conta")
 
 class Login_User(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email"})
     password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha"})
-    
-    submit = SubmitField("Entrar")
+    submit = SubmitField("Entrar", render_kw={"class":"btn"})
+
+class Pesquisar_Aluno(FlaskForm):
+    pesquisa = StringField("Pesquisa", validators=[DataRequired()], render_kw={"placeholder":"Pesquisar Aluno"})
+    submit = SubmitField("Pesquisar")
