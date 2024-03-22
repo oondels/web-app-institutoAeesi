@@ -1,0 +1,17 @@
+{%extends "navigation.html"%}
+{%block content%}
+
+<div>
+    <div>
+        <h1>Resultado</h1>
+    </div>
+    
+    <div>
+        {% for aluno in result_pesquisa %}
+        Aluno: {{aluno}}
+        {{%endfor%}}
+    </div>
+</div>
+
+
+{%endblock%}
