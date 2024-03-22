@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash
-from forms import Cadastro_Form, Upload_File, Register_User, Login_User
+from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Pesquisar_Aluno
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -80,10 +80,21 @@ def admin_acces():
 def home():
     return render_template('home.html')
 
-@app.route("/alunos")
+@app.route("/alunos", methods=["GET", "POST"])
 def alunos_cadastrados():
     alunos = Aluno.query.all()
-    return render_template('alunos.html', alunos = alunos)
+    form_pesquisa = Pesquisar_Aluno()
+
+    # Pesquisa Pesquisa Woosh depois
+    if form_pesquisa.validate_on_submit():
+        pesquisa = form_pesquisa.pesquisa.data
+        return redirect(url_for('pesquisa', pesquisa=pesquisa))
+    return render_template('alunos.html', alunos = alunos, form_pesquisa = form_pesquisa)
+
+@app.route("/alunos/pesquisa/<pesquisa>")
+def pesquisa(pesquisa):
+    result_pesquisa = Aluno.query.whoosh_search(pesquisa).all()
+    return render_template("pesquisa_aluno.html", result_pesquisa=result_pesquisa)
 
 @app.route("/aluno/<aluno_id>")
 @login_required
