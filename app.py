@@ -78,15 +78,19 @@ def admin_acces():
 
 @app.route('/')
 def home():
+    return render_template('home.html')
+
+@app.route("/alunos")
+def alunos_cadastrados():
     alunos = Aluno.query.all()
-    return render_template('home.html', alunos=alunos)
+    return render_template('alunos.html', alunos = alunos)
 
 @app.route("/aluno/<aluno_id>")
 @login_required
-def alunos(aluno_id):
+def aluno(aluno_id):
     if admin_acces():
-        alunos = Aluno.query.filter_by(id=aluno_id).first()
-        return render_template("alunos.html", alunos=alunos)
+        aluno = Aluno.query.filter_by(id=aluno_id).first()
+        return render_template("aluno.html", aluno=aluno)
     return "Acesso Bloqueado"
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
