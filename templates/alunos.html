@@ -8,6 +8,18 @@
         {% endfor %}
         </ul>
 
-        <p><a href="{{ url_for('cadastro_aluno') }}"><strong>Cadastrar Aluno</strong></a></p>   
+        <div>
+            <p><a href="{{ url_for('cadastro_aluno') }}"><strong>Cadastrar Aluno</strong></a></p>   
+        </div>
+
+        <div>
+            <p>Pesquisar Aluno</p>
+            <div>
+                <form method="POST">
+                    {{form_pesquisa.hidden_tag()}}
+                    {{form_pesquisa.pesquisa()}} {{form_pesquisa.submit()}}
+                </form>
+            </div>
+        </div>
     </div>
 {%endblock%}
