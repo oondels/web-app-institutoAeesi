@@ -5,8 +5,15 @@
     font-family: "poppins", sans-serif;
 }
 
+.body-register {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+}
+
 .register {
-    width: 400px;
+    width: 420px;
     box-shadow: 0 0 10px rgba(0, 0, .2);
     color: #004526;
     border-radius: 10px;
