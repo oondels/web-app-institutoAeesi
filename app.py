@@ -1,6 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash
-from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Pesquisar_Aluno
+from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Pesquisar_Aluno, Editar_Form
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -124,11 +124,22 @@ def cadastro_aluno():
     return render_template("cadastro.html", template_form=cadastrar_form)
 
 # Finalizar Route
-@app.route('/editar_aluno/<aluno_name>/<aluno_id>')
+@app.route('/editar_aluno/<aluno_name>/<aluno_id>', methods=["GET", "POST"])
+@login_required
 def editar_aluno(aluno_name, aluno_id):
+    editar_form = Editar_Form()
+    aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
     if admin_acces():
-        aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
-    return "editando..."
+        if editar_form.validate_on_submit():
+            aluno_edite.nome = editar_form.nome.data
+            aluno_edite.sobrenome = editar_form.sobrenome.data
+            aluno_edite.idade = editar_form.idade.data
+            aluno_edite.curso = editar_form.curso.data
+            aluno_edite.bolsa = editar_form.bolsa.data
+            db.session.commit()
+            return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
+    else: return "Acesso bloqueado!"
+    return render_template("editar.html", editar_form=editar_form)
 
 @app.route("/upload-arquivos", methods=["GET", "POST"])
 @login_required
@@ -138,7 +149,7 @@ def upload_files():
     if file_form.validate_on_submit():
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
-        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER']+"\comprovantes", filename))
+        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         return redirect(url_for('upload_files'))
     return render_template("upload.html", file_form=file_form)
 

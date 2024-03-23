@@ -40,3 +40,11 @@ class Login_User(FlaskForm):
 class Pesquisar_Aluno(FlaskForm):
     pesquisa = StringField("Pesquisa", validators=[DataRequired()], render_kw={"placeholder":"Pesquisar Aluno"})
     submit = SubmitField("Pesquisar")
+
+class Editar_Form(FlaskForm):
+    nome = StringField("Nome:", validators=[DataRequired()])
+    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
+    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
+    curso = RadioField("Curso:", choices=cursos)
+    bolsa = BooleanField("Possui Bolsa?")
+    submit = SubmitField("Editar")

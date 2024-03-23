@@ -11,5 +11,5 @@
             Não é Bolsista
         {%endif%}
     </p>
-    <p><a href="url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)">Editar informações</a></p>
+    <p><a href="{{url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)}}">Editar informações</a></p>
 {%endblock%} 
