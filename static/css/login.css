@@ -5,18 +5,26 @@
     font-family: "poppins", sans-serif;
 }
 
-body {
+.body-login {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: seagreen;
+    background:url('../bg/bg-login.jpg') no-repeat;
+    background-size: cover;
+    background-position: center;
 }
 
 .wrapper {
     width: 420px;
-    background: purple;
-    color: #fff;
+    background: transparent;
+    backdrop-filter:  blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, .2);
+    border: 2px solid #3f4d41;
+    color: #004526;
+    border-radius: 10px;
+    padding: 30px 40px;
+    font-weight: 600;
 }
 
 .wrapper h1 {
@@ -40,8 +48,13 @@ body {
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: #ffffff;
     padding: 20px 45px 20px 20px;
+    font-weight: 600;
+}
+
+.input-box input::placeholder {
+    color: #fff;
 }
 
 .input-box i {
@@ -57,6 +70,7 @@ body {
     justify-content: space-between;
     font-size: 14.5px;
     margin: -15px 0 15px;
+    font-weight: 600;
 }
 
 .remember-forgot label input {
@@ -85,4 +99,21 @@ body {
     font-size: 16px;
     color: #333;
     font-weight: 600;
+}
+
+.registe-link {
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
+    font-weight: 600;
+}
+
+.registe-link p a {
+    color: #018749;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.registe-link p a:hover {
+    text-decoration: underline;
 }
