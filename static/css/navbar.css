@@ -1,18 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+}
+
 .header {
     top: 0;
     left: 0;
     width: 100%;
     padding: 20px 100px;
-    background-color: blue;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
+    border: 2px solid #3f4d41;
 }
 
 .nav-bar {
     font-size: 18px;
-    color: #fff;
     font-weight: 500;
     text-decoration: none;
     margin-left: 40px;
@@ -20,14 +26,14 @@
 
 .logo {
     font-size: 32px;
-    color: #fff;
+    color: #44704a;
     text-decoration: none;
     font-weight: 600;
 }
 
 .nav-bar a {
     text-decoration: none;
-    color: #fff;
+    color: #44704a;
     font-weight: 500;
     margin-left: 20px;
 }
