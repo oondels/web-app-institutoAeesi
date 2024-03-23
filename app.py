@@ -168,15 +168,20 @@ def register():
 def login():
     login_form = Login_User()
 
-    if login_form.validate_on_submit():
-        user = User.query.filter_by(email=login_form.email.data).first()
-        if user and check_password_hash(user.password_hash, login_form.password.data):
-            login_user(user)
-            return redirect(url_for('user_page', user_id=user.id))
-        else:
-            flash("Falha ao efetuar login. Verifique erro de digitação ou se já esta cadastrado no sistema!")
-            return redirect(url_for('login'))
-    return render_template("login.html", login_form=login_form)
+    if not current_user.is_authenticated:
+        if login_form.validate_on_submit():
+            user = User.query.filter_by(email=login_form.email.data).first()
+            if user and check_password_hash(user.password_hash, login_form.password.data):
+                login_user(user)
+                return redirect(url_for('user_page', user_id=user.id))
+            else:
+                flash("Falha ao efetuar login. Verifique erro de digitação ou se já esta cadastrado no sistema!")
+                return redirect(url_for('login'))
+                
+        return render_template("login.html", login_form=login_form)
+    else:
+        flash("Você já está autenticado!")
+        return redirect(url_for('home'))
 
 @app.route('/user_page/<user_id>')
 @login_required

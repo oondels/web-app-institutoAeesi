@@ -4,4 +4,11 @@
         <p>Home do Aplicativo</p> 
         <a href="{{url_for('alunos_cadastrados')}}">Alunos</a>
     </div>
+    {%with messages = get_flashed_messages()%}
+    {%if messages%}
+      {%for message in messages%}
+        <p><strong>{{message}}</strong><br></p>
+      {%endfor%}
+    {%endif%}
+  {%endwith%}
 {%endblock%}
