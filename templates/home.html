@@ -1,14 +1,25 @@
 {%extends "navigation.html"%}
 {%block content%}
     <div>
-        <p>Home do Aplicativo</p> 
-        <a href="{{url_for('alunos_cadastrados')}}">Alunos</a>
+        <p>Home do Aplicativo</p>
+        <div>
+          <ul>
+            <li><a href="{{url_for('alunos_cadastrados')}}">Alunos</a></li>
+            <li><a href="#">Cursos Disponíveis e Horários</a></li>
+            <li><a href="#">Professores e Formações</a></li>
+            <li><a href="#"></a></li>
+          </ul>         
+        </div> 
     </div>
-    {%with messages = get_flashed_messages()%}
-    {%if messages%}
-      {%for message in messages%}
-        <p><strong>{{message}}</strong><br></p>
-      {%endfor%}
-    {%endif%}
-  {%endwith%}
+
+    <div>
+      {%with messages = get_flashed_messages()%}
+        {%if messages%}
+          {%for message in messages%}
+            <p><strong>{{message}}</strong><br></p>
+          {%endfor%}
+        {%endif%}
+      {%endwith%}
+    </div>
+    
 {%endblock%}
