@@ -25,12 +25,12 @@ class Upload_File(FlaskForm):
     submit = SubmitField("Enviar")
 
 class Register_User(FlaskForm):
-    nome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Nome"})
-    sobrenome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome"})
-    email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email"})
-    password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha"})
+    nome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Nome", "class":"register-form"})
+    sobrenome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome", "class":"register-form"})
+    email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email", "class":"register-form"})
+    password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha", "class":"register-form"})
     password_repeat = PasswordField("Repetir Senha", validators=[DataRequired(),  EqualTo('password')], render_kw={"placeholder":"Repetir Senha"})
-    submit = SubmitField("Criar Conta")
+    submit = SubmitField("Criar Conta", render_kw={"class":"btn"})
 
 class Login_User(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email"})

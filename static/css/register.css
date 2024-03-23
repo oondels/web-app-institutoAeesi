@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.register {
+    width: 400px;
+    box-shadow: 0 0 10px rgba(0, 0, .2);
+    color: #004526;
+    border-radius: 10px;
+    padding: 30px 40px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.register input::placeholder{
+    color: green;
+    font-weight: 600;
+}
+
+.register .btn {
+    width: 50%;
+    height: 45px;
+    background: #427753;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+}

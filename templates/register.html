@@ -1,14 +1,51 @@
-{%extends "navigation.html"%}
-{%block content%}
-    <h1>Página de Regsitro</h1>
-    <form method="POST">
-        {{register_form.hidden_tag()}}
-        <p>{{register_form.nome()}}</p>
-        <p>{{register_form.sobrenome()}}</p>
-        <p>{{register_form.email()}}</p>
-        <p>{{register_form.password()}}</p>
-        <p>{{register_form.password_repeat()}}</p>
-        <p onclick="alert('Registrado com Sucesso')">{{register_form.submit()}}</p>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Aplicativo de Controle AEESI!</h1>
+        <div>
+            <a href="{{url_for('home')}}">Home</a>
+            | 
+            <a href="{{url_for('register')}}">Register</a>
+            |
+            <a href="{{url_for('login')}}">Login</a>
+            |
+            <a href="{{url_for('upload_files')}}">Upload</a>
+            |
+            {% if current_user.is_authenticated %}
+                <a href="{{url_for('user_page',user_id=current_user.get_id())}}">Página do Usuário</a>
+            {%else%}
+                <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
+            {%endif%}
+            |
+            <a href="">Admin</a>
+        </div>
+    </div>
+    <div class="register">
+        <div>
+            <h1>Página de Regsitro</h1>
+        </div>
+        <form method="POST">
+            {{register_form.hidden_tag()}}
+            <div>
+                <p>{{register_form.nome()}}</p>
+                <p>{{register_form.sobrenome()}}</p>
+                <p>{{register_form.email()}}</p>
+                <p>{{register_form.password()}}</p>
+                <p>{{register_form.password_repeat()}}</p>
+            </div>
     
-{%endblock%}
+            <div>
+                <p>{{register_form.submit()}}</p>
+            </div>
+        </form>
+    
+    </div>    
+</body>
+</html>
