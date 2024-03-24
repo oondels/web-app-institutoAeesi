@@ -1,6 +1,6 @@
 {% for result in results %}
 <tr>
-    <td>{{ result.nome }}</td>
+    <td><a href="{{ url_for('aluno', aluno_id=result.id) }}">{{ result.nome }}</a></td>
     <td>{{ result.idade }}</td>
 </tr>
 {% endfor %}
