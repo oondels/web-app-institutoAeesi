@@ -1,17 +1,6 @@
-{%extends "navigation.html"%}
-{%block content%}
-
-<div>
-    <div>
-        <h1>Resultado</h1>
-    </div>
-    
-    <div>
-        {% for aluno in result_pesquisa %}
-        Aluno: {{aluno}}
-        {{%endfor%}}
-    </div>
-</div>
-
-
-{%endblock%}
+{% for result in results %}
+<tr>
+    <td>{{ result.nome }}</td>
+    <td>{{ result.idade }}</td>
+</tr>
+{% endfor %}

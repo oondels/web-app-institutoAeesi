@@ -37,10 +37,6 @@ class Login_User(FlaskForm):
     password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha"})
     submit = SubmitField("Entrar", render_kw={"class":"btn"})
 
-class Pesquisar_Aluno(FlaskForm):
-    pesquisa = StringField("Pesquisa", validators=[DataRequired()], render_kw={"placeholder":"Pesquisar Aluno"})
-    submit = SubmitField("Pesquisar")
-
 class Editar_Form(FlaskForm):
     nome = StringField("Nome:", validators=[DataRequired()])
     sobrenome = StringField("Sobrenome:", validators=[DataRequired()])

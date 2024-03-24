@@ -1,5 +1,4 @@
-{%extends "navigation.html"%}
-{% block content %} 
+{%include "navigation.html"%}
     <h3>Dados do aluno: {{aluno.nome}}</h3>
     <p>
         Curso: {{aluno.curso}} <br>
@@ -12,4 +11,3 @@
         {%endif%}
     </p>
     <p><a href="{{url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)}}">Editar informações</a></p>
-{%endblock%} 
