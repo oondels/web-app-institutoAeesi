@@ -197,5 +197,14 @@ def logout():
    logout_user()
    return redirect(url_for('login'))
 
+@app.route('/admin')
+@login_required
+def admin():
+    if current_user.dev == 1:
+        return render_template("admin.html")
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
+
 if __name__ == "__main__":
     app.run(debug=True)
