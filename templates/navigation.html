@@ -15,7 +15,8 @@
     >
     {%else%}
     <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
+    {%endif%} {%if current_user.dev == 1 %}
+    <a href="{{url_for('admin')}}">Admin</a>
     {%endif%}
-    <a href="">Admin</a>
   </nav>
 </header>
