@@ -181,7 +181,7 @@ def login():
         return render_template("login.html", login_form=login_form)
     else:
         flash("Você já está autenticado!")
-        return redirect(url_for('home'))
+        return redirect(request.referrer)
 
 @app.route('/user_page/<user_id>')
 @login_required
