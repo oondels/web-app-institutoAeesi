@@ -1,11 +1,5 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "poppins", sans-serif;
-}
-
 .body-home {
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,11 +9,27 @@
 .title {
   padding-top: 20px;
   padding-bottom: 20px;
-  font-size: large;
-  font-weight: 600;
 }
 
 .logo-aeesi img {
   margin-top: 20px;
   width: 300px;
+}
+
+.saudacao p {
+  white-space: pre-line;
+}
+
+.saudacao {
+  margin-bottom: 20px;
+}
+
+.menu a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.menu a:hover {
+  text-decoration: underline;
 }
