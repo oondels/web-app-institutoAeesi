@@ -11,6 +11,12 @@
   </head>
   <body>
     {%include "navigation.html"%}
+    <div class="flash-message">
+      {%with messages = get_flashed_messages()%} {%if messages%} {%for message
+      in messages%}
+      <p><strong>{{message}}</strong><br /></p>
+      {%endfor%} {%endif%} {%endwith%}
+    </div>
     <div class="body-home">
       <div>
         <div class="logo-aeesi">
@@ -33,13 +39,6 @@
             <li><a href="#"></a></li>
           </ul>
         </div>
-      </div>
-
-      <div>
-        {%with messages = get_flashed_messages()%} {%if messages%} {%for message
-        in messages%}
-        <p><strong>{{message}}</strong><br /></p>
-        {%endfor%} {%endif%} {%endwith%}
       </div>
     </div>
   </body>
