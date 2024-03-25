@@ -1,38 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css')}}">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/register.css')}}"
+    />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     {%include 'navigation.html'%}
     <div class="body-register">
-        <div class="register">
-            <div>
-                <h1>Página de Registro</h1>
-            </div>
-            <form method="POST">
-                {{register_form.hidden_tag()}}
-                <div>
-                    <p>{{register_form.nome()}}</p>
-                    <p>{{register_form.sobrenome()}}</p>
-                    <p>{{register_form.email()}}</p>
-                    <p>{{register_form.password()}}</p>
-                    <p>{{register_form.password_repeat()}}</p>
-                </div>
-
-                <div>
-                    <p>{{register_form.submit()}}</p>
-                </div>
-            </form>
+      <div class="register">
+        <div class="title">
+          <h1>Página de Registro</h1>
         </div>
+        <form method="POST">
+          {{register_form.hidden_tag()}}
+          <div>
+            <p>{{register_form.nome()}}</p>
+            <p>{{register_form.sobrenome()}}</p>
+            <p>{{register_form.email()}}</p>
+            <p>{{register_form.password()}}</p>
+            <p>{{register_form.password_repeat()}}</p>
+          </div>
+
+          <div>
+            <p>{{register_form.submit()}}</p>
+          </div>
+        </form>
+      </div>
     </div>
-
-
-</body>
-
+  </body>
 </html>

@@ -29,7 +29,7 @@ class Register_User(FlaskForm):
     sobrenome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome", "class":"register-form"})
     email = StringField("Email", validators=[DataRequired(), Email()], render_kw={"placeholder":"Email", "class":"register-form"})
     password = PasswordField("Senha", validators=[DataRequired()], render_kw={"placeholder":"Senha", "class":"register-form"})
-    password_repeat = PasswordField("Repetir Senha", validators=[DataRequired(),  EqualTo('password')], render_kw={"placeholder":"Repetir Senha"})
+    password_repeat = PasswordField("Repetir Senha", validators=[DataRequired(),  EqualTo('password')], render_kw={"placeholder":"Repetir Senha", "class":"register-form"})
     submit = SubmitField("Criar Conta", render_kw={"class":"btn"})
 
 class Login_User(FlaskForm):
