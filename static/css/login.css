@@ -13,6 +13,7 @@
   background: url("../bg/bg-login.jpg") no-repeat;
   background-size: cover;
   background-position: center;
+  flex-direction: column;
 }
 
 .wrapper {

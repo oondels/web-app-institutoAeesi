@@ -20,3 +20,14 @@
     {%endif%}
   </nav>
 </header>
+
+<div id="flash" class="flash-message">
+  {%with messages = get_flashed_messages()%} 
+    {%if messages%} 
+      {%for message in messages%}
+        <strong id="flash">{{message}}</strong><br/>
+        <button onclick="document.getElementById('flash').style.display = 'none';">X</button>
+      {%endfor%} 
+    {%endif%} 
+  {%endwith%}
+</div>

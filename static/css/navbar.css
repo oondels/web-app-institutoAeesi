@@ -44,7 +44,7 @@ body {
 }
 
 .flash-message {
-  color: #fff;
+  color: #feffdf;
   display: flex;
   justify-content: center;
   padding: 15px;
