@@ -4,4 +4,5 @@
   align-items: center;
   min-height: 40vh;
   color: #fff;
+  flex-direction: column;
 }

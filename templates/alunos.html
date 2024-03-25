@@ -1,49 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/htmx.org@1.9.11"></script>
     <title>AEESI: Alunos</title>
-</head>
-<body>
+  </head>
+  <body>
     {%include "navigation.html"%}
     <div>
+      <h3>Alunos</h3>
 
-        <h3>Alunos</h3>
-
+      <div>
+        <p>Pesquisar Aluno</p>
         <div>
-            <p>Pesquisar Aluno</p>
-            <div>
-                <form method="POST">
-                    <input type="text" name="q" class="input" placeholder="Pesquisar Aluno" hx-get="/pesquisa" hx-trigger="keyup changed delay:500ms" hx-target="#results">
-                </form>
-            </div>
+          <form method="POST">
+            <input
+              type="text"
+              name="q"
+              class="input"
+              placeholder="Pesquisar Aluno"
+              hx-get="/pesquisa"
+              hx-trigger="keyup changed delay:500ms"
+              hx-target="#results"
+            />
+          </form>
         </div>
+      </div>
 
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Idade</th>
-                    </tr>
-                </thead>
-                <tbody id="results">
-                </tbody>
-            </table>
-        </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Idade</th>
+            </tr>
+          </thead>
+          <tbody id="results"></tbody>
+        </table>
+      </div>
 
-        <ul>
-            {% for aluno in alunos %}
-            <li> <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}">{{ aluno.nome }}</a> </li>
-            {% endfor %}
-        </ul>
-    
-        <div>
-            <p><a href="{{ url_for('cadastro_aluno') }}"><strong>Cadastrar Aluno</strong></a></p>
-        </div>
+      <ul>
+        {% for aluno in alunos %}
+        <li>
+          <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}"
+            >{{ aluno.nome }}</a
+          >
+        </li>
+        {% endfor %}
+      </ul>
 
+      <div>
+        <p>
+          <a href="{{ url_for('cadastro_aluno') }}"
+            ><strong>Cadastrar Aluno</strong></a
+          >
+        </p>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -15,6 +15,12 @@
       <div class="admin-dashbord">
         <h1>Hello Admin</h1>
       </div>
+      <div class="edit-user">
+        <h3>Editar usuário</h3>
+        {% for user in users %}
+        <p>{{user.nome}}</p>
+        {%endfor%}
+      </div>
     </div>
   </body>
 </html>

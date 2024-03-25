@@ -200,8 +200,9 @@ def logout():
 @app.route('/admin')
 @login_required
 def admin():
+    users = User.query.all()
     if current_user.dev == 1:
-        return render_template("admin.html")
+        return render_template("admin.html", users=users)
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
