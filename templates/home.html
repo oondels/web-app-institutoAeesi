@@ -1,23 +1,45 @@
-{%include "navigation.html"%}
-    <div>
-      <p>Home do Aplicativo</p>
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/home.css')}}"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    {%include "navigation.html"%}
+
+    <div class="body-home">
       <div>
-        <ul>
-          <li><a href="{{url_for('alunos_cadastrados')}}">Alunos</a></li>
-          <li><a href="#">Cursos Disponíveis e Horários</a></li>
-          <li><a href="#">Professores e Formações</a></li>
-          <li><a href="#"></a></li>
-        </ul>
+        <div class="saudation">
+          <div class="logo-aeesi">
+            <img
+              src="../static/img/logo.png"
+              alt="logo yin yang do instituto"
+            />
+          </div>
+          <p class="title">Aplicativo de Controle AEESI</p>
+        </div>
+
+        <div class="menu">
+          <ul>
+            <li><a href="{{url_for('alunos_cadastrados')}}">Alunos</a></li>
+            <li><a href="#">Cursos Disponíveis e Horários</a></li>
+            <li><a href="#">Professores e Formações</a></li>
+            <li><a href="#"></a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div>
+        {%with messages = get_flashed_messages()%} {%if messages%} {%for message
+        in messages%}
+        <p><strong>{{message}}</strong><br /></p>
+        {%endfor%} {%endif%} {%endwith%}
       </div>
     </div>
-    
-    <div>
-      {%with messages = get_flashed_messages()%}
-      {%if messages%}
-      {%for message in messages%}
-      <p><strong>{{message}}</strong><br></p>
-      {%endfor%}
-      {%endif%}
-      {%endwith%}
-    </div>
-    
+  </body>
+</html>

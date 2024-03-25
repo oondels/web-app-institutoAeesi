@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "poppins", sans-serif;
+}
+
+.body-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 35vh;
+}
+
+.title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-size: large;
+  font-weight: 600;
+}
+
+.logo-aeesi img {
+  margin-top: 20px;
+  width: 300px;
+}
