@@ -4,59 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/aluno.css')}}">
     <title>AEESI: Alunos</title>
   </head>
   <body>
     {%include "navigation.html"%}
-    <div>
-      <h3>Alunos</h3>
-
+    <div class="body-aluno">
       <div>
-        <p>Pesquisar Aluno</p>
+        <h3>Alunos</h3>
+        
+        <form method="POST">
+          <div class="input-pesquisa">
+            <input type="text" name="q" placeholder="Pesquisar Aluno" hx-get="/pesquisa" hx-trigger="keyup changed delay:500ms"
+              hx-target="#results" />
+          </div>
+        </form>
+
+        <div class="tabela-alunos">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Idade</th>
+              </tr>
+            </thead>
+            <tbody id="results"></tbody>
+          </table>
+        </div>
+  
+        <ul>
+          {% for aluno in alunos %}
+          <li>
+            <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}"
+              >{{ aluno.nome }}</a
+            >
+          </li>
+          {% endfor %}
+        </ul>
+  
         <div>
-          <form method="POST">
-            <input
-              type="text"
-              name="q"
-              class="input"
-              placeholder="Pesquisar Aluno"
-              hx-get="/pesquisa"
-              hx-trigger="keyup changed delay:500ms"
-              hx-target="#results"
-            />
-          </form>
+          <p>
+            <a href="{{ url_for('cadastro_aluno') }}"
+              ><strong>Cadastrar Aluno</strong></a
+            >
+          </p>
         </div>
       </div>
-
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>Idade</th>
-            </tr>
-          </thead>
-          <tbody id="results"></tbody>
-        </table>
-      </div>
-
-      <ul>
-        {% for aluno in alunos %}
-        <li>
-          <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}"
-            >{{ aluno.nome }}</a
-          >
-        </li>
-        {% endfor %}
-      </ul>
-
-      <div>
-        <p>
-          <a href="{{ url_for('cadastro_aluno') }}"
-            ><strong>Cadastrar Aluno</strong></a
-          >
-        </p>
-      </div>
     </div>
+    
   </body>
 </html>

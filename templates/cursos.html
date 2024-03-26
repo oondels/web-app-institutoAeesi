@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/cursos.css')}}"
+    />
+    <title>AEESI: Cursos</title>
+</head>
+<body>
+    {%include 'navigation.html'%}
+    <div class="body-cursos">
+        <div class="cards">
+            <div class="card">
+              <div class="wrapper-card">
+                <img
+                  src="../static/img/jiu-jitsu.png"
+                  alt=""
+                  class="cover-image"
+                />
+              </div>
+              <img
+                src="../static/img/faixa-preta.png"
+                alt=""
+                class="second-cover"
+              />
+              <img
+                src="../static/img/logo-jiujtsu.png"
+                alt=""
+                class="logo-card"
+              />
+            </div>
+            <div class="card">
+              <div class="wrapper-card">
+                <img
+                  src="../static/img/box/boxing.png"
+                  alt=""
+                  class="cover-image"
+                />
+              </div>
+              <img
+                src="../static/img/box/luvas.png"
+                alt=""
+                class="second-cover"
+              />
+              <img
+                src="../static/img/box/logo-box.png"
+                alt=""
+                class="logo-card"
+              />
+            </div>
+          </div>
+    </div>
+</body>
+</html>

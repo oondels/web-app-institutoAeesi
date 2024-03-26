@@ -141,6 +141,10 @@ def editar_aluno(aluno_name, aluno_id):
     else: return "Acesso bloqueado!"
     return render_template("editar.html", editar_form=editar_form)
 
+@app.route("/cursos")
+def cursos():
+    return render_template("cursos.html")
+
 @app.route("/upload-arquivos", methods=["GET", "POST"])
 @login_required
 def upload_files():
