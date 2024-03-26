@@ -37,6 +37,10 @@ body {
   font-weight: 600;
 }
 
+.logo img {
+  height: 45px;
+}
+
 .nav-bar a {
   text-decoration: none;
   color: #44704a;
