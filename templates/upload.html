@@ -1,7 +1,22 @@
-{%include "navigation.html"%}
-    <h1>Upload de Arquivos</h1>
-    <form method="POST" enctype="multipart/form-data">
-        {{ file_form.hidden_tag() }}
-        <p>{{ file_form.file_up() }}</p>
-        <p onclick="alert('Arquivo Enviado!')">{{ file_form.submit() }}</p>
-    </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/upload.css')}}">
+    <title>AEESI: Upload</title>
+</head>
+<body>
+    {%include "navigation.html"%}
+    <div class="body-upload">
+        <div class="wrapper">
+            <h1>Upload de Arquivos</h1>
+            <form method="POST" enctype="multipart/form-data">
+                {{ file_form.hidden_tag() }}
+                <p>{{ file_form.file_up() }}</p>
+                <p>{{ file_form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

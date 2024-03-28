@@ -1,0 +1,23 @@
+.body-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper {
+    width: 700px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0.2);
+    border: 2px solid #3f4d41;
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    font-weight: 600;
+  }
+
+  .wrapper h1 {
+    text-align: center;
+    margin-bottom: 25px;
+
+  }
