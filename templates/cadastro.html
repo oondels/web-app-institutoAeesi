@@ -1,34 +1,16 @@
-{%extends "navigation.html"%}
-{%block content%}
+{%include "navigation.html"%}
 <div>
-    <h2>Guia de Cadastro</h2>
+  <h2>Guia de Cadastro</h2>
 </div>
 
 <div>
-    <form method="POST">
-            {{ template_form.hidden_tag() }}
-        <p>
-            {{ template_form.nome.label }}
-            {{ template_form.nome() }}
-        </p>
-        <p>
-            {{ template_form.sobrenome.label }}
-            {{ template_form.sobrenome() }}
-        </p>
-        <p>
-            {{ template_form.idade.label }}
-            {{ template_form.idade() }}
-        </p>
-        <p>
-            {{ template_form.curso.label }}
-            {{ template_form.curso() }}
-        </p>
-        <p>
-            {{template_form.bolsa.label}}
-            {{template_form.bolsa()}}
-        </p>
-        <p>{{ template_form.submit() }}</p>
-    </form>
-
+  <form method="POST">
+    {{ template_form.hidden_tag() }}
+    <p>{{ template_form.nome.label }} {{ template_form.nome() }}</p>
+    <p>{{ template_form.sobrenome.label }} {{ template_form.sobrenome() }}</p>
+    <p>{{ template_form.idade.label }} {{ template_form.idade() }}</p>
+    <p>{{ template_form.curso.label }} {{ template_form.curso() }}</p>
+    <p>{{template_form.bolsa.label}} {{template_form.bolsa()}}</p>
+    <p>{{ template_form.submit() }}</p>
+  </form>
 </div>
-{%endblock%}

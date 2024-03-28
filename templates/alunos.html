@@ -4,7 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/htmx.org@1.9.11"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/aluno.css')}}">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/aluno.css')}}"
+    />
     <title>AEESI: Alunos</title>
   </head>
   <body>
@@ -14,11 +17,17 @@
         <div>
           <h1>Alunos</h1>
         </div>
-        
+
         <form method="POST">
           <div class="input-pesquisa">
-            <input type="text" name="q" placeholder="Pesquisar Aluno" hx-get="/pesquisa" hx-trigger="keyup changed delay:500ms"
-              hx-target="#results" />
+            <input
+              type="text"
+              name="q"
+              placeholder="Pesquisar Aluno"
+              hx-get="/pesquisa"
+              hx-trigger="keyup changed delay:500ms"
+              hx-target="#results"
+            />
           </div>
         </form>
 
@@ -49,15 +58,11 @@
         -->
 
         <div class="cadastrar-aluno">
-            <div class="btn" >
-              <a  href="{{ url_for('cadastro_aluno') }}"
-              >Cadastrar Aluno</a
-            >
-            </div>
+          <div class="btn">
+            <a href="{{ url_for('cadastro_aluno') }}">Cadastrar Aluno</a>
+          </div>
         </div>
-
       </div>
     </div>
-    
   </body>
 </html>
