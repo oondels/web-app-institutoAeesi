@@ -3,7 +3,9 @@
   href="{{ url_for('static', filename='css/navbar.css')}}"
 />
 <header class="header">
-  <a class="logo" href="{{url_for('home')}}"> <img src="../static/img/logo2.png" alt="logo AEESI">AEESI</a>
+  <a class="logo" href="{{url_for('home')}}">
+    <img src="../static/img/logo2.png" alt="logo AEESI" />AEESI</a
+  >
   <nav class="nav-bar">
     <a href="{{url_for('home')}}">Home</a>
     <a href="{{url_for('register')}}">Register</a>
@@ -22,12 +24,10 @@
 </header>
 
 <div id="flash" class="flash-message">
-  {%with messages = get_flashed_messages()%} 
-    {%if messages%} 
-      {%for message in messages%}
-        <strong id="flash">{{message}}</strong><br/>
-        <button onclick="document.getElementById('flash').style.display = 'none';">X</button>
-      {%endfor%} 
-    {%endif%} 
-  {%endwith%}
+  {%for message in get_flashed_messages()%}
+  <strong id="flash">{{message}}</strong><br />
+  <button onclick="document.getElementById('flash').style.display = 'none';">
+    X
+  </button>
+  {%endfor%}
 </div>

@@ -56,3 +56,12 @@ body {
   font-weight: 600;
   font-size: large;
 }
+
+.flash-message button {
+  padding: 5px;
+  margin-left: 10px;
+  border-radius: 40px;
+  background: transparent;
+  color: #feffdf;
+  font-weight: 600;
+}
