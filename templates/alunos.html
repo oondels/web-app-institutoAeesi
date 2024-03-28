@@ -11,7 +11,9 @@
     {%include "navigation.html"%}
     <div class="body-aluno">
       <div>
-        <h3>Alunos</h3>
+        <div>
+          <h2>Alunos</h2>
+        </div>
         
         <form method="POST">
           <div class="input-pesquisa">
@@ -24,31 +26,34 @@
           <table>
             <thead>
               <tr>
-                <th>Nome</th>
-                <th>Idade</th>
+                <div><th>Nome</th></div>
+                <div><th>Idade</th></div>
               </tr>
             </thead>
             <tbody id="results"></tbody>
           </table>
         </div>
   
-        <ul>
-          {% for aluno in alunos %}
-          <li>
-            <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}"
-              >{{ aluno.nome }}</a
-            >
-          </li>
-          {% endfor %}
-        </ul>
-  
-        <div>
-          <p>
-            <a href="{{ url_for('cadastro_aluno') }}"
-              ><strong>Cadastrar Aluno</strong></a
-            >
-          </p>
+        <div class="todos-alunos">
+          <ul>
+            {% for aluno in alunos %}
+            <li>
+              <a href=" {{ url_for('aluno', aluno_id=aluno.id) }}"
+                >{{ aluno.nome }}</a
+              >
+            </li>
+            {% endfor %}
+          </ul>
         </div>
+  
+        <div class="cadastrar-aluno">
+            <div class="btn" >
+              <a  href="{{ url_for('cadastro_aluno') }}"
+              >Cadastrar Aluno</a
+            >
+            </div>
+        </div>
+
       </div>
     </div>
     

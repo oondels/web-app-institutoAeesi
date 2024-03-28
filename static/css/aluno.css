@@ -5,16 +5,31 @@
 }
 
 .tabela-alunos {
-    padding: 15px;
+    padding: 10px;
+    margin-top: 15px;
+    margin-bottom: 25px;
     border: 2px solid #fff;
     border-radius: 15px;
     display: flex;
-    align-items: center;
-    justify-content:space-around;
+    justify-content: space-evenly;
 }
 
-.tabela-alunos td {
-    padding: 10px;
+.tabela-alunos th {
+    padding: 0 35px;
+}
+
+.tabela-alunos tr td {
+    text-align: center;
+    padding: 0 35px;    
+}
+
+.tabela-alunos tr td a {
+    color: green; 
+    text-decoration: none;
+}
+
+.tabela-alunos tr td a:hover {
+    text-decoration: underline;
 }
 
 .input-pesquisa input{
@@ -29,4 +44,44 @@
     color: #ffffff;
     padding: 20px 45px 20px 20px;
     font-weight: 400;
+}
+
+.body-aluno form {
+    margin: 15px;
+}
+
+.body-aluno div h2 {
+    text-align: center;
+}
+
+.todos-alunos {
+    margin-bottom: 25px;
+}
+
+.todos-alunos ul {
+    list-style-type: none;
+}
+
+.todos-alunos a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.todos-alunos a:hover {
+    text-decoration: underline;
+}
+
+.cadastrar-aluno .btn {
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    text-align: center;
 }
