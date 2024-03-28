@@ -12,7 +12,7 @@
   <body>
     {%include "navigation.html"%}
     <div class="body-home">
-      <div>
+      <div class="wrapper">
         <div class="logo-aeesi">
           <img src="../static/img/logo.png" alt="logo yin yang do instituto" />
           <h1 class="title">Aplicativo de Controle AEESI</h1>
@@ -27,13 +27,14 @@
         </div>
 
         <div class="menu">
+          <h3>Menu</h3>
           <ul>
             <li><a href="{{url_for('alunos_cadastrados')}}">Alunos</a></li>
             <li>
-              <a href="{{url_for('cursos')}}">Cursos Disponíveis e Horários</a>
+              <a href="{{url_for('cursos')}}">Cursos Disponíveis</a>
             </li>
-            <li><a href="#">Professores e Formações</a></li>
-            <li><a href="#"></a></li>
+            <li><a href="#">Professores</a></li>
+            <li><a href="#">Testes</a></li>
           </ul>
         </div>
       </div>

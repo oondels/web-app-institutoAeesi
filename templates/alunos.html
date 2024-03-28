@@ -10,9 +10,9 @@
   <body>
     {%include "navigation.html"%}
     <div class="body-aluno">
-      <div>
+      <div class="wrapper">
         <div>
-          <h2>Alunos</h2>
+          <h1>Alunos</h1>
         </div>
         
         <form method="POST">
@@ -27,13 +27,14 @@
             <thead>
               <tr>
                 <div><th>Nome</th></div>
-                <div><th>Idade</th></div>
+                <div><th>Curso</th></div>
               </tr>
             </thead>
             <tbody id="results"></tbody>
           </table>
         </div>
-  
+
+        <!--
         <div class="todos-alunos">
           <ul>
             {% for aluno in alunos %}
@@ -45,7 +46,8 @@
             {% endfor %}
           </ul>
         </div>
-  
+        -->
+
         <div class="cadastrar-aluno">
             <div class="btn" >
               <a  href="{{ url_for('cadastro_aluno') }}"

@@ -1,6 +1,6 @@
 {% for result in results %}
 <tr class="results-tabela">
     <td><a href="{{ url_for('aluno', aluno_id=result.id) }}">{{ result.nome }}</a></td>
-    <td>{{result.idade}}</td>
+    <td>{{result.curso}}</td>
 </tr>
 {% endfor %}
