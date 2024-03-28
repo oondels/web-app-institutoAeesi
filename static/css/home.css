@@ -8,35 +8,12 @@
   box-sizing: border-box;
 }
 
-.title {
-  padding-top: 20px;
-  padding-bottom: 20px;
-}
-
-.logo-aeesi img {
-  margin-top: 20px;
-  width: 300px;
-}
-
-.saudacao p {
-  white-space: pre-line;
-}
-
-.saudacao {
-  margin-bottom: 20px;
-}
-
-.menu a {
-  text-decoration: none;
-  cursor: pointer;
-  color: #fff;
-}
-
-.menu a:hover {
-  text-decoration: underline;
-}
 
 .wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   width: 650px;
   background: transparent;
   backdrop-filter: blur(20px);
@@ -57,24 +34,58 @@
   text-align: center;
 }
 
+.title {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.logo-aeesi img {
+  margin-top: 20px;
+  width: 300px;
+}
+
+.saudacao {
+  margin-bottom: 20px;
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+
+.menu a {
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+}
+
+
 .menu li {
   list-style-type: none;
-  width: 35%;
+  width: 155px;
+}
+
+.menu .btn {
+  width: 100%;
   height: 45px;
-  background: #525151;
+  background: #fff;
   border: none;
   outline: none;
-  border-radius: 40px;
+  border-radius: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   font-size: 16px;
-  color: #000000;
+  color: #333;
   font-weight: 600;
-  margin: 1px;
-  word-break: break-all;
 }
 
-.menu ul {
+.menu ul a {
   display: flex;
   text-align: center;
   justify-content: center;
@@ -82,11 +93,7 @@
   align-items: center;
   vertical-align: baseline;
   line-height: 45px;
-}
-
-.menu {
-  text-align: center;
-  padding: 5px;
+  padding: 2px;
 }
 
 .menu h3 {
