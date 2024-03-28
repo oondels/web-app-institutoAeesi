@@ -11,11 +11,13 @@
     <div class="body-upload">
         <div class="wrapper">
             <h1>Upload de Arquivos</h1>
-            <form method="POST" enctype="multipart/form-data">
-                {{ file_form.hidden_tag() }}
-                <p>{{ file_form.file_up() }}</p>
-                <p>{{ file_form.submit() }}</p>
-            </form>
+            <div class="envio">
+                <form method="POST" enctype="multipart/form-data">
+                    {{ file_form.hidden_tag() }}
+                    <p>{{ file_form.file_up() }}</p>
+                    <p>{{ file_form.submit() }}</p>
+                </form>
+            </div>
         </div>
     </div>
 </body>

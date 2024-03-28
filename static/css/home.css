@@ -68,7 +68,7 @@
 
 .menu li {
   list-style-type: none;
-  width: 155px;
+  width: 165px;
 }
 
 .menu .btn {
@@ -83,6 +83,10 @@
   font-size: 16px;
   color: #333;
   font-weight: 600;
+}
+
+.menu .btn:hover {
+  color: green;
 }
 
 .menu ul a {

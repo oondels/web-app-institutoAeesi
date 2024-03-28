@@ -21,8 +21,8 @@ class Edite_Form(FlaskForm):
     submit = SubmitField("Cadastrar")   
 
 class Upload_File(FlaskForm):
-    file_up = FileField("Arquivo", validators=[FileRequired()])
-    submit = SubmitField("Enviar")
+    file_up = FileField("Arquivo", validators=[FileRequired()], render_kw={"class":"file_up"})
+    submit = SubmitField("Enviar", render_kw={"class":"btn"})
 
 class Register_User(FlaskForm):
     nome = StringField("Usuário", validators=[DataRequired()], render_kw={"placeholder":"Nome", "class":"register-form"})
