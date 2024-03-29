@@ -205,11 +205,22 @@ def logout():
 @login_required
 def admin():
     users = User.query.all()
-    if current_user.dev == 1:
-        return render_template("admin.html", users=users)
+    admin = User.query.filter_by(id=current_user.id).first()
+    if current_user.admin == 1:
+        return render_template("admin.html", users=users, admin=admin)
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
+
+@app.route("/user/<user_id>")
+@login_required
+def edit_user(user_id):
+    user_edit = User.query.filter_by(id = user_id).first()
+    if current_user.dev == 1:
+        return render_template("edit_user.html", user_edit=user_edit)
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(request.referrer))
 
 if __name__ == "__main__":
     app.run(debug=True)
