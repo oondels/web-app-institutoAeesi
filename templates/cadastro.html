@@ -1,16 +1,44 @@
-{%include "navigation.html"%}
-<div>
-  <h2>Guia de Cadastro</h2>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/editar.css')}}"
+    />
+  <title>Document</title>
+</head>
+<body>
+  {%include "navigation.html"%}
 
-<div>
-  <form method="POST">
-    {{ template_form.hidden_tag() }}
-    <p>{{ template_form.nome.label }} {{ template_form.nome() }}</p>
-    <p>{{ template_form.sobrenome.label }} {{ template_form.sobrenome() }}</p>
-    <p>{{ template_form.idade.label }} {{ template_form.idade() }}</p>
-    <p>{{ template_form.curso.label }} {{ template_form.curso() }}</p>
-    <p>{{template_form.bolsa.label}} {{template_form.bolsa()}}</p>
-    <p>{{ template_form.submit() }}</p>
-  </form>
-</div>
+  <div class="body-edit">
+    <div class="wrapper">
+      <div>
+        <h2>Guia de Cadastro</h2>
+      </div>
+      
+      <div class="edit-form">
+        <form method="POST">
+          {{ template_form.hidden_tag() }}
+          <p>{{ template_form.nome() }}</p>
+          <p>{{ template_form.sobrenome() }}</p>
+          <p>{{ template_form.idade() }}</p>
+          <div class="bolsa-curso">
+            <div>
+              <p>Curso: </p>
+              {{ template_form.curso() }}
+            </div>
+            
+            <div>
+              {{ template_form.bolsa.label }} {{template_form.bolsa()}}
+            </div>
+          </div>
+          <p>{{ template_form.submit() }}</p>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

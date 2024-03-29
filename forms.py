@@ -5,12 +5,12 @@ from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 cursos = [("Jiu-Jitsu","Jius-Jitsu"), ("RitBox", "RitBox"), ("Box", "Box"), ("Academia", "Academia")]
 class Cadastro_Form(FlaskForm):
-    nome = StringField("Nome:", validators=[DataRequired()])
-    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
-    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
-    curso = RadioField("Curso:", choices=cursos)
+    nome = StringField("Nome", validators=[DataRequired()], render_kw={"placeholder":"Nome", "class":"edit"})
+    sobrenome = StringField("Sobrenome", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome", "class":"edit"})
+    idade = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Idade", "class":"edit"})
+    curso = RadioField("Curso:", choices=cursos, render_kw={"class": "lista-cursos"})
     bolsa = BooleanField("Possui Bolsa?")
-    submit = SubmitField("Cadastrar")
+    submit = SubmitField("Cadastrar", render_kw={"class":"btn"})
 
 class Edite_Form(FlaskForm):
     nome = StringField("Nome:", validators=[DataRequired()])
@@ -38,9 +38,9 @@ class Login_User(FlaskForm):
     submit = SubmitField("Entrar", render_kw={"class":"btn"})
 
 class Editar_Form(FlaskForm):
-    nome = StringField("Nome:", validators=[DataRequired()])
-    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
-    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
-    curso = RadioField("Curso:", choices=cursos)
+    nome = StringField("Nome", validators=[DataRequired()], render_kw={"placeholder":"Nome", "class":"edit"})
+    sobrenome = StringField("Sobrenome", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome", "class":"edit"})
+    idade = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Idade", "class":"edit"})
+    curso = RadioField("Curso:", choices=cursos, render_kw={"class": "lista-cursos"})
     bolsa = BooleanField("Possui Bolsa?")
-    submit = SubmitField("Editar")
+    submit = SubmitField("Salvar", render_kw={"class":"btn"})

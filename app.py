@@ -139,7 +139,7 @@ def editar_aluno(aluno_name, aluno_id):
             db.session.commit()
             return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
     else: return "Acesso bloqueado!"
-    return render_template("editar.html", editar_form=editar_form)
+    return render_template("editar.html", editar_form=editar_form, aluno_edite = aluno_edite)
 
 @app.route("/cursos")
 def cursos():

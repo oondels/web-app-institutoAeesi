@@ -1,0 +1,107 @@
+.body-edit {
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 35vh;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 700px;
+    background: transparent;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0.2);
+    border: 2px solid #3f4d41;
+    color: #fff;
+    border-radius: 10px;
+    padding: 30px 40px;
+    font-weight: 600;
+  }
+
+  .wrapper .input-box {
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+    position: relative;
+  }
+
+  .wrapper h2 {
+    margin-bottom: 15px;
+  }
+
+  .edit-form p {
+    padding: 5px;
+  }
+
+.edit-form {
+    width: 300px;
+    font-weight: 600;
+    text-align: center;
+    background: transparent;
+}
+
+.edit {
+    width: 100%;
+    height: 40px;
+    margin: 5px 0;
+    position: relative;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: black;
+    padding: 20px 45px 20px 20px;
+    font-weight: 400;
+  }
+
+.edit-form .bolsa-curso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+}
+
+.edit-form .deletar {
+    margin-top: 40px;
+}
+
+.edit-form .deletar a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.edit-form .deletar a:hover {
+    text-decoration: underline;
+}
+
+.bolsa-curso {
+    width: 100%;
+}
+
+.bolsa-curso .lista-cursos {
+    list-style-type: none;
+}
+
+.bolsa-curso div {
+    width: 100%;
+    margin: 15px;
+}
+
+.btn {
+    width: 50%;
+    height: 45px;
+    background: #427753;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
+    margin-top: 15px;
+}

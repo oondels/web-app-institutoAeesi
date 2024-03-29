@@ -1,36 +1,53 @@
-{%extends "navigation.html"%}
-{%block content%}
-<div>
-    <h2>Guia de Edição</h2>
-</div>
-
-<div>
-    <form method="POST">
-            {{ editar_form.hidden_tag() }}
-        <p>
-            {{ editar_form.nome.label }}
-            {{ editar_form.nome() }}
-        </p>
-        <p>
-            {{ editar_form.sobrenome.label }}
-            {{ editar_form.sobrenome() }}
-        </p>
-        <p>
-            {{ editar_form.idade.label }}
-            {{ editar_form.idade() }}
-        </p>
-        <p>
-            {{ editar_form.curso.label }}
-            {{ editar_form.curso() }}
-        </p>
-        <p>
-            {{editar_form.bolsa.label}}
-            {{editar_form.bolsa()}}
-        </p>
-        <p>{{ editar_form.submit() }}</p>
-    </form>
-</div>
-<div>
-    <a href="">Deletar Aluno</a>
-</div>
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/editar.css')}}"
+    />
+    <title>Document</title>
+</head>
+<body>
+    {%include "navigation.html"%}
+    <div class="body-edit">
+        <div class="wrapper">
+            <div>
+                <h2>Edição do Aluno: {{ aluno_edite.nome }}</h2>
+            </div>
+            
+            <div class="edit-form">
+                <form method="POST">
+                        {{ editar_form.hidden_tag() }}
+                    <p>
+                        {{ editar_form.nome() }}
+                    </p>
+                    <p>
+                        {{ editar_form.sobrenome() }}
+                    </p>
+                    <p>
+                        {{ editar_form.idade() }}
+                    </p>
+                    <div class="bolsa-curso">
+                        <div>
+                            <p>Curso:</p>
+                            {{ editar_form.curso() }}
+                        </div>
+                        <div>
+                            {{editar_form.bolsa.label}}
+                            {{editar_form.bolsa()}}
+                        </div>
+                    </div>
+                    <p>{{ editar_form.submit() }}</p>
+                    <div class="deletar">
+                        <a href="">Deletar Aluno</a>
+                    </div>   
+                </form>
+            </div>
+            
+        </div>
+    </div>
+     
+</body>
+</html>

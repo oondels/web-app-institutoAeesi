@@ -56,7 +56,7 @@
     text-align: center;
 }
 
-.cadastrar-aluno .btn {
+.btn {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -94,3 +94,25 @@
     text-align: center;
     color: #fff;
   }
+
+.dados-aluno {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    color: #fff;
+}
+
+.dados-aluno p {
+    padding: 5px;
+}
+
+.aluno-name h3 {
+    color: #427732;
+    font-size: 35px;
+}
+
+.button .btn {
+    padding: 0 15px;
+}
