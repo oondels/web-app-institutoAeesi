@@ -10,6 +10,32 @@ body {
   color: #fff;
 }
 
+.body-wrap {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 35vh;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 650px;
+  background: transparent;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 10px rgba(0, 0, 0.2);
+  border: 2px solid #3f4d41;
+  color: #fff;
+  border-radius: 10px;
+  padding: 30px 40px;
+  font-weight: 600;
+}
+
 .header {
   top: 0;
   left: 0;
@@ -43,7 +69,7 @@ body {
 
 .nav-bar a {
   text-decoration: none;
-  color: #44704a;
+  color: #018749;
   font-weight: 500;
   margin-left: 20px;
 }
@@ -64,4 +90,114 @@ body {
   background: transparent;
   color: #feffdf;
   font-weight: 600;
+}
+
+.wrapper h1 {
+  margin: 10px;
+}
+
+/* Inputbox */
+.wrapper .input-box {
+  width: 100%;
+  height: 50px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.input-box input {
+  color: #b9b9b9;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  padding: 20px 45px 20px 20px;
+  font-weight: 400;
+}
+
+.input-box input::placeholder {
+  color: #ffffff;
+}
+
+/* buttons */
+.wrapper .btn {
+  width: 100%;
+  height: 45px;
+  background: #fff;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  font-weight: 600;
+  margin: 3px;
+}
+
+.wrapper li {
+  list-style-type: none;
+}
+
+/*Link*/
+.wrapper a {
+  text-decoration: none;
+  color: #018749;
+}
+
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+.bolsa-curso {
+  display: flex;
+  justify-content: center;
+}
+
+.bolsa-curso div {
+  padding: 10px;
+}
+
+/* Upload Arquivos */
+.upload {
+  display: flex;
+  justify-content: center;
+  padding: 10px 50px;
+  margin-bottom: 15px;
+}
+
+.upload div {
+  padding: 0 10px;
+}
+
+.up {
+  margin-top: 15px;
+}
+
+.input-up {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #ffffff;
+  padding: 20px 45px 20px 20px;
+  font-weight: 400;
+  text-align: center;
+}
+
+/* Login */
+.input-box i {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translatey(-50%);
+  font-size: 20px;
+  color: black;
 }

@@ -12,14 +12,14 @@
   </head>
   <body>
     {%include "navigation.html"%}
-    <div class="body-aluno">
+    <div class="body-wrap">
       <div class="wrapper">
         <div>
           <h1>Alunos</h1>
         </div>
 
         <form method="POST">
-          <div class="input-pesquisa">
+          <div class="input-box">
             <input
               type="text"
               name="q"
@@ -59,7 +59,9 @@
 
         <div class="cadastrar-aluno">
           <div>
-            <a href="{{ url_for('cadastro_aluno') }}"><button class="btn">Cadastrar Aluno</button></a>
+            <a href="{{ url_for('cadastro_aluno') }}"
+              ><button class="btn">Cadastrar Aluno</button></a
+            >
           </div>
         </div>
       </div>

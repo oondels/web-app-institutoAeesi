@@ -11,25 +11,27 @@
   </head>
   <body>
     {%include "navigation.html"%}
-    <div class="body-upload">
+    <div class="body-wrap">
       <div class="wrapper">
         <h1>Upload de Arquivos</h1>
-        <fieldset class="upload-choice">
+        <fieldset class="upload">
           <legend>O que deseja fazer?</legend>
-          <div>
-            <input type="checkbox" />
-            <label for="Comprovante">Comprovante</label>
-          </div>
-          <div>
-            <input type="checkbox" />
-            <label for="foto">foto</label>
-          </div>
+          <form method="POST">
+            <div>
+              <input name="selection" type="checkbox" value="comprovante" />
+              <label for="Comprovante">Comprovante</label>
+            </div>
+            <div>
+              <input name="selection" type="checkbox" value="foto" />
+              <label for="foto">foto</label>
+            </div>
+          </form>
         </fieldset>
-        <div class="envio">
+        <div>
           <form method="POST" enctype="multipart/form-data">
             {{ file_form.hidden_tag() }}
-            <p>{{ file_form.file_up() }}</p>
-            <p>{{ file_form.submit() }}</p>
+            <div>{{ file_form.file_up() }}</div>
+            <div class="up">{{ file_form.submit() }}</div>
           </form>
         </div>
       </div>

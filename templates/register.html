@@ -12,19 +12,19 @@
 
   <body>
     {%include 'navigation.html'%}
-    <div class="body-register">
-      <div class="register">
+    <div class="body-wrap">
+      <div class="wrapper">
         <div class="title">
           <h1>Página de Registro</h1>
         </div>
         <form method="POST">
           {{register_form.hidden_tag()}}
           <div>
-            <p>{{register_form.nome()}}</p>
-            <p>{{register_form.sobrenome()}}</p>
-            <p>{{register_form.email()}}</p>
-            <p>{{register_form.password()}}</p>
-            <p>{{register_form.password_repeat()}}</p>
+            <div class="input-box">{{register_form.nome()}}</div>
+            <div class="input-box">{{register_form.sobrenome()}}</div>
+            <div class="input-box">{{register_form.email()}}</div>
+            <div class="input-box">{{register_form.password()}}</div>
+            <div class="input-box">{{register_form.password_repeat()}}</div>
           </div>
 
           <div>

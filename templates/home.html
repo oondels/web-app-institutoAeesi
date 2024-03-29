@@ -11,7 +11,7 @@
   </head>
   <body>
     {%include "navigation.html"%}
-    <div class="body-home">
+    <div class="body-wrap">
       <div class="wrapper">
         <div class="logo-aeesi">
           <img src="../static/img/logo.png" alt="logo yin yang do instituto" />
@@ -29,12 +29,22 @@
         <div class="menu">
           <h3>Menu</h3>
           <ul>
-            <li><a href="{{url_for('alunos_cadastrados')}}"><button class="btn">Alunos</button></a></li>
             <li>
-              <a href="{{url_for('cursos')}}"><button class="btn">Cursos Disponíveis</button></a>
+              <a href="{{url_for('alunos_cadastrados')}}"
+                ><button class="btn">Alunos</button></a
+              >
             </li>
-            <li><a href="#"><button class="btn">Professores</button></a></li>
-            <li><a href="#"><button class="btn">Testes</button></a></li>
+            <li>
+              <a href="{{url_for('cursos')}}"
+                ><button class="btn">Cursos Disponíveis</button></a
+              >
+            </li>
+            <li>
+              <a href="#"><button class="btn">Professores</button></a>
+            </li>
+            <li>
+              <a href="#"><button class="btn">Testes</button></a>
+            </li>
           </ul>
         </div>
       </div>

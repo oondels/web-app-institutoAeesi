@@ -149,7 +149,9 @@ def cursos():
 @login_required
 def upload_files():
     file_form = Upload_File()
-
+    if request.method == "POST":
+        selection = request.form.getlist("selection")
+        print(selection)
     if file_form.validate_on_submit():
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
