@@ -21,6 +21,8 @@ class Edite_Form(FlaskForm):
     submit = SubmitField("Cadastrar")   
 
 class Upload_File(FlaskForm):
+    option = [("comprovantes", "comprovantes"), ("foto", "foto")]
+    directory = RadioField("directory", choices=option)
     file_up = FileField("Arquivo", validators=[FileRequired()], render_kw={"class":"input-up"})
     submit = SubmitField("Enviar", render_kw={"class":"btn"})
 

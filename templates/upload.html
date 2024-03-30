@@ -3,10 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{url_for('static', filename='css/upload.css')}}"
-    />
+
     <title>AEESI: Upload</title>
   </head>
   <body>
@@ -14,24 +11,14 @@
     <div class="body-wrap">
       <div class="wrapper">
         <h1>Upload de Arquivos</h1>
-        <fieldset class="upload">
-          <legend>O que deseja fazer?</legend>
-          <form method="POST">
-            <div>
-              <input name="selection" type="checkbox" value="comprovante" />
-              <label for="Comprovante">Comprovante</label>
-            </div>
-            <div>
-              <input name="selection" type="checkbox" value="foto" />
-              <label for="foto">foto</label>
-            </div>
-          </form>
-        </fieldset>
         <div>
           <form method="POST" enctype="multipart/form-data">
             {{ file_form.hidden_tag() }}
-            <div>{{ file_form.file_up() }}</div>
-            <div class="up">{{ file_form.submit() }}</div>
+            <fieldset class="upload">
+              <legend>O que deseja fazer?</legend>
+              {{file_form.directory()}}
+            </fieldset>
+            {{ file_form.file_up() }} {{file_form.submit() }}
           </form>
         </div>
       </div>

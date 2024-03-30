@@ -115,7 +115,7 @@ def cadastro_aluno():
             idade = cadastrar_form.idade.data
             curso = cadastrar_form.curso.data
             bolsa = cadastrar_form.bolsa.data
-
+            print(curso)
             aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
             db.session.add(aluno)
             db.session.commit()
@@ -149,13 +149,17 @@ def cursos():
 @login_required
 def upload_files():
     file_form = Upload_File()
-    if request.method == "POST":
-        selection = request.form.getlist("selection")
-        print(selection)
     if file_form.validate_on_submit():
+        selection = file_form.directory.data
+        print(selection)
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
-        arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + "/comprovantes", filename))
+        try:
+            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
+        except:
+            new_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}")
+            os.mkdir(new_path)
+            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
         return redirect(url_for('upload_files'))
     return render_template("upload.html", file_form=file_form)
 
