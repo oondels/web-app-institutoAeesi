@@ -7,35 +7,174 @@
       rel="stylesheet"
       href="{{url_for('static', filename='css/admin.css')}}"
     />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+    />
     <title>AEESI: Admin</title>
   </head>
   <body>
-    {%include 'navigation.html'%}
-    <div class="body-wrap">
-      <div class="wrapper">
-        <div>
-          <div>
-            <h1>Admin: {{admin.nome}} {%if admin.dev%} (dev) {%endif%}</h1>
-            <p>Fazer Dashboard futuramente..</p>
-            <br /><br />
+    <div class="container-admin">
+      <!-- SideBar -->
+      <aside>
+        <div class="toggle">
+          <div class="logo-sidebar">
+            <img src="../static/img/logo2.png" />
+            <h2>AEESI - Instituto</h2>
           </div>
-          <div>
-            <p>
-              Nome: {{admin.nome}} {{admin.sobrenome}} <br />
-              Email: {{admin.email}} <br />
-              Função: (adicionar...)
-            </p>
+          <div class="close" id="close-btn">
+            <span class="material-symbols-outlined"> close </span>
           </div>
         </div>
-        <div>
-          <h3>Editar usuário</h3>
-          {% for user in users %}
-          <p>
-            <a href="{{url_for('edit_user', user_id = user.id)}}"
-              >{{user.nome}}</a
-            >
-          </p>
-          {%endfor%}
+
+        <div class="sidebar">
+          <a href="#">
+            <span class="material-symbols-outlined"> dashboard </span>
+            <h3>Dashboard</h3>
+          </a>
+          <a href="#">
+            <span class="material-symbols-outlined"> person_outline </span>
+            <h3>Users</h3>
+          </a>
+          <a href="#">
+            <span class="material-symbols-outlined"> settings </span>
+            <h3>Configurações</h3>
+          </a>
+          <a href="#">
+            <span class="material-symbols-outlined"> add </span>
+            <h3>New Login</h3>
+          </a>
+          <a href="#">
+            <span class="material-symbols-outlined"> logout </span>
+            <h3>Sair</h3>
+          </a>
+        </div>
+      </aside>
+      <!-- End SideBar -->
+
+      <!-- End SideBar -->
+      <main>
+        <!-- Mudar para nome da página atual se necessário -->
+        <h1>Dashboard</h1>
+        <!--Analise-->
+        <div class="analyse">
+          <div class="parametro">
+            <div class="status">
+              <div class="info">
+                <!-- Mudar com dados do banco de dados -->
+                <h3>Total de Alunos</h3>
+                <h1>600</h1>
+                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <div class="progresso">
+                  <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                  </svg>
+                  <div class="percentage">
+                    <p>+20%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="parametro">
+            <div class="status">
+              <div class="info">
+                <!-- Mudar com dados do banco de dados -->
+                <h3>Porcentagem em cada curso</h3>
+                <h1>600</h1>
+                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <div class="progresso">
+                  <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                  </svg>
+                  <div class="percentage">
+                    <p>+20%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="parametro">
+            <div class="status">
+              <div class="info">
+                <!-- Mudar com dados do banco de dados -->
+                <h3>Porcentagem em cada curso</h3>
+                <h1>600</h1>
+                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <div class="progresso">
+                  <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                  </svg>
+                  <div class="percentage">
+                    <p>+20%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--End Analise-->
+
+        <!-- Alunos Novos -->
+        <div class="recent-alunos">
+          <h2>Alunos Novos</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Idade</th>
+                <th>Pagamento</th>
+                <th>Bolsa?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>exemplo</td>
+                <td>exemplo</td>
+                <td>exemplo</td>
+                <td>exemplo</td>
+                <td>exemplo</td>
+              </tr>
+            </tbody>
+          </table>
+          <a href="#">Mostrar Todos</a>
+        </div>
+      </main>
+
+      <!-- right seletion-->
+      <div class="right-section">
+        <!-- nav-->
+        <div class="nav">
+          <button id="menu-btn">
+            <span class="material-symbols-outlined"> menu </span>
+          </button>
+
+          <div class="dark-mode">
+            <span class="material-symbols-outlined"> dark_mode </span>
+            <span class="material-symbols-outlined"> light_mode </span>
+          </div>
+
+          <div class="profile">
+            <div class="info">
+              <p>Hey, <b>{{admin.nome}}</b></p>
+              <small class="text-muted">Admin</small>
+            </div>
+            <div class="profile-foto">
+              <!-- Mudar para foto personalizad -->
+              <img src="../static/img/logo2.png" />
+            </div>
+          </div>
+        </div>
+
+        <div class="aeesi-profile">
+          <div class="logo-user">
+            <img src="../static/img/logo.png" />
+            <h2>Academia AEESI</h2>
+            <p>Dashboard de Controle</p>
+          </div>
         </div>
       </div>
     </div>
