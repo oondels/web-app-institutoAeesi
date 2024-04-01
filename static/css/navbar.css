@@ -1,41 +1,51 @@
 * {
   margin: 0;
   padding: 0;
+  outline: 0;
+  appearance: 0;
+  border: 0;
+  text-decoration: none;
   box-sizing: border-box;
-  font-family: "poppins", sans-serif;
+}
+
+html {
+  font-size: 14px;
 }
 
 body {
-  background: #030712;
-  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.88rem;
+  user-select: none;
+  overflow-x: hidden;
+  color: #edeffd;
+  background-color: #181a1e;
 }
 
-.body-wrap {
-  color: #fff;
+.container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 35vh;
   flex-direction: column;
-  box-sizing: border-box;
 }
 
 .wrapper {
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 650px;
-  background: transparent;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 10px rgba(0, 0, 0.2);
-  border: 2px solid #3f4d41;
-  color: #fff;
-  border-radius: 10px;
+  border: 2px solid #1f1f1f;
+  border-radius: 45px;
   padding: 30px 40px;
+  margin-bottom: 20px;
   font-weight: 600;
 }
 
+/* NavBar */
 .header {
   top: 0;
   left: 0;
@@ -94,6 +104,34 @@ body {
 
 .wrapper h1 {
   margin: 10px;
+}
+
+/*  Home */
+.wrapper .saudacao {
+  font-size: 15px;
+  margin: 10px;
+}
+
+.wrapper .saudacao h1 {
+  text-align: center;
+}
+
+.wrapper .menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.wrapper .menu h3 {
+  padding: 10px;
+  font-size: 18 px;
+}
+
+.wrapper .menu .menu-buttons ul {
+  width: 450px;
+  display: flex;
+  justify-content: space-between;
 }
 
 /* Inputbox */
