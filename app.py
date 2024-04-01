@@ -16,7 +16,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'datab
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_BINDS'] = {
    'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db'),
-   'alunos_database': 'sqlite:///' + os.path.join(path, 'database/alunos_database.db')
+   'aluno_database': 'sqlite:///' + os.path.join(path, 'database/aluno_database.db')
 }
 
 login_manager = LoginManager()
@@ -58,12 +58,16 @@ class User(UserMixin, db.Model):
         return self.dev
     
 class Aluno(db.Model):
-    __bind_key__ =  "alunos_database"
+    __bind_key__ =  "aluno_database"
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(20))
-    sobrenome = db.Column(db.String(128))
     idade = db.Column(db.Integer())
+    cpf = db.Column(db.Integer())
     curso = db.Column(db.String(128))
+    telefone = db.Column(db.Integer())
+    horario= db.Column(db.String(128))
+    email = db.Column(db.String(128))
+    aniversario = db.Column(db.String(128))
     bolsa = db.Column(db.Boolean())
 
     def __repr__(self):
@@ -111,12 +115,16 @@ def cadastro_aluno():
     if admin_acces():
         if cadastrar_form.validate_on_submit():
             nome = cadastrar_form.nome.data
-            sobrenome = cadastrar_form.sobrenome.data
             idade = cadastrar_form.idade.data
+            cpf_aluno = cadastrar_form.cpf_aluno.data
             curso = cadastrar_form.curso.data
+            telefone = cadastrar_form.telefone.data
+            horario = cadastrar_form.horario.data
+            email = cadastrar_form.email.data
+            aniversario = cadastrar_form.aniversario.data
             bolsa = cadastrar_form.bolsa.data
-            print(curso)
-            aluno = Aluno(nome=nome, sobrenome=sobrenome, idade=idade, curso=curso, bolsa=bolsa)
+
+            aluno = Aluno(nome=nome, idade=idade, cpf=cpf_aluno, curso=curso, telefone=telefone, horario=horario, email=email, aniversario=aniversario, bolsa=bolsa)
             db.session.add(aluno)
             db.session.commit()
             return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))

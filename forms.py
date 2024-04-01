@@ -1,14 +1,18 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileRequired
-from wtforms import StringField, SubmitField, TextAreaField, RadioField, BooleanField, FileField, PasswordField
+from wtforms import StringField, SubmitField, IntegerField, RadioField, BooleanField, FileField, PasswordField
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 cursos = [("Jiu-Jitsu","Jius-Jitsu"), ("RitBox", "RitBox"), ("Box", "Box"), ("Academia", "Academia")]
 class Cadastro_Form(FlaskForm):
     nome = StringField("Nome", validators=[DataRequired()], render_kw={"placeholder":"Nome", "class":"edit"})
-    sobrenome = StringField("Sobrenome", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome", "class":"edit"})
     idade = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Idade", "class":"edit"})
+    cpf_aluno = StringField("Cpf", validators=[DataRequired()], render_kw={"placeholder":"Cpf", "class":"edit"})
     curso = RadioField("Curso:", choices=cursos, render_kw={"class": "lista-cursos"})
+    telefone = IntegerField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Telefone", "class":"edit"})
+    horario = StringField("Horário", validators=[DataRequired()], render_kw={"placeholder":"Horário", "class":"edit"})
+    email = StringField("Email", validators=[DataRequired()], render_kw={"placeholder":"Email", "class":"edit"})
+    aniversario = StringField("Aniversário", validators=[DataRequired()], render_kw={"placeholder":"Aniversário", "class":"edit"})
     bolsa = BooleanField("Possui Bolsa?")
     submit = SubmitField("Cadastrar", render_kw={"class":"btn"})
 
