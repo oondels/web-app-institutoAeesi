@@ -44,9 +44,9 @@
             <span class="material-symbols-outlined"> add </span>
             <h3>New Login</h3>
           </a>
-          <a href="#">
+          <a href="{{url_for('home')}}">
             <span class="material-symbols-outlined"> logout </span>
-            <h3>Sair</h3>
+            <h3>Home</h3>
           </a>
         </div>
       </aside>
@@ -63,7 +63,44 @@
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
                 <h3>Total de Alunos</h3>
-                <h1>600</h1>
+                <h1>{{alunos.query.count()}}</h1>
+                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <div class="progresso">
+                  <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                  </svg>
+                  <div class="percentage">
+                    <p>+20%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="parametro">
+            <div class="status">
+              <div class="info">
+                <h3>Porcentagem Com Bolsa de Estudos</h3>
+                <h1>{{alunos.query.filter_by(bolsa=True).count()}}</h1>
+                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <div class="progresso">
+                  <svg>
+                    <circle cx="38" cy="38" r="36"></circle>
+                  </svg>
+                  <div class="percentage">
+                    <p>+20%</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="parametro">
+            <div class="status">
+              <div class="info">
+                <!-- Mudar com dados do banco de dados -->
+                <h3>Aviversariante(s) do Mês</h3>
+                <h1>Pegar info depois</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso">
                   <svg>
@@ -82,26 +119,7 @@
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
                 <h3>Porcentagem em cada curso</h3>
-                <h1>600</h1>
-                <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso">
-                  <svg>
-                    <circle cx="38" cy="38" r="36"></circle>
-                  </svg>
-                  <div class="percentage">
-                    <p>+20%</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="parametro">
-            <div class="status">
-              <div class="info">
-                <!-- Mudar com dados do banco de dados -->
-                <h3>Porcentagem em cada curso</h3>
-                <h1>600</h1>
+                <h2>...</h2>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso">
                   <svg>
@@ -131,13 +149,16 @@
               </tr>
             </thead>
             <tbody>
+              {%for aluno in reversed(alunos.query.all()[-5:])%}
               <tr>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
+                <td>
+                  <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
+                    >{{aluno.nome}}</a
+                  >
+                </td>
+                <td>{{aluno.curso}}</td>
               </tr>
+              {%endfor%}
             </tbody>
           </table>
           <a href="#">Mostrar Todos</a>
@@ -159,7 +180,7 @@
 
           <div class="profile">
             <div class="info">
-              <p>Hey, <b>{{admin.nome}}</b></p>
+              <p>Ola, <b>{{admin.nome}}</b></p>
               <small class="text-muted">Admin</small>
             </div>
             <div class="profile-foto">
@@ -173,7 +194,7 @@
           <div class="logo-user">
             <img src="../static/img/logo.png" />
             <h2>Academia AEESI</h2>
-            <p>Dashboard de Controle</p>
+            <p>Aplicativo para controle de alunos e professores.</p>
           </div>
         </div>
       </div>
