@@ -221,7 +221,7 @@ def admin():
     users = User.query.all()
     admin = User.query.filter_by(id=current_user.id).first()
     if current_user.admin == 1:
-        return render_template("admin.html", users=users, admin=admin, alunos=alunos)
+        return render_template("admin.html", users=users, admin=admin, alunos=alunos, reversed=reversed)
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))

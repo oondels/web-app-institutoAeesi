@@ -80,7 +80,6 @@
           <div class="parametro">
             <div class="status">
               <div class="info">
-                
                 <h3>Porcentagem Com Bolsa de Estudos</h3>
                 <h1>{{alunos.query.filter_by(bolsa=True).count()}}</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
@@ -101,9 +100,7 @@
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
                 <h3>Aviversariante(s) do Mês</h3>
-                <h1>
-                  Pegar info depois
-                </h1>
+                <h1>Pegar info depois</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso">
                   <svg>
@@ -135,7 +132,6 @@
               </div>
             </div>
           </div>
-
         </div>
         <!--End Analise-->
 
@@ -153,11 +149,14 @@
               </tr>
             </thead>
             <tbody>
-              {%for aluno in alunos.query.all()[-10:]%}
+              {%for aluno in reversed(alunos.query.all()[-5:])%}
               <tr>
-                  <td>{{aluno.nome}}</td>
-                  <td>{{aluno.curso}}</td>
-                 
+                <td>
+                  <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
+                    >{{aluno.nome}}</a
+                  >
+                </td>
+                <td>{{aluno.curso}}</td>
               </tr>
               {%endfor%}
             </tbody>
