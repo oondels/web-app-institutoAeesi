@@ -16,7 +16,7 @@
   <body>
     <div class="container-admin">
       <!-- SideBar -->
-      <aside>
+      <aside name="aside-show">
         <div class="toggle">
           <div class="logo-sidebar">
             <img src="../static/img/logo2.png" />
@@ -153,13 +153,13 @@
               </tr>
             </thead>
             <tbody>
+              {%for aluno in alunos.query.all()[-10:]%}
               <tr>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
-                <td>exemplo</td>
+                  <td>{{aluno.nome}}</td>
+                  <td>{{aluno.curso}}</td>
+                 
               </tr>
+              {%endfor%}
             </tbody>
           </table>
           <a href="#">Mostrar Todos</a>
@@ -170,7 +170,7 @@
       <div class="right-section">
         <!-- nav-->
         <div class="nav">
-          <button id="menu-btn">
+          <button onclick="document.querySelector('#aside-show').style.display = 'block'" id="menu-btn">
             <span class="material-symbols-outlined"> menu </span>
           </button>
 
@@ -195,7 +195,7 @@
           <div class="logo-user">
             <img src="../static/img/logo.png" />
             <h2>Academia AEESI</h2>
-            <p>Dashboard de Controle</p>
+            <p>Aplicativo para controle de alunos e professores.</p>
           </div>
         </div>
       </div>
