@@ -172,12 +172,13 @@ def pagamentos():
     file_form = Upload_File()
     alunos = Aluno.query.all()
 
-    # Resetando pagamento de todos os alunos para falso no primeiro dia do mês
+    # Resetando pagamento de todos os alunos para falso no primeiro dia do mês (Menos bolsistas)
     if date.today().day == 1:
         for aluno in alunos:
-            for pag in aluno.pagamento:
-                pag.pagamento = False
-                db.session.commit()
+            if aluno.bolsa == False:
+                for pag in aluno.pagamento:
+                    pag.pagamento = False
+                    db.session.commit()
 
     # Verificando se tem envio de dados
     if request.method == "POST":
