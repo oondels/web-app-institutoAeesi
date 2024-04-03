@@ -106,7 +106,6 @@ def alunos_cadastrados():
 def pesquisa():
     pesquisa = request.args.get("q")
     if pesquisa:
-        print(pesquisa)
         results = Aluno.query.filter(Aluno.nome.icontains(pesquisa)).order_by(Aluno.nome.asc()).limit(100).all()
     else: 
         results = []
