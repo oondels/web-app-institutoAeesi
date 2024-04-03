@@ -12,10 +12,12 @@
         <h1>Pagamentos</h1>
 
         <div class="pagamentos">
-          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisar Aluno">
+          <input type="text" id="input-pesquisa" onkeyup="myFunction()" placeholder="Pesquisar Aluno">
+          
 
-          <ul id="myUL">
-            <form method="POST">
+          <ul id="aluno-pesquisa">
+            <form method="POST" enctype="multipart/form-data">
+              <input type="text" placeholder="Data" name="mes-pagamento">
                 {% for aluno in alunos %}
                     <li>
                         <p>
@@ -24,25 +26,20 @@
                                 {{aluno.nome}}
                             </a>
                         </p>
-                        <button>Enviar</button>
-                    </li>
+                      </li>
                 {% endfor %}
+
+                {{ file_form.hidden_tag() }}
+              <fieldset class="upload">
+                <legend>O que deseja fazer?</legend>
+                {{file_form.directory()}}
+              </fieldset>
+                {{ file_form.file_up() }}
+                {{file_form.submit() }}
             </form>
-        </ul>
-
+          </ul>
         </div>
 
-        <div>
-          <form method="POST" enctype="multipart/form-data">
-            {{ file_form.hidden_tag() }}
-            <fieldset class="upload">
-              <legend>O que deseja fazer?</legend>
-              {{file_form.directory()}}
-            </fieldset>
-            {{ file_form.file_up() }} {{file_form.submit() }}
-            <!--<img src="../static/svg/upload-icon.svg">-->
-          </form>
-        </div>
       </div>
     </div>
 
@@ -51,9 +48,9 @@
       function myFunction() {
         // Declare variables
         var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('myInput');
+        input = document.getElementById('input-pesquisa');
         filter = input.value.toUpperCase();
-        ul = document.getElementById("myUL");
+        ul = document.getElementById("aluno-pesquisa");
         li = ul.getElementsByTagName('li');
       
         // Loop through all list items, and hide those who don't match the search query
