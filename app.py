@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
+from datetime import datetime
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -69,9 +70,20 @@ class Aluno(db.Model):
     email = db.Column(db.String(128))
     aniversario = db.Column(db.String(128))
     bolsa = db.Column(db.Boolean())
+    pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
 
     def __repr__(self):
         return f"{self.nome}"
+
+class Pagamento(db.Model):
+    __bind_key__ =  "aluno_database"
+    id = db.Column(db.Integer, primary_key=True)
+    pagamento = db.Column(db.Boolean())
+    mes = db.Column(db.DateTime, default=datetime.utcnow)
+    aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
+
+    def __repr__(self):
+        return self.pagamento
 
 def admin_acces():
     if current_user.is_authenticated:
@@ -139,11 +151,8 @@ def editar_aluno(aluno_name, aluno_id):
     aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
     if admin_acces():
         if editar_form.validate_on_submit():
-            aluno_edite.nome = editar_form.nome.data
-            aluno_edite.sobrenome = editar_form.sobrenome.data
-            aluno_edite.idade = editar_form.idade.data
-            aluno_edite.curso = editar_form.curso.data
-            aluno_edite.bolsa = editar_form.bolsa.data
+            aluno_edite.pagamento = editar_form.pagamento.data
+
             db.session.commit()
             return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
     else: return "Acesso bloqueado!"
@@ -153,9 +162,9 @@ def editar_aluno(aluno_name, aluno_id):
 def cursos():
     return render_template("cursos.html")
 
-@app.route("/upload-arquivos", methods=["GET", "POST"])
+@app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
-def upload_files():
+def pagamentos():
     file_form = Upload_File()
     if file_form.validate_on_submit():
         selection = file_form.directory.data
@@ -167,8 +176,8 @@ def upload_files():
             new_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}")
             os.mkdir(new_path)
             arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
-        return redirect(url_for('upload_files'))
-    return render_template("upload.html", file_form=file_form)
+        return redirect(url_for('pagamentos'))
+    return render_template("pagamentos.html", file_form=file_form)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
