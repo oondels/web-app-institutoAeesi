@@ -5,7 +5,7 @@ from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
-from datetime import datetime
+from datetime import datetime, date
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
@@ -79,11 +79,11 @@ class Pagamento(db.Model):
     __bind_key__ =  "aluno_database"
     id = db.Column(db.Integer, primary_key=True)
     pagamento = db.Column(db.Boolean())
-    mes = db.Column(db.DateTime, default=datetime.utcnow)
+    mes = db.Column(db.DateTime, default=date.today())
     aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
 
     def __repr__(self):
-        return self.pagamento
+        return f'<{self.pagamento}>'
 
 def admin_acces():
     if current_user.is_authenticated:
@@ -117,6 +117,9 @@ def pesquisa():
 def aluno(aluno_id):
     if admin_acces():
         aluno = Aluno.query.filter_by(id=aluno_id).first()
+        # Pegar pagamento do aluno -> Colocar no arquivo .html
+        for pag in aluno.pagamento:
+            print(pag.pagamento)
         return render_template("aluno.html", aluno=aluno)
     return "Acesso Bloqueado"
 
@@ -137,6 +140,8 @@ def cadastro_aluno():
             bolsa = cadastrar_form.bolsa.data
 
             aluno = Aluno(nome=nome, idade=idade, cpf=cpf_aluno, curso=curso, telefone=telefone, horario=horario, email=email, aniversario=aniversario, bolsa=bolsa)
+            pag_aluno = Pagamento(pagamento=False, mes=date.today(), aluno=aluno)
+            db.session.add(pag_aluno)
             db.session.add(aluno)
             db.session.commit()
             return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
