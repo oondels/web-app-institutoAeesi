@@ -3,14 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
     <title>AEESI: Upload</title>
   </head>
   <body>
     {%include "navigation.html"%}
     <div class="body-wrap">
       <div class="wrapper">
-        <h1>Upload de Arquivos</h1>
+        <h1>Pagamentos</h1>
+
+        <form method="POST">
+          <div class="input-box">
+            <input
+              type="text"
+              name="q"
+              placeholder="Pesquisar Aluno"
+              hx-get="/pesquisa-pagamentos"
+              hx-trigger="keyup changed delay:500ms"
+              hx-target="#results"
+            />
+          </div>
+        </form>
+
+        <div class="pagamentos">
+          <div class="tabela-alunos">
+            <table>
+              <thead>
+                <tr>
+                  <div><th>Nome</th></div>
+                  <div><th>Pagamento</th></div>
+                </tr>
+              </thead>
+              <tbody id="results"></tbody>
+            </table>
+          </div>
+        </div>
+
         <div>
           <form method="POST" enctype="multipart/form-data">
             {{ file_form.hidden_tag() }}
