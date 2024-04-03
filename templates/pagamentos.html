@@ -19,6 +19,7 @@
             <form method="POST" enctype="multipart/form-data">
               <input type="text" placeholder="Data" name="mes-pagamento">
                 {% for aluno in alunos %}
+                  {% if aluno.bolsa != True %}
                     <li>
                         <p>
                             <input type="checkbox" name="aluno-pesquisa" value="{{aluno.id}}">
@@ -27,6 +28,7 @@
                             </a>
                         </p>
                       </li>
+                  {% endif %}
                 {% endfor %}
 
                 {{ file_form.hidden_tag() }}
