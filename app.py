@@ -165,26 +165,44 @@ def editar_aluno(aluno_name, aluno_id):
 def cursos():
     return render_template("cursos.html")
 
+# Rota para registrar pagamento de alunos e upload de comprovantes/fotos
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
-def pagamentos():
+def pagamentos():       
+    file_form = Upload_File()
     alunos = Aluno.query.all()
 
-    if request.form.get("aluno-pesquisa"):
-        print(request.form.get("aluno-pesquisa"))
+    # Resetando pagamento de todos os alunos para falso no primeiro dia do mês
+    if date.today().day == 1:
+        for aluno in alunos:
+            for pag in aluno.pagamento:
+                pag.pagamento = False
+                db.session.commit()
 
-    file_form = Upload_File()
+    # Verificando se tem envio de dados
+    if request.method == "POST":
+        aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
+        # Atualizando informação de pagamento
+        try:
+            for pay in aluno_pesquisado.pagamento:
+                pay.pagamento = True
+                db.session.commit() 
+        except:
+            flash("Erro ao efetuar pagamento do aluno!")
+    
     if file_form.validate_on_submit():
         selection = file_form.directory.data
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
+        #Verificando se existe o caminho, caso contrário criando o folder
         try:
-            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
+            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}", filename))
         except:
-            new_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}")
+            new_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}")
             os.mkdir(new_path)
-            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
+            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}", filename))
         return redirect(url_for('pagamentos'))
+
     return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
 
 @app.route("/register", methods=["GET", "POST"])
