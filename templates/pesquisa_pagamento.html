@@ -1,12 +1,15 @@
 {% for result in results %}
 <tr class="results-tabela">
-  <!--Finalizar-->
+  <!--Concertar-->
+  <td>{{ result.nome }}</td>
   <td>
-    <form method="POST"><input type="checkbox" />{{ result.nome }}</form>
-  </td>
-  <td>
-    {% for aluno in result.pagamento %} {% if aluno.pagamento %} Pago {% else %}
-    Não Pago {% endif %} {%endfor%}
+    <form method="POST">
+      {% for aluno in result.pagamento %} {% if aluno.pagamento %} Pago {% else
+      %} Não Pago {% endif %}
+      <input type="checkbox" name="nome_aluno" value="{{result.id}}" />
+      <button>enviar</button>
+      {%endfor%}
+    </form>
   </td>
 </tr>
 {% endfor %}
