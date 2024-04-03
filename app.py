@@ -110,15 +110,6 @@ def pesquisa():
         results = []
     return render_template("pesquisa_aluno.html", results=results)
 
-@app.route("/pesquisa-pagamentos")
-def pesquisa_pagamento():
-    pesquisa = request.args.get("q")
-    if pesquisa:
-        results = Aluno.query.filter(Aluno.nome.icontains(pesquisa)).order_by(Aluno.nome.asc()).limit(100).all()
-    else: 
-        results = []
-    return render_template("pesquisa_pagamento.html", results=results)
-
 @app.route("/aluno/<aluno_id>")
 @login_required
 def aluno(aluno_id):
@@ -177,7 +168,11 @@ def cursos():
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
 def pagamentos():
-    print(request.form.get("nome_aluno"))
+    alunos = Aluno.query.all()
+
+    if request.form.get("aluno-pesquisa"):
+        print(request.form.get("aluno-pesquisa"))
+
     file_form = Upload_File()
     if file_form.validate_on_submit():
         selection = file_form.directory.data
@@ -190,7 +185,7 @@ def pagamentos():
             os.mkdir(new_path)
             arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}", filename))
         return redirect(url_for('pagamentos'))
-    return render_template("pagamentos.html", file_form=file_form)
+    return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
