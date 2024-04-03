@@ -177,6 +177,7 @@ def cursos():
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
 def pagamentos():
+    print(request.form.get("nome_aluno"))
     file_form = Upload_File()
     if file_form.validate_on_submit():
         selection = file_form.directory.data
