@@ -101,7 +101,6 @@ def alunos_cadastrados():
     alunos = Aluno.query.all()
     return render_template('alunos.html', alunos = alunos)
 
-#corrigir depois
 @app.route("/pesquisa")
 def pesquisa():
     pesquisa = request.args.get("q")
@@ -110,6 +109,15 @@ def pesquisa():
     else: 
         results = []
     return render_template("pesquisa_aluno.html", results=results)
+
+@app.route("/pesquisa-pagamentos")
+def pesquisa_pagamento():
+    pesquisa = request.args.get("q")
+    if pesquisa:
+        results = Aluno.query.filter(Aluno.nome.icontains(pesquisa)).order_by(Aluno.nome.asc()).limit(100).all()
+    else: 
+        results = []
+    return render_template("pesquisa_pagamento.html", results=results)
 
 @app.route("/aluno/<aluno_id>")
 @login_required
