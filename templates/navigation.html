@@ -10,7 +10,7 @@
     <a href="{{url_for('home')}}">Home</a>
     <a href="{{url_for('register')}}">Register</a>
     <a href="{{url_for('login')}}">Login</a>
-    <a href="{{url_for('upload_files')}}">Upload</a>
+    <a href="{{url_for('pagamentos')}}">Pagamentos</a>
     {% if current_user.is_authenticated %}
     <a href="{{url_for('user_page',user_id=current_user.get_id())}}"
       >Página do Usuário</a

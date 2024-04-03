@@ -44,9 +44,6 @@ class Login_User(FlaskForm):
     submit = SubmitField("Entrar", render_kw={"class":"btn"})
 
 class Editar_Form(FlaskForm):
-    nome = StringField("Nome", validators=[DataRequired()], render_kw={"placeholder":"Nome"})
-    sobrenome = StringField("Sobrenome", validators=[DataRequired()], render_kw={"placeholder":"Sobrenome"})
-    idade = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Idade"})
-    curso = RadioField("Curso:", choices=cursos, render_kw={"class": "lista-cursos"})
-    bolsa = BooleanField("Possui Bolsa?")
+    nome = StringField("Nome", validators=[DataRequired()])
+    # Idade ser calculada de acordo com aniversário
     submit = SubmitField("Salvar", render_kw={"class":"btn"})

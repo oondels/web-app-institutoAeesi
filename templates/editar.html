@@ -21,15 +21,6 @@
           <form method="POST">
             {{ editar_form.hidden_tag() }}
             <div class="input-box">{{ editar_form.nome() }}</div>
-            <div class="input-box">{{ editar_form.sobrenome() }}</div>
-            <div class="input-box">{{ editar_form.idade() }}</div>
-            <div class="bolsa-curso">
-              <div>
-                <p>Curso:</p>
-                {{ editar_form.curso() }}
-              </div>
-              <div>{{editar_form.bolsa.label}} {{editar_form.bolsa()}}</div>
-            </div>
             <p>{{ editar_form.submit() }}</p>
             <div class="deletar">
               <a href="">Deletar Aluno</a>
