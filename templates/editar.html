@@ -1,17 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/editar.css')}}"
-    />
     <title>Document</title>
   </head>
   <body>
     {%include "navigation.html"%}
-    <div class="body-wrap">
+    <div class="container">
       <div class="wrapper">
         <div>
           <h2>Edição do Aluno: {{ aluno_edite.nome }}</h2>
