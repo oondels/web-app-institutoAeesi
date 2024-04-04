@@ -12,7 +12,8 @@
         <h1>Pagamentos</h1>
 
         <div class="pagamentos">
-          <input type="text" id="input-pesquisa" onkeyup="myFunction()" placeholder="Pesquisar Aluno">
+          <div class="input-box input"><input type="text" id="input-pesquisa" onkeyup="myFunction()" placeholder="Pesquisar Aluno"></div>
+          
           
 
           <ul id="aluno-pesquisa">
@@ -20,14 +21,19 @@
               <input type="text" placeholder="Data" name="mes-pagamento">
                 {% for aluno in alunos %}
                   {% if aluno.bolsa != True %}
-                    <li>
-                        <p>
-                            <input type="checkbox" name="aluno-pesquisa" value="{{aluno.id}}">
-                            <a href="#">
-                                {{aluno.nome}}
-                            </a>
-                        </p>
-                      </li>
+                    {% for pag in aluno.pagamento %}
+                      {% if not pag.pagamento %}
+                        <li>
+                          <p>
+                              <input type="checkbox" name="aluno-pesquisa" value="{{aluno.id}}">
+                              <a href="#">
+                                  {{aluno.nome}}
+                              </a>
+                          </p>
+                        </li>
+                      {% endif %}
+                    {% endfor %}
+                    
                   {% endif %}
                 {% endfor %}
 
