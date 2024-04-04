@@ -195,13 +195,22 @@ def pagamentos():
         selection = file_form.directory.data
         arquivo = file_form.file_up.data
         filename = secure_filename(arquivo.filename)
-        #Verificando se existe o caminho, caso contrário criando o folder
+        mes_pagamento = request.form.get("mes-pagamento").replace("/", "-").strip()
+
+        # Formarto de Data
+        format = "%d-%m-%Y"
         try:
-            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}", filename))
+            datetime.strptime(mes_pagamento, format)
+            # Verificando se existe o caminho, caso contrário criando o folder
+            save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.id}" + f"/{mes_pagamento}")
+            if os.path.exists(save_path):
+                arquivo.save(os.path.join(save_path, filename))
+            else:
+                os.makedirs(save_path)
+                arquivo.save(os.path.join(save_path, filename))
+                flash("Arquivo enviado")
         except:
-            new_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}")
-            os.mkdir(new_path)
-            arquivo.save(os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}/{aluno_pesquisado.nome}-{aluno_pesquisado.id}", filename))
+            flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>")       
         return redirect(url_for('pagamentos'))
 
     return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
