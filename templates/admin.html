@@ -157,6 +157,23 @@
                   >
                 </td>
                 <td>{{aluno.curso}}</td>
+                <td>{{aluno.idade}}</td>
+                <td>
+                  {% for pag in aluno.pagamento %} 
+                    {% if pag.pagamento %} 
+                      Pago 
+                    {% else %} 
+                      Não Pago 
+                    {% endif %} 
+                  {% endfor %}
+                </td>
+                <td>
+                  {% if aluno.bolsa %}
+                    Possui Bolsa
+                  {% else %}
+                    Não Possui
+                  {% endif %}
+                </td>
               </tr>
               {%endfor%}
             </tbody>
