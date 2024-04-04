@@ -18,13 +18,15 @@
 
           <ul id="aluno-pesquisa">
             <form method="POST" enctype="multipart/form-data">
-              <input type="text" placeholder="Data" name="mes-pagamento">
+              <div class="input-box input">
+                <input type="text" placeholder="Data" name="mes-pagamento">
+              </div>
                 {% for aluno in alunos %}
                   {% if aluno.bolsa != True %}
                     {% for pag in aluno.pagamento %}
                       {% if not pag.pagamento %}
                         <li>
-                          <p>
+                          <p> 
                               <input type="checkbox" name="aluno-pesquisa" value="{{aluno.id}}">
                               <a href="#">
                                   {{aluno.nome}}
