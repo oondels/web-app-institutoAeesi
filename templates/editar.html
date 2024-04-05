@@ -17,10 +17,10 @@
           <form method="POST">
             {{ editar_form.hidden_tag() }}
             <div class="input-box">{{ editar_form.email() }}</div>
-            <div class="input-box">{{ editar_form.curso() }}</div>
             <div class="input-box">{{ editar_form.telefone() }}</div>
             <div class="input-box">{{ editar_form.horario() }}</div>
-            <div class="input-box">{{ editar_form.bolsa () }}</div>
+            <div> {{editar_form.bolsa.label}} {{ editar_form.bolsa () }}</div>
+            <div>{{ editar_form.curso() }}</div>
 
             <p>{{ editar_form.submit() }}</p>
             <div class="deletar">

@@ -154,8 +154,11 @@ def editar_aluno(aluno_name, aluno_id):
     aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
     if admin_acces():
         if editar_form.validate_on_submit():
-            aluno_edite.pagamento = editar_form.pagamento.data
-
+            aluno_edite.email = editar_form.email.data
+            aluno_edite.telefone = editar_form.telefone.data
+            aluno_edite.horario = editar_form.horario.data
+            aluno_edite.curso = editar_form.curso.data
+            aluno_edite.bolsa = editar_form.bolsa.data
             db.session.commit()
             return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
     else: return "Acesso bloqueado!"
