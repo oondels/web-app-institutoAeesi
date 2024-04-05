@@ -17,9 +17,10 @@ class Cadastro_Form(FlaskForm):
     submit = SubmitField("Cadastrar", render_kw={"class":"btn"})
 
 class Edite_Form(FlaskForm):
-    nome = StringField("Nome:", validators=[DataRequired()])
-    sobrenome = StringField("Sobrenome:", validators=[DataRequired()])
-    idade = StringField("Idade:", validators=[DataRequired(), Length(min=1, max=3)])
+    email = StringField("Email")
+    telefone =
+    horario =
+    bolsa =
     curso = RadioField("Curso:", choices=cursos)
     bolsa = BooleanField("Possui Bolsa?")
     submit = SubmitField("Cadastrar")   
