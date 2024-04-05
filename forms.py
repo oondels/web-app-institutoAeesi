@@ -16,15 +16,6 @@ class Cadastro_Form(FlaskForm):
     bolsa = BooleanField("Possui Bolsa?")
     submit = SubmitField("Cadastrar", render_kw={"class":"btn"})
 
-class Edite_Form(FlaskForm):
-    email = StringField("Email")
-    telefone =
-    horario =
-    bolsa =
-    curso = RadioField("Curso:", choices=cursos)
-    bolsa = BooleanField("Possui Bolsa?")
-    submit = SubmitField("Cadastrar")   
-
 class Upload_File(FlaskForm):
     option = [("comprovantes", "comprovantes"), ("foto", "foto")]
     directory = RadioField("directory", choices=option)
@@ -45,6 +36,9 @@ class Login_User(FlaskForm):
     submit = SubmitField("Entrar", render_kw={"class":"btn"})
 
 class Editar_Form(FlaskForm):
-    nome = StringField("Nome", validators=[DataRequired()])
-    # Idade ser calculada de acordo com aniversário
+    email = StringField("Email",render_kw={"placeholder":"Email"})
+    telefone = StringField("Telefone", render_kw={"placeholder":"Telefone"})
+    horario = StringField("Horario", render_kw={"placeholder":"Horário"})
+    curso = RadioField("Curso:", choices=cursos)
+    bolsa = BooleanField("Possui Bolsa?")
     submit = SubmitField("Salvar", render_kw={"class":"btn"})
