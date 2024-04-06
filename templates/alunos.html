@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="{{ url_for('static', filename='css/aluno.css')}}"
     />
+    <script src="../static/js/search_aluno.js" defer></script>
     <title>AEESI: Alunos</title>
   </head>
   <body>
@@ -18,7 +19,7 @@
         </div>
 
         <div class="pesquisa-alunos">
-          <div class="input-box input"><input type="text" id="input-pesquisa" onkeyup="myFunction()" placeholder="Pesquisar Aluno"></div>
+          <div class="input-box input"><input type="text" id="input-pesquisa" onkeyup="search_aluno()" placeholder="Pesquisar Aluno"></div>
 
           <ul id="aluno-pesquisa">
             <form method="POST" enctype="multipart/form-data">
@@ -35,29 +36,6 @@
           </ul>
 
         </div>
-
-        <!-- Função para Filtro de lista de pesquisa de Alunos -->
-    <script>
-      function myFunction() {
-        // Declare variables
-        var input, filter, ul, li, a, i, txtValue;
-        input = document.getElementById('input-pesquisa');
-        filter = input.value.toUpperCase();
-        ul = document.getElementById("aluno-pesquisa");
-        li = ul.getElementsByTagName('li');
-      
-        // Loop through all list items, and hide those who don't match the search query
-        for (i = 0; i < li.length; i++) {
-          a = li[i].getElementsByTagName("a")[0];
-          txtValue = a.textContent || a.innerText;
-          if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-          } else {
-            li[i].style.display = "none";
-          }
-        }
-      }
-      </script>
 
         <div class="cadastrar-aluno">
           <div>
