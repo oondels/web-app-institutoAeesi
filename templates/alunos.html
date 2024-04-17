@@ -15,26 +15,54 @@
     <div class="container">
       <div class="wrapper">
         <div>
-          <h1>Alunos</h1>
+          <h1>Alunos Cadastrados</h1>
         </div>
 
-        <div class="pesquisa-alunos">
-          <div class="input-box input"><input type="text" id="input-pesquisa" onkeyup="search_aluno()" placeholder="Pesquisar Aluno"></div>
+        <div class="dados-aluno">
+          <div class="input-box input">
+            <input type="text" id="input-pesquisa" onkeyup="search_aluno_table()" placeholder="Pesquisar Aluno">
+          </div>
 
-          <ul id="aluno-pesquisa">
-            <form method="POST" enctype="multipart/form-data">
-                {% for aluno in alunos %}
-                        <li>
-                          <p> 
-                              <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
-                                  {{aluno.nome}}
-                              </a>
-                          </p>
-                        </li>
-                {% endfor %}
-            </form>
-          </ul>
+          <table>
+            <thead>
+             <tr>
+              <th>Nome</th>
+              <th>Curso</th>
+              <th>Idade</th>
+              <th>Possui Bolsa</th>
+              <th>Telefone</th>
+              <th>Horário</th>
+             </tr>
+            </thead>
 
+            <tbody id="aluno-pesquisa_table">
+                  <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
+                  {% for aluno in alunos %}
+                    <tr>
+                      <td>
+                        <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
+                          {{aluno.nome}}
+                        </a>
+                      </td>
+                      <td>
+                        {{aluno.curso}}
+                      </td>
+                      <td>
+                        {{aluno.idade}}
+                      </td>
+                      <td>
+                        {%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}
+                      </td>
+                      <td>
+                        {{aluno.telefone}}
+                      </td>
+                      <td>
+                        {{aluno.horario}}
+                      </td>
+                    </tr>
+                  {% endfor %}
+            </tbody>
+          </table>
         </div>
 
         <div class="cadastrar-aluno">
