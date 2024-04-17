@@ -178,39 +178,10 @@
                 </td>
               </tr>
               {%endfor%}
-
-              <!--Consertar esse Evento-->
-              {%for aluno in reversed(alunos.query.all()[:-5])%}
-              <tr id="ver-mais" style="display: none;">
-                <td>
-                  <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
-                    >{{aluno.nome}}</a
-                  >
-                </td>
-                <td>{{aluno.curso}}</td>
-                <td>{{aluno.idade}}</td>
-                <td>
-                  {% for pag in aluno.pagamento %} 
-                    {% if pag.pagamento %} 
-                      Pago 
-                    {% else %} 
-                      Não Pago 
-                    {% endif %} 
-                  {% endfor %}
-                </td>
-                <td>
-                  {% if aluno.bolsa %}
-                    Possui Bolsa
-                  {% else %}
-                    Não Possui
-                  {% endif %}
-                </td>
-              </tr>
-              {%endfor%}
-
+              
             </tbody>
           </table>
-          <button id="mostrar-todos">Motrar Todos</button>
+          <button id="mostrar-todos">Mostrar Todos</button>
         </div>
       </main>
 
