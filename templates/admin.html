@@ -137,7 +137,7 @@
 
         <!-- Alunos Novos -->
         <div class="recent-alunos">
-          <h2>Alunos Novos</h2>
+          <h2>New Students</h2>
           <table>
             <thead>
               <tr>
@@ -178,10 +178,43 @@
                 </td>
               </tr>
               {%endfor%}
+
+              <section class="itens-toShow" style="display: none;">
+                  {%for aluno in reversed(alunos.query.all()[0:-5])%}
+                  <tr>
+                    <td>
+                        <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
+                          >{{aluno.nome}}</a
+                        >
+                      </td>
+                      <td>{{aluno.curso}}</td>
+                      <td>{{aluno.idade}}</td>
+                      <td>
+                        {% for pag in aluno.pagamento %} 
+                          {% if pag.pagamento %} 
+                            Pago 
+                          {% else %} 
+                            Não Pago 
+                          {% endif %} 
+                        {% endfor %}
+                      </td>
+                      <td>
+                        {% if aluno.bolsa %}
+                          Possui Bolsa
+                        {% else %}
+                          Não Possui
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {%endfor%}
+              </section>
               
+
             </tbody>
+
           </table>
-          <button id="mostrar-todos">Mostrar Todos</button>
+
+          <button class="mostrar-itens">Mostrar Todos</button>
         </div>
       </main>
 
