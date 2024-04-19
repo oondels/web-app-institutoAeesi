@@ -1,9 +1,9 @@
-let verMais = document.getElementById("ver-mais");
-let mostrarMais = document.getElementById("mostrar-todos");
+let itemToshow = document.getElementsByClassName("itens-toShow")[0];
+let buttonShow = document.getElementsByClassName("mostrar-itens")[0];
 
 const mostrarMaisAlunos = () => {
-    verMais.style.display = 'inline';
+    itemToshow.style.display = 'block';
     
 };
 
-mostrarMais.addEventListener('click', mostrarMaisAlunos);
+buttonShow.addEventListener('click', mostrarMaisAlunos);
