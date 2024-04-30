@@ -11,5 +11,3 @@ Gerenciamento de pessoas, cadastros, financeiro, acompanhamento de desenvolvimen
 - Cadastros
 - Financeiro
 - Acompanhamento de desenvolvimento pessoal.
->>>>>>> 9a95e6ff2e1eb0f37ecca4e5ea74ef8a00d5da61
-
