@@ -7,30 +7,47 @@
   </head>
   <body>
     {%include "navigation.html"%}
+
     <div class="container">
       <div class="wrapper">
-        <div class="logo-aeesi">
-          <img src="../static/img/logo.png" alt="logo yin yang do instituto" />
-        </div>
-        <div class="saudacao">
-          <h1 class="title">Aplicativo de Controle AEESI</h1>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
-            harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
-            saepe voluptas tenetur nam eum quod vitae dolor repudiandae
-            dignissimos atque voluptates nemo.
-          </p>
+
+        <div class="faixada">
+          <div class="logo-aeesi">  
+            <img src="../static/img/logo.png" alt="logo yin yang do instituto" />
+          </div>
+  
+          <div class="saudacao">
+            <h1 class="title">Aplicativo de Controle AEESI</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
+              harum reiciendis perferendis, delectus blanditiis quibusdam deserunt
+              saepe voluptas tenetur nam eum quod vitae dolor repudiandae
+              dignissimos atque voluptates nemo.
+            </p>
+          </div>
         </div>
 
         <div class="menu">
-          <h3>Menu</h3>
           <div class="menu-buttons">
             <ul>
-              <li>
-                <a href="{{url_for('alunos_cadastrados')}}"
-                  ><button class="btn">Alunos</button></a
-                >
-              </li>
               <li>
                 <a href="{{url_for('cursos')}}"
                   ><button class="btn">Cursos Disponíveis</button></a
@@ -40,12 +57,17 @@
                 <a href="#"><button class="btn">Professores</button></a>
               </li>
               <li>
-                <a href="#"><button class="btn">Testes</button></a>
+                <a href="#"><button class="btn">Quem somos</button></a>
+              </li>
+              <li>
+                <a href="#"><button class="btn">Horários</button></a>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      {%include "footer.html"%}
     </div>
+    
   </body>
 </html>
