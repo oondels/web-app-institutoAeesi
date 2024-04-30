@@ -10,49 +10,46 @@
     {%include "navigation.html"%}
     <div class="container">
       <div class="wrapper">
-        <h1>Pagamentos</h1>
-
         <div class="pagamentos">
-          <div class="input-box input"><input type="text" id="input-pesquisa" onkeyup="search_aluno()" placeholder="Pesquisar Aluno"></div>
-          
-          
+          <h1>Pagamentos</h1>
+          <div class="input-box input">
+            <input
+              type="text"
+              id="input-pesquisa"
+              onkeyup="search_aluno()"
+              placeholder="Pesquisar Aluno"
+            />
+          </div>
 
           <ul id="aluno-pesquisa">
             <form method="POST" enctype="multipart/form-data">
               <div class="input-box input">
-                <input type="text" placeholder="Data" name="mes-pagamento">
+                <input type="text" placeholder="Data" name="mes-pagamento" />
               </div>
-                {% for aluno in alunos %}
-                  {% if aluno.bolsa != True %}
-                    {% for pag in aluno.pagamento %}
-                      {% if not pag.pagamento %}
-                        <li>
-                          <p> 
-                              <input type="checkbox" name="aluno-pesquisa" value="{{aluno.id}}">
-                              <a href="#">
-                                  {{aluno.nome}}
-                              </a>
-                          </p>
-                        </li>
-                      {% endif %}
-                    {% endfor %}
-                    
-                  {% endif %}
-                {% endfor %}
-
-                {{ file_form.hidden_tag() }}
+              {% for aluno in alunos %} {% if aluno.bolsa != True %} {% for pag
+              in aluno.pagamento %} {% if not pag.pagamento %}
+              <li>
+                <p>
+                  <input
+                    type="checkbox"
+                    name="aluno-pesquisa"
+                    value="{{aluno.id}}"
+                  />
+                  <a href="#"> {{aluno.nome}} </a>
+                </p>
+              </li>
+              {% endif %} {% endfor %} {% endif %} {% endfor %} {{
+              file_form.hidden_tag() }}
               <fieldset class="upload">
                 <legend>O que deseja fazer?</legend>
                 {{file_form.directory()}}
               </fieldset>
-                {{ file_form.file_up() }}
-                {{file_form.submit() }}
+              {{ file_form.file_up() }} {{file_form.submit() }}
             </form>
           </ul>
         </div>
-
       </div>
     </div>
-
+    {%include "footer.html"%}
   </body>
 </html>
