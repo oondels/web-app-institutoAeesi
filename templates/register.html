@@ -19,12 +19,16 @@
         </div>
         <form method="POST">
           {{register_form.hidden_tag()}}
-          <div>
-            <div class="input-box">{{register_form.nome()}}</div>
-            <div class="input-box">{{register_form.sobrenome()}}</div>
-            <div class="input-box">{{register_form.email()}}</div>
-            <div class="input-box">{{register_form.password()}}</div>
-            <div class="input-box">{{register_form.password_repeat()}}</div>
+          <div class="register-inputs">
+            <div class="register-1">
+              <div class="input-box">{{register_form.nome()}}</div>
+              <div class="input-box">{{register_form.sobrenome()}}</div>
+              <div class="input-box">{{register_form.email()}}</div>
+            </div>
+            <div class="register-2">
+              <div class="input-box">{{register_form.password()}}</div>
+              <div class="input-box">{{register_form.password_repeat()}}</div>
+            </div>
           </div>
 
           <div>
