@@ -2,26 +2,42 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/navbar.css')}}"
 />
-<header class="header">
-  <a class="logo" href="{{url_for('home')}}">
-    <img src="../static/img/logo2.png" alt="logo AEESI" />AEESI</a
-  >
-  <nav class="nav-bar">
-    <a href="{{url_for('home')}}">Home</a>
-    <a href="{{url_for('register')}}">Register</a>
-    <a href="{{url_for('login')}}">Login</a>
-    <a href="{{url_for('pagamentos')}}">Pagamentos</a>
-    {% if current_user.is_authenticated %}
-    <a href="{{url_for('user_page',user_id=current_user.get_id())}}"
-      >Página do Usuário</a
-    >
-    {%else%}
-    <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
-    {%endif%} {%if current_user.dev == 1 %}
-    <a href="{{url_for('admin')}}">Admin</a>
-    {%endif%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("topNav");
+  if (x.className === "nav-bar") {
+    x.className += " responsive";
+  } else {
+    x.className = "nav-bar";
+  }
+  console.log(x.className)
+  
+}
+
+</script>
+
+  <nav id="topNav" class="nav-bar">
+    <a class="logo" href="{{url_for('home')}}"><img src="../static/img/logo2.png" alt="logo AEESI" /></a>
+    <div class="menu-nav"><a href="{{url_for('home')}}">Home</a>
+      <a href="{{url_for('register')}}">Register</a>
+      <a href="{{url_for('login')}}">Login</a>
+      <a href="{{url_for('pagamentos')}}">Pagamentos</a>
+      {% if current_user.is_authenticated %}
+      <a href="{{url_for('user_page',user_id=current_user.get_id())}}"
+        >Página do Usuário</a
+      >
+      {%else%}
+      <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
+      {%endif%} {%if current_user.dev == 1 %}
+      <a href="{{url_for('admin')}}">Admin</a>
+      {%endif%}</div>
+    <a href="javascript:void(0)" class="icon" onclick="myFunction()">
+      <i class="fa fa-bars"></i>
+    </a>
   </nav>
-</header>
+
 
 <div id="flash" class="flash-message">
   {%for message in get_flashed_messages()%}

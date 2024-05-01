@@ -44,7 +44,9 @@
                 <legend>O que deseja fazer?</legend>
                 {{file_form.directory()}}
               </fieldset>
-              {{ file_form.file_up() }} {{file_form.submit() }}
+              <div class="upload-submit">
+                {{ file_form.file_up() }} {{file_form.submit() }}
+              </div>
             </form>
           </ul>
         </div>
