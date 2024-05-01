@@ -45,7 +45,8 @@ body {
 }
 
 /* NavBar */
-.header {
+
+.nav-bar {
   top: 0;
   left: 0;
   width: 100%;
@@ -55,13 +56,14 @@ body {
   align-items: center;
   z-index: 100;
   background: #3d3d3d;
-}
-
-.nav-bar {
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
-  margin-left: 40px;
+  overflow: hidden
+}
+
+.nav-bar .icon{
+  display: none;
 }
 
 .logo {
@@ -235,16 +237,6 @@ h3 {
 .upload {
   display: flex;
   justify-content: center;
-  padding: 10px 50px;
-  margin-bottom: 15px;
-}
-
-.upload div {
-  padding: 0 10px;
-}
-
-.up {
-  margin-top: 15px;
 }
 
 .input-up {
@@ -257,9 +249,17 @@ h3 {
   border-radius: 40px;
   font-size: 16px;
   color: #ffffff;
-  padding: 20px 45px 20px 20px;
+  padding: 10px 35px 10px 10px;
   font-weight: 400;
   text-align: center;
+}
+
+.upload-submit {
+  display: flex;
+}
+
+.upload-submit .btn {
+  width: 120px;
 }
 
 /* Login */
@@ -315,6 +315,7 @@ h3 {
 /* Footer */
 
 .footer-basic {
+  padding-top: 20px;
   background-color: #0c0d0e;
   color: #fff;
   position: absolute;
@@ -326,6 +327,7 @@ h3 {
 }
 
 .footer-basic ul {
+  
   list-style: none;
   text-align: center;
   font-size: 18px;
@@ -339,13 +341,13 @@ h3 {
   padding: 0 10px;
 }
 
-.footer-basic ul a {
+.footer-basic a {
   color: inherit;
   text-decoration: none;
   opacity: 0.8;
 }
 
-.footer-basic ul a:hover {
+.footer-basic a:hover {
   opacity: 1;
 }
 
@@ -397,8 +399,6 @@ h3 {
   }
 
   .footer-basic {
-    margin-top: 30px;
-    height: 50px;
     position: relative;
   }
 
@@ -410,12 +410,10 @@ h3 {
     margin-bottom: 0;
   }
 
-  .social {
-    display: none;
-  }
 }
 
 @media (max-width: 1200px) {
+
   .container {
     width: 100%;
   }
@@ -424,9 +422,9 @@ h3 {
     width: 80%;
   }
 
-  .footer-basic {
-    height: 100px;
+  .wrapper .faixada .logo-aeesi {
     position: relative;
+    top: 30%;
   }
 
   .footer-basic .copyright {
@@ -438,7 +436,43 @@ h3 {
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
+
+  .nav-bar a:not(:first-child) {
+    display: none;
+  }
+
+  .nav-bar a.icon {
+    float: right;
+    display: block;
+  }
+
+  .wrapper .faixada .logo-aeesi {
+    position: relative;
+    top: 0%
+  }
+  
+}
+
+@media (max-width: 800px) {
+
+
+  .nav-bar.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
+  .nav-bar.responsive img {
+    display: none;
+  }
+
+  .nav-bar.responsive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
   .container {
     width: 100%;
   }
@@ -463,11 +497,60 @@ h3 {
     padding: 0px;
   }
 
-  .header {
-    display: none;
+  .upload-submit {
+    padding-top: 30px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .upload-submit .btn {
+    margin-top: 15px;
   }
 
   .footer-basic {
-    position: relative;
+    height: 230px;
+    padding-top: 5px;
   }
+
+  .footer-basic .list-inline {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .wrapper .menu .menu-buttons ul li{
+    width: 230px;
+  }
+
+  .wrapper .btn {
+    height: 40px;
+  }
+
+  .wrapper .menu-buttons ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-basic {
+    height: 130px;
+    padding: 0px;
+  }
+
+  .footer-basic ul {
+    font-size: 16px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .footer-basic .list-inline-item:last-child{
+    display: none;
+  }
+
+  .saudacao p {
+    display: none;
+  }
+
 }
