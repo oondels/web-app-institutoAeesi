@@ -29,7 +29,6 @@ body {
   max-height: 100vh;
   flex-direction: column;
   position: relative;
-  padding-bottom: 130px;
 }
 
 .wrapper {
@@ -39,9 +38,10 @@ body {
   align-items: center;
   flex-direction: column;
   width: 1200px;
+  height: 550px;
   border-radius: 45px;
-  padding-bottom: 40px;
   font-weight: 600;
+  margin-top: 20px;
 }
 
 .wrapper h1 {
@@ -403,11 +403,6 @@ h3 {
 
   .wrapper .pagamentos {
     width: 80%;
-  }
-
-  .wrapper form .register-inputs {
-    display: flex;
-    flex-direction: row;
   }
 
   .footer-basic {
