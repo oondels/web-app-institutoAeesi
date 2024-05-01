@@ -38,8 +38,8 @@
     </a>
   </nav>
 
-
-<div id="flash" class="flash-message">
+<!-- Corrigir display de flash-messages -->
+<div id="flash" class="flash-message" style="display: none;">
   {%for message in get_flashed_messages()%}
   <strong id="flash">{{message}}</strong><br />
   <button onclick="document.getElementById('flash').style.display = 'none';">
