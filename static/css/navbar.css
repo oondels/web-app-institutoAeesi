@@ -426,12 +426,13 @@ h3 {
 
 @media (max-width: 1200px) {
 
-  .container {
-    width: 100%;
+  .wrapper {
+    height: 90%;
+    width: 90%;
   }
 
-  .wrapper {
-    width: 80%;
+  .container {
+    width: 100%;
   }
 
   .wrapper .faixada .logo-aeesi {
@@ -449,11 +450,6 @@ h3 {
 }
 
 @media (max-width: 800px) {
-
-  .wrapper {
-    height: 100%;
-    border-radius: 0;
-  }
 
   .nav-bar a:not(:first-child) {
     display: none;
@@ -488,14 +484,6 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .container {
-    width: 100%;
-  }
-
-  .wrapper {
-    width: 100%;
   }
 
   .wrapper .faixada {
@@ -535,7 +523,21 @@ h3 {
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
+
+  .nav-bar {
+    height: 70px;
+  }
+
+  .nav-bar.responsive {
+    height: 230px;
+  }
+
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+  }
 
   .wrapper .menu .menu-buttons ul li{
     width: 230px;
@@ -551,15 +553,8 @@ h3 {
     align-items: center;
   }
 
-  .footer-basic {
-    height: 130px;
-    padding: 0px;
-  }
-
   .footer-basic ul {
     font-size: 16px;
-    padding: 0;
-    margin: 0;
   }
 
   .footer-basic .list-inline-item:last-child{
