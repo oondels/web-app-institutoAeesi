@@ -179,13 +179,34 @@ h3 {
 
 /* Professores */
 .professores {
+  text-align: center;
   display: grid;
-  grid-template-rows: 250px 250px 250px;
-  grid-template-columns: 300px 300px 300px;
+  grid-template-rows: 500px 500px 500px;
+  grid-template-columns: 400px 400px 400px;
+}
+
+.professores h2,
+h3 {
+  text-align: center;
 }
 
 .professor {
   border: 1px solid white;
+  border-radius: 30px;
+  margin: 10px;
+}
+
+.professor ul {
+  margin-left: 30px;
+  text-align: left;
+}
+
+.professor img {
+  width: 200px;
+}
+
+.professor img:hover {
+  cursor: pointer;
 }
 
 /* Inputbox */
