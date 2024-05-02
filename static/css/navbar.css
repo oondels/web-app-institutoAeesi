@@ -180,54 +180,51 @@ h3 {
 /* Professores */
 .professores {
   text-align: center;
-  display: grid;
-  grid-template-rows: 370px 370px 370px;
-  grid-template-columns: 400px 400px 400px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 30px;
+  margin-bottom: 50px;
 }
 
 .professor {
-  color: #0a0a0a;
+  color: black;
+  flex: 1 1 30%;
   max-width: 300px;
-  margin: 20px;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 10px;
-  position: relative;
-  text-align: left;
+  height: 450px;
+  background: #43a680;
+  padding: 20px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 0 2px 0 #ccc;
+  transition: 0.3s;
+  margin: 5px;
 }
 
-.professor h3 {
-  text-align: center;
+.professor:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px -5px #18453b;
+  cursor: pointer;
+  border-radius: 40px;
+  background-color: #18453b;
+  color: white;
 }
 
-.professor ul {
-  margin-left: 30px;
+.profile-icon {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
-.image {
-  width: 75px;
-  height: 75px;
-    border-radius: 50%;
-    margin: 0 auto;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    transform-origin: bottom left;
-    box-shadow: 0 3px 15px rgba(#0a0a0a, 0.1);
-    transition: all 0.3s ease-in-out;
-    background-image: url("../img/professores/laudeci.jpeg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 25px 0 10px 0;
 }
-
-
-  .image:hover {
-    transform: scale(2);
-    border-radius: 10px;
-  }
-
 
 /* Inputbox */
 .wrapper .input-box {
