@@ -8,27 +8,24 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 14px;
-}
-
 body {
   width: 100vw;
-  height: 100vh;
   font-family: "Poppins", sans-serif;
   user-select: none;
   overflow-x: hidden;
   color: #edeffd;
   background-color: #181a1e;
+  position: absolute;
 }
 
 .container {
+  margin: 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-height: 100vh;
+  min-height: 100%;
   flex-direction: column;
-  position: relative;
+  padding-bottom: 130px;
 }
 
 .wrapper {
@@ -37,8 +34,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 1200px;
-  height: 550px;
+  width: 80%;
+  min-height: 600px;
   border-radius: 45px;
   font-weight: 600;
   margin-top: 20px;
@@ -52,6 +49,7 @@ body {
 .nav-bar {
   top: 0;
   left: 0;
+  height: 70px;
   width: 100%;
   padding: 20px 100px;
   display: flex;
@@ -62,10 +60,10 @@ body {
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
-  overflow: hidden
+  /* overflow: hidden; */
 }
 
-.nav-bar .icon{
+.nav-bar .icon {
   display: none;
 }
 
@@ -85,20 +83,26 @@ body {
   color: #018749;
   font-weight: 500;
   margin-left: 20px;
+  padding: 3px;
 }
 
-.flash-message {
-  color: #feffdf;
+a:is(:link, :active, :visited).active {
+  color: white !important;
+  border-bottom: 1px solid white;
+}
+
+/* Flash Message */
+#flash {
   display: flex;
+  flex-direction: row;
   justify-content: center;
+  color: #feffdf;
   padding: 15px;
   font-weight: 600;
   font-size: large;
 }
 
-.flash-message button {
-  padding: 5px;
-  margin-left: 10px;
+#flash button {
   border-radius: 40px;
   background: transparent;
   color: #feffdf;
@@ -152,8 +156,9 @@ h3 {
 }
 
 .faixada .logo-aeesi img {
+  align-items: center;
   float: left;
-  width: 100%;
+  width: 90%;
   object-fit: contain;
 }
 
@@ -165,6 +170,10 @@ h3 {
 .faixada .saudacao p {
   margin: 5px;
   font-size: 15px;
+}
+
+.menu {
+  padding-bottom: 50px;
 }
 
 /* Inputbox */
@@ -191,6 +200,11 @@ h3 {
 
 .input-box input::placeholder {
   color: #ffffff;
+}
+
+/* Registro */
+.registro {
+  margin-bottom: 50px;
 }
 
 /* buttons */
@@ -237,10 +251,22 @@ h3 {
   padding: 10px;
 }
 
+/* Pagamento */
 /* Upload Arquivos */
+
+#aluno-pesquisa {
+  padding-bottom: 50px;
+}
+
 .upload {
+  margin: 20px 0;
   display: flex;
   justify-content: center;
+}
+
+.upload legend {
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .input-up {
@@ -277,7 +303,7 @@ h3 {
 }
 
 .remember-forgot {
-  margin: 20px 0px
+  margin: 20px 0px;
 }
 
 .remember-forgot a {
@@ -330,16 +356,14 @@ h3 {
   padding-top: 20px;
   background-color: #0c0d0e;
   color: #fff;
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
-  right: 0;
   width: 100%;
-  height: 130px;
+  height: 140px;
 }
 
 .footer-basic ul {
-  
   list-style: none;
   text-align: center;
   font-size: 18px;
@@ -394,40 +418,12 @@ h3 {
   margin-bottom: 0;
 }
 
-@media (max-width: 1600px) {
-  .container {
-    width: 100%;
-    height: 90%;
-    padding: 0px;
-  }
-
-  .wrapper .pagamentos {
-    width: 80%;
-  }
-
-  .footer-basic {
-    position: relative;
-  }
-
-  .footer-basic .copyright {
-    margin-top: 5px;
-    text-align: center;
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 0;
-  }
-
-}
-
 @media (max-width: 1200px) {
-
   .wrapper {
-    height: 90%;
     width: 90%;
   }
-
   .container {
-    width: 100%;
+    padding-bottom: 20px;
   }
 
   .wrapper .faixada .logo-aeesi {
@@ -445,6 +441,9 @@ h3 {
 }
 
 @media (max-width: 800px) {
+  .nav-bar {
+    height: 60px;
+  }
 
   .nav-bar a:not(:first-child) {
     display: none;
@@ -454,16 +453,32 @@ h3 {
     float: right;
     display: block;
   }
-
-  .wrapper .faixada .logo-aeesi {
-    position: relative;
-    top: 0%
-  }
-  
 }
 
 @media (max-width: 800px) {
+  .container {
+    padding-bottom: 0;
+  }
 
+  .wrapper {
+    height: 100%;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 30px;
+    border-radius: 0;
+  }
+
+  .menu {
+    margin-bottom: 50px;
+  }
+
+  .menu-buttons .btn {
+    height: 40px;
+  }
+
+  .nav-bar.responsive {
+    height: 230px;
+  }
 
   .nav-bar.responsive a {
     float: none;
@@ -490,7 +505,15 @@ h3 {
 
   .wrapper .faixada .logo-aeesi {
     padding: 5px;
-    margin-top: 50px;
+    margin-top: 80px;
+    position: relative;
+    top: 0%;
+    text-align: center;
+  }
+
+  .faixada .logo-aeesi img {
+    width: 70%;
+    padding-left: 40px;
   }
 
   .wrapper .faixada .saudacao {
@@ -518,23 +541,15 @@ h3 {
   }
 }
 
-@media (max-width: 650px) {
-
-  .nav-bar {
-    height: 70px;
-  }
-
-  .nav-bar.responsive {
-    height: 230px;
-  }
-
+@media (max-width: 680px) {
   .wrapper {
     height: 100%;
     width: 100%;
     border-radius: 0;
+    margin: 0;
   }
 
-  .wrapper .menu .menu-buttons ul li{
+  .wrapper .menu .menu-buttons ul li {
     width: 230px;
   }
 
@@ -548,16 +563,20 @@ h3 {
     align-items: center;
   }
 
+  .footer-basic {
+    padding-top: 10px;
+    height: 190px;
+  }
+
   .footer-basic ul {
     font-size: 16px;
   }
 
-  .footer-basic .list-inline-item:last-child{
+  .footer-basic .list-inline-item:last-child {
     display: none;
   }
 
   .saudacao p {
     display: none;
   }
-
 }
