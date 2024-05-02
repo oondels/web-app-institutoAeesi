@@ -181,33 +181,53 @@ h3 {
 .professores {
   text-align: center;
   display: grid;
-  grid-template-rows: 500px 500px 500px;
+  grid-template-rows: 370px 370px 370px;
   grid-template-columns: 400px 400px 400px;
 }
 
-.professores h2,
-h3 {
-  text-align: center;
+.professor {
+  color: #0a0a0a;
+  max-width: 300px;
+  margin: 20px;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  position: relative;
+  text-align: left;
 }
 
-.professor {
-  border: 1px solid white;
-  border-radius: 30px;
-  margin: 10px;
+.professor h3 {
+  text-align: center;
 }
 
 .professor ul {
   margin-left: 30px;
-  text-align: left;
 }
 
-.professor img {
-  width: 200px;
+.image {
+  width: 75px;
+  height: 75px;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    transform-origin: bottom left;
+    box-shadow: 0 3px 15px rgba(#0a0a0a, 0.1);
+    transition: all 0.3s ease-in-out;
+    background-image: url("../img/professores/laudeci.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    
 }
 
-.professor img:hover {
-  cursor: pointer;
-}
+
+  .image:hover {
+    transform: scale(2);
+    border-radius: 10px;
+  }
+
 
 /* Inputbox */
 .wrapper .input-box {
