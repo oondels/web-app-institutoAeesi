@@ -36,6 +36,7 @@ body {
   flex-direction: column;
   width: 80%;
   min-height: 600px;
+  height: fit-content;
   border-radius: 45px;
   font-weight: 600;
   margin-top: 20px;
@@ -174,6 +175,17 @@ h3 {
 
 .menu {
   padding-bottom: 50px;
+}
+
+/* Professores */
+.professores {
+  display: grid;
+  grid-template-rows: 250px 250px 250px;
+  grid-template-columns: 300px 300px 300px;
+}
+
+.professor {
+  border: 1px solid white;
 }
 
 /* Inputbox */
