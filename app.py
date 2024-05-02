@@ -218,6 +218,10 @@ def pagamentos():
 
     return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
 
+@app.route("/professores")
+def professores():
+    return render_template("professores.html")
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     register_form = Register_User(csrf_enabled=False)
