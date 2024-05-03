@@ -178,7 +178,13 @@ h3 {
 }
 
 /* Professores */
+.resume {
+  text-align: center;
+  margin: 15px;
+}
+
 .professores {
+  border: 1px red solid;
   text-align: center;
   box-sizing: border-box;
   display: flex;
@@ -224,6 +230,64 @@ h3 {
   font-size: 24px;
   font-weight: bold;
   margin: 25px 0 10px 0;
+}
+
+/* Cursos */
+.container-site {
+  padding-bottom: 140px;
+}
+
+.banner-cursos {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  padding: 150px 0;
+  padding-left: 80px;
+  height: 100%;
+  width: 100%;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  background-image: url(../img/cursos/bg-cursos.jpg);
+}
+
+.cursos-cardlist {
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-columns: 1fr;
+  display: grid;
+}
+
+.card {
+  color: black;
+  background-color: #fff;
+  border-radius: 1rem;
+  max-width: 38rem;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-image {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  min-width: 12rem;
+  max-width: 12rem;
+  min-height: 17rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-image img {
+  object-fit: cover;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
 }
 
 /* Inputbox */
