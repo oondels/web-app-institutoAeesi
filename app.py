@@ -168,6 +168,10 @@ def editar_aluno(aluno_name, aluno_id):
 def cursos():
     return render_template("cursos.html")
 
+@app.route("/cursos/<nameCourse>")
+def curso(nameCourse):
+    return render_template("curso.html", curso=nameCourse)
+
 # Rota para registrar pagamento de alunos e upload de comprovantes/fotos
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
