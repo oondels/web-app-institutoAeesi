@@ -102,7 +102,7 @@ a:is(:link, :active, :visited).active {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  color: #feffdf;
+  color: #000000;
   padding: 15px;
   font-weight: 600;
   font-size: large;
