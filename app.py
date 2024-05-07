@@ -188,16 +188,6 @@ def pagamentos():
                     db.session.commit()
 
     # Verificando se tem envio de dados
-    if request.method == "POST":
-        aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
-        # Atualizando informação de pagamento
-        try:
-            for pay in aluno_pesquisado.pagamento:
-                pay.pagamento = True
-                db.session.commit() 
-        except:
-            flash("Erro ao efetuar pagamento do aluno!")
-    
     if file_form.validate_on_submit():
         selection = file_form.directory.data
         arquivo = file_form.file_up.data
@@ -207,17 +197,31 @@ def pagamentos():
         # Formarto de Data
         format = "%d-%m-%Y"
         try:
+            # Verificando se o formato de dato é válido
             datetime.strptime(mes_pagamento, format)
+
+            # Verificando se um aluno foi selecionado para fazer pagamento
+            if request.method == "POST":
+            # Atualizando informação de pagamento
+                try:
+                    aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
+                    for pay in aluno_pesquisado.pagamento:
+                        pay.pagamento = True
+                        db.session.commit() 
+                except:
+                    flash("Erro ao efetuar pagamento do aluno!")
+
             # Verificando se existe o caminho, caso contrário criando o folder
-            save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.id}" + f"/{mes_pagamento}")
+            save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.nome}-{aluno_pesquisado.id}" + f"/{mes_pagamento}")
             if os.path.exists(save_path):
                 arquivo.save(os.path.join(save_path, filename))
             else:
                 os.makedirs(save_path)
                 arquivo.save(os.path.join(save_path, filename))
                 flash("Arquivo enviado")
+        
         except:
-            flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>")       
+            flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
         return redirect(url_for('pagamentos'))
 
     return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
