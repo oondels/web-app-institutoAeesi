@@ -27,14 +27,13 @@
     <a href="{{url_for('home')}}">Home</a>
     <a href="{{url_for('register')}}">Register</a>
     <a href="{{url_for('login')}}">Login</a>
+    {% if current_user.admin == 1 %}
     <a href="{{url_for('pagamentos')}}">Pagamentos</a>
-    {% if current_user.is_authenticated %}
+    {% endif %} {% if current_user.is_authenticated %}
     <a href="{{url_for('user_page',user_id=current_user.get_id())}}"
       >Página do Usuário</a
     >
-    {%else%}
-    <a href="{{url_for('user_page',user_id=1)}}">Página do Usuário</a>
-    {%endif%} {%if current_user.dev == 1 %}
+    {%endif%} {%if current_user.admin == 1 %}
     <a href="{{url_for('admin')}}">Admin</a>
     {%endif%}
   </div>

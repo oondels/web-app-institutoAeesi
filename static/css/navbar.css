@@ -132,6 +132,28 @@ a:is(:link, :active, :visited).active {
   right: 0%;
 }
 
+.text-matricula {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  text-align: justify;
+  color: #000;
+  margin-bottom: 0;
+  font-family: Montserrat, sans-serif;
+  line-height: 1.5;
+}
+
+.assinar-button button {
+  width: 150px;
+  padding: 15px;
+  border-radius: 25px;
+  background-color: #018749;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+}
+
 .sobre-vantagens {
   position: relative;
   display: grid;
@@ -142,10 +164,10 @@ a:is(:link, :active, :visited).active {
 }
 
 .sobre-vantagens .wrapper-cards {
-  width: 85vh;
-  height: 75vh;
+  width: 55vh;
+  height: 60vh;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
-  margin: 5rem auto;
+  margin: 3rem auto;
   overflow: hidden;
 }
 
@@ -172,6 +194,12 @@ a:is(:link, :active, :visited).active {
 #slider-img-3 {
   background-image: url(../img/slide-home/academia.jpg);
   background-position: center;
+  background-size: cover;
+}
+
+#slider-img-4 {
+  background-image: url(../img/slide-home/runner.jpg);
+  background-position: top;
   background-size: cover;
 }
 
@@ -222,27 +250,84 @@ a:is(:link, :active, :visited).active {
 
 .slide-fotos {
   display: flex;
+  justify-content: space-between;
 }
 
 .slide {
   width: 100%;
   height: 100%;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+  margin: 3rem auto;
+  overflow: hidden;
+  transition: 0.3s;
+  cursor: pointer;
 }
 
-.mais-aluno img {
+.slide p {
+  background-color: #018749;
+  padding: 5px;
   width: 100%;
-  padding: 0;
-  margin: 0;
+  height: 30%;
+  opacity: 0.8;
 }
 
-.text-matricula {
+.slide:hover {
+  transform: scale(1.1);
+  border-radius: 20px;
+}
+
+.slider-foto-1 {
+  background-image: url(../img/cards/maefilhas.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 35px;
   font-family: Montserrat, sans-serif;
-  font-size: 18px;
-  text-align: justify;
-  color: #000;
-  margin-bottom: 0;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.slider-foto-2 {
+  background-image: url(../img/cards/colegio.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 35px;
   font-family: Montserrat, sans-serif;
-  line-height: 1.5;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.slider-foto-3 {
+  background-image: url(../img/cards/medalhas.jpg);
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  font-size: 35px;
+  font-family: Montserrat, sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+}
+
+.frase-efeito {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 20vh;
+  font-size: 25px;
 }
 
 /* Professores */
@@ -343,7 +428,6 @@ a:is(:link, :active, :visited).active {
 }
 
 .title {
-  padding: 25px 0;
   font-size: 25px;
 }
 
