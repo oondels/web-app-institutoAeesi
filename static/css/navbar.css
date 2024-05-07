@@ -132,13 +132,83 @@ a:is(:link, :active, :visited).active {
   right: 0%;
 }
 
-.page-content {
-  display: flex;
-  justify-content: space-around;
-  padding-left: 50px;
-  padding-right: 50px;
+.sobre-vantagens {
+  position: relative;
+  display: grid;
+  grid-template-columns: 500px auto;
+  grid-row-start: initial;
   padding-top: 50px;
   padding-bottom: 70px;
+}
+
+.sobre-vantagens .wrapper-cards {
+  width: 85vh;
+  height: 75vh;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
+  margin: 5rem auto;
+  overflow: hidden;
+}
+
+.sobre-vantagens .slide-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 100%);
+  height: 100%;
+  width: 100%;
+  animation: slider 30s ease-in-out infinite alternate;
+}
+
+#slider-img-1 {
+  background-image: url(../img/slide-home/jiuJitsu.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#slider-img-2 {
+  background-image: url(../img/slide-home/Boxe.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+#slider-img-3 {
+  background-image: url(../img/slide-home/academia.jpg);
+  background-position: center;
+  background-size: cover;
+}
+
+@keyframes slider {
+  0% {
+    transform: translateX(0%);
+  }
+  10% {
+    transform: translateX(-100%);
+  }
+  20% {
+    transform: translateX(-100%);
+  }
+  30% {
+    transform: translateX(-200%);
+  }
+  40% {
+    transform: translateX(-200%);
+  }
+  50% {
+    transform: translateX(-200%);
+  }
+  60% {
+    transform: translateX(-300%);
+  }
+  70% {
+    transform: translateX(-300%);
+  }
+  80% {
+    transform: translateX(-300%);
+  }
+  90% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .matricular {
@@ -146,18 +216,33 @@ a:is(:link, :active, :visited).active {
   flex-direction: column;
   flex: none;
   justify-content: center;
-  width: 22.875rem;
+  width: 29rem;
   display: flex;
 }
 
 .slide-fotos {
   display: flex;
-  justify-content: space-between;
 }
 
 .slide {
-  border: #018749 solid 1px;
-  padding: 30px;
+  width: 100%;
+  height: 100%;
+}
+
+.mais-aluno img {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.text-matricula {
+  font-family: Montserrat, sans-serif;
+  font-size: 18px;
+  text-align: justify;
+  color: #000;
+  margin-bottom: 0;
+  font-family: Montserrat, sans-serif;
+  line-height: 1.5;
 }
 
 /* Professores */
@@ -259,6 +344,7 @@ a:is(:link, :active, :visited).active {
 
 .title {
   padding: 25px 0;
+  font-size: 25px;
 }
 
 .title,
