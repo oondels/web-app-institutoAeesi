@@ -7,85 +7,67 @@
   </head>
   <body>
     {%include "navigation.html"%}
+    <div class="container-site">
+      <div class="wrapper-site">
+        <div class="banner-home">
+          <img src="../static/img/bgs/home-bg.png" alt="" >
+        </div>
 
-    <div class="container">
-      <div class="wrapper">
-        <div class="faixada">
-          <div class="logo-aeesi">
-            <img
-              src="../static/img/logo.png"
-              alt="logo yin yang do instituto"
-            />
-          </div>
+        <div class="sobre-vantagens">
+          <div class="page-content">
+            <div class="matricular">
+              <div class="tittle">
+                <h2>Porque se</h2>
+                <h2 class="destak">Matricular?</h2>
+              </div>
+              <div class="text-matricula">
+                <p>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+                  Ut ratione est itaque, reiciendis distinctio ipsam amet totam asperiores 
+                  quo odit adipisci optio quasi sapiente, 
+                  dolores earum aperiam sed fugit maxime.
+                </p>
+              </div>
+              <div class="assinar-button">
+                <button>Assinar Agora!</button>
+              </div>
+            </div>
 
-          <div class="saudacao">
-            <h1 class="title">Aplicativo de Controle AEESI</h1>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
-              harum reiciendis perferendis, delectus blanditiis quibusdam
-              deserunt saepe voluptas tenetur nam eum quod vitae dolor
-              repudiandae dignissimos atque voluptates nemo. Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Libero et harum reiciendis
-              perferendis, delectus blanditiis quibusdam deserunt saepe voluptas
-              tenetur nam eum quod vitae dolor repudiandae dignissimos atque
-              voluptates nemo. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Libero et harum reiciendis perferendis, delectus
-              blanditiis quibusdam deserunt saepe voluptas tenetur nam eum quod
-              vitae dolor repudiandae dignissimos atque voluptates nemo.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
-              harum reiciendis perferendis, delectus blanditiis quibusdam
-              deserunt saepe voluptas tenetur nam eum quod vitae dolor
-              repudiandae dignissimos atque voluptates nemo. Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Libero et harum reiciendis
-              perferendis, delectus blanditiis quibusdam deserunt saepe voluptas
-              tenetur nam eum quod vitae dolor repudiandae dignissimos atque
-              voluptates nemo. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Libero et harum reiciendis perferendis, delectus
-              blanditiis quibusdam deserunt saepe voluptas tenetur nam eum quod
-              vitae dolor repudiandae dignissimos atque voluptates nemo.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero et
-              harum reiciendis perferendis, delectus blanditiis quibusdam
-              deserunt saepe voluptas tenetur nam eum quod vitae dolor
-              repudiandae dignissimos atque voluptates nemo. Lorem ipsum dolor
-              sit amet consectetur adipisicing elit. Libero et harum reiciendis
-              perferendis, delectus blanditiis quibusdam deserunt saepe voluptas
-              tenetur nam eum quod vitae dolor repudiandae dignissimos atque
-              voluptates nemo. Lorem ipsum dolor sit amet consectetur
-              adipisicing elit. Libero et harum reiciendis perferendis, delectus
-              blanditiis quibusdam deserunt saepe voluptas tenetur nam eum quod
-              vitae dolor repudiandae dignissimos atque voluptates nemo.
-            </p>
+            <div class="slide-cards">
+              Slide de Fotos
+            </div>
           </div>
         </div>
 
-        <div class="menu">
-          <div class="menu-buttons">
-            <ul>
-              <li>
-                <a href="{{url_for('cursos')}}"
-                  ><button class="btn">Cursos Disponíveis</button></a
-                >
-              </li>
-              <li>
-                <a href="{{url_for('professores')}}"
-                  ><button class="btn">Professores</button></a
-                >
-              </li>
-              <li>
-                <a href="#"><button class="btn">Quem somos</button></a>
-              </li>
-              <li>
-                <a href="#"><button class="btn">Horários</button></a>
-              </li>
-            </ul>
+        <div class="home_section">
+          <div class="padding-main">
+            <div class="title">
+              <h2>Somos</h2>
+              <h2 class="destak">AEESI!</h2>
+            </div>
+
+            <div class="slide-fotos">
+              <div class="mais-aluno slide">
+                Somos mais de +200 Alunos
+              </div>
+              <div class="aulas-bolsas slide">
+                Ajudando mais de +300 alunos em Escolas Públicas
+              </div>
+              <div class="medalhas slide">
+                Conquistando o senário esportivo com mais de +250 medalhas e 15 troféus
+              </div>
+            </div>
           </div>
+        </div>
+
+        <div class="frase-efeito">
+          Comece a treinar Hoje!!
+        </div>
+
+        <div class="fotos_academia">
+          Imagem da academia, arredores, paisagem
         </div>
       </div>
-    </div>
-    {%include "footer.html"%}
+      {%include "footer.html"%}
   </body>
 </html>

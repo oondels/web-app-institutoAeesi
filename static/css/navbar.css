@@ -13,8 +13,8 @@ body {
   font-family: "Poppins", sans-serif;
   user-select: none;
   overflow-x: hidden;
-  color: #edeffd;
-  background-color: #181a1e;
+  background-color: #e7e7e7;
+  color: black;
   position: absolute;
 }
 
@@ -26,6 +26,11 @@ body {
   min-height: 100%;
   flex-direction: column;
   padding-bottom: 130px;
+}
+
+.padding-main {
+  padding-left: 200px;
+  padding-right: 200px;
 }
 
 .wrapper {
@@ -57,7 +62,7 @@ body {
   justify-content: space-between;
   align-items: center;
   z-index: 100;
-  background: #3d3d3d;
+  background: transparent;
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
@@ -88,8 +93,8 @@ body {
 }
 
 a:is(:link, :active, :visited).active {
-  color: white !important;
-  border-bottom: 1px solid white;
+  color: #01ce72 !important;
+  border-bottom: 1px solid #01ce72;
 }
 
 /* Flash Message */
@@ -110,71 +115,49 @@ a:is(:link, :active, :visited).active {
   font-weight: 600;
 }
 
-.wrapper h1,
-h2,
-h3 {
-  margin: 15px;
-}
-
 .wrapper h3 {
   font-size: 25px;
   font-weight: 600;
 }
 
 /*  Home */
-.wrapper .menu {
+.banner-home img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+}
+
+.page-content {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 50px;
+  padding-bottom: 70px;
+}
+
+.matricular {
+  grid-row-gap: 1rem;
   flex-direction: column;
+  flex: none;
+  justify-content: center;
+  width: 22.875rem;
+  display: flex;
 }
 
-.wrapper .menu h3 {
-  padding: 10px;
-  font-size: 18 px;
-}
-
-.wrapper .menu .menu-buttons ul {
-  width: 550px;
+.slide-fotos {
   display: flex;
   justify-content: space-between;
 }
 
-.faixada {
-  padding: 20px;
-}
-
-.faixada .logo-aeesi {
-  width: 50%;
-  float: left;
-  padding: 20px;
-}
-
-.faixada .saudacao {
-  width: 50%;
-  float: left;
-  padding: 20px;
-}
-
-.faixada .logo-aeesi img {
-  align-items: center;
-  float: left;
-  width: 90%;
-  object-fit: contain;
-}
-
-.faixada .saudacao {
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-.faixada .saudacao p {
-  margin: 5px;
-  font-size: 15px;
-}
-
-.menu {
-  padding-bottom: 50px;
+.slide {
+  border: #018749 solid 1px;
+  padding: 30px;
 }
 
 /* Professores */
@@ -605,11 +588,6 @@ h3 {
     padding-bottom: 20px;
   }
 
-  .wrapper .faixada .logo-aeesi {
-    position: relative;
-    top: 30%;
-  }
-
   .footer-basic .copyright {
     margin-top: 5px;
     text-align: center;
@@ -659,14 +637,6 @@ h3 {
     border-radius: 0;
   }
 
-  .menu {
-    margin-bottom: 50px;
-  }
-
-  .menu-buttons .btn {
-    height: 40px;
-  }
-
   .nav-bar {
     height: 60px;
     padding-top: 0;
@@ -691,30 +661,6 @@ h3 {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-
-  .wrapper .faixada {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 5px;
-  }
-
-  .wrapper .faixada .logo-aeesi {
-    padding: 5px;
-    margin-top: 80px;
-    position: relative;
-    top: 0%;
-    text-align: center;
-  }
-
-  .faixada .logo-aeesi img {
-    width: 70%;
-    padding-left: 40px;
-  }
-
-  .wrapper .faixada .saudacao {
-    padding: 0px;
   }
 
   .upload-submit {
@@ -771,20 +717,6 @@ h3 {
     margin: 0;
   }
 
-  .wrapper .menu .menu-buttons ul li {
-    width: 230px;
-  }
-
-  .wrapper .btn {
-    height: 40px;
-  }
-
-  .wrapper .menu-buttons ul {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   .footer-basic {
     padding-top: 10px;
     height: 190px;
@@ -795,10 +727,6 @@ h3 {
   }
 
   .footer-basic .list-inline-item:last-child {
-    display: none;
-  }
-
-  .saudacao p {
     display: none;
   }
 
