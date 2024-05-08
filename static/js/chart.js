@@ -1,5 +1,6 @@
 const ctx = document.getElementById("bolsa-porcentagem");
 const ctx2 = document.getElementById("quantidade-por-curso");
+const ctx3 = document.getElementById("porcentagem-pagamento");
 
 const bolsaPorcentagem = new Chart(ctx, {
   type: "doughnut",
@@ -37,6 +38,27 @@ const quantidadeCurso = new Chart(ctx2, {
           chartVariable.ritbox,
         ],
         borderWidth: 1,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
+
+const porcentagemPagamento = new Chart(ctx3, {
+  type: "doughnut",
+  data: {
+    labels: ["Pago", "Não Pago"],
+    datasets: [
+      {
+        data: [chartVariable.pago, 100 - chartVariable.pago],
+        borderWidth: 1,
+        backgroundColor: ["#018749", "#FFB1C1"],
       },
     ],
   },

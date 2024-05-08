@@ -58,12 +58,12 @@
           <div class="parametro">
             <div class="status">
               <div class="info">
-                <!-- Mudar com dados do banco de dados -->
                 <h3>Total de Alunos</h3>
                 <h1>{{alunos.query.count()}}</h1>
                 <h3>Total de Alunos Bolsistas</h3>
                 <h1>{{alunos.query.filter_by(bolsa=True).count()}}</h1>
-                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <h3>Porcentagem de Alunos que Faltam Pagar</h3>
+                <h1>{{100 - alunoPago}}%</h1>
                 <div class="progresso"></div>
               </div>
             </div>
@@ -74,7 +74,6 @@
               <div class="info">
                 <h3>Porcentagem Com Bolsa de Estudos</h3>
                 <h1>{{porcentagem_bolsa}}%</h1>
-                <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso">
                   <div>
                     <canvas id="bolsa-porcentagem"></canvas>
@@ -87,9 +86,7 @@
           <div class="parametro">
             <div class="status">
               <div class="info">
-                <!-- Mudar com dados do banco de dados -->
                 <h3>Quantidade em Cada Curso</h3>
-                <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso-bar">
                   <div>
                     <canvas id="quantidade-por-curso"></canvas>
@@ -102,9 +99,8 @@
           <div class="parametro">
             <div class="status">
               <div class="info">
-                <!-- Mudar com dados do banco de dados -->
                 <h3>Porcentagem de alunos que faltam pagar</h3>
-                <!-- Mudar para gráfico Matplotlib com dados BG -->
+                <h1>{{ 100 - alunoPago }}%</h1>
                 <div class="progresso">
                   <div>
                     <canvas id="porcentagem-pagamento"></canvas>
@@ -118,7 +114,7 @@
 
         <!-- Alunos Novos -->
         <div class="recent-alunos">
-          <h2>New Students</h2>
+          <h2>Alunos que Faltam Pagar</h2>
           <table>
             <thead>
               <tr>
@@ -131,7 +127,8 @@
             </thead>
 
             <tbody>
-              {%for aluno in reversed(alunos.query.all()[-5:])%}
+              {% for aluno in alunos.query.all() %} {% if not aluno.bolsa %} {%
+              for pay in aluno.pagamento %} {% if not pay.pagamento %}
               <tr>
                 <td>
                   <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
@@ -149,29 +146,7 @@
                   endif %}
                 </td>
               </tr>
-              {%endfor%}
-
-              <section class="itens-toShow" style="display: none">
-                {%for aluno in reversed(alunos.query.all()[0:-5])%}
-                <tr>
-                  <td>
-                    <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
-                      >{{aluno.nome}}</a
-                    >
-                  </td>
-                  <td>{{aluno.curso}}</td>
-                  <td>{{aluno.idade}}</td>
-                  <td>
-                    {% for pag in aluno.pagamento %} {% if pag.pagamento %} Pago
-                    {% else %} Não Pago {% endif %} {% endfor %}
-                  </td>
-                  <td>
-                    {% if aluno.bolsa %} Possui Bolsa {% else %} Não Possui {%
-                    endif %}
-                  </td>
-                </tr>
-                {%endfor%}
-              </section>
+              {% endif %} {% endfor %} {% endif %} {% endfor %}
             </tbody>
           </table>
 
@@ -218,11 +193,13 @@
     <!-- Passar variaveis para o arquivo js -->
     <script type="text/javascript">
       window.chartVariable = {
-        jiuJitsu: "{{alunos.query.filter_by(curso='Jiu-Jitsu').count()}}",
+        totalAlunos: "{{ alunos.query.count() }}",
+        jiuJitsu: "{{ alunos.query.filter_by(curso='Jiu-Jitsu').count() }}",
         academia: "{{ alunos.query.filter_by(curso = 'Academia').count() }}",
         boxe: "{{ alunos.query.filter_by(curso = 'Box').count() }}",
         ritbox: "{{ alunos.query.filter_by(curso = 'RitBox').count() }}",
         porcentagem_bolsa: "{{porcentagem_bolsa}}",
+        pago: "{{ alunoPago }}",
       };
     </script>
     <script
