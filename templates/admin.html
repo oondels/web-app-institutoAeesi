@@ -103,10 +103,13 @@
             <div class="status">
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
-                <h3>Porcentagem em cada curso</h3>
-                <h2>...</h2>
+                <h3>Porcentagem de alunos que faltam pagar</h3>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso"></div>
+                <div class="progresso">
+                  <div>
+                    <canvas id="porcentagem-pagamento"></canvas>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -212,54 +215,19 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-      const ctx = document.getElementById("bolsa-porcentagem");
-      const ctx2 = document.getElementById("quantidade-por-curso");
-
-      const bolsaPorcentagem = new Chart(ctx, {
-        type: "doughnut",
-        data: {
-          labels: ["Com Bolsa", "Sem Bolsa"],
-          datasets: [
-            {
-              data: ["{{porcentagem_bolsa}}", 100 - "{{porcentagem_bolsa}}"],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-
-      const quantidadeCurso = new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: ["Academia", "Jiu-Jitsu", "Boxe", "HitBox"],
-          datasets: [
-            {
-              data: [
-                "{{alunos.query.filter_by(curso='Academia').count()}}",
-                "{{alunos.query.filter_by(curso='Jiu-Jitsu').count()}}",
-                "{{alunos.query.filter_by(curso='Box').count()}}",
-                "{{alunos.query.filter_by(curso='RitBox').count()}}",
-              ],
-              borderWidth: 1,
-            },
-          ],
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
+    <!-- Passar variaveis para o arquivo js -->
+    <script type="text/javascript">
+      window.chartVariable = {
+        jiuJitsu: "{{alunos.query.filter_by(curso='Jiu-Jitsu').count()}}",
+        academia: "{{ alunos.query.filter_by(curso = 'Academia').count() }}",
+        boxe: "{{ alunos.query.filter_by(curso = 'Box').count() }}",
+        ritbox: "{{ alunos.query.filter_by(curso = 'RitBox').count() }}",
+        porcentagem_bolsa: "{{porcentagem_bolsa}}",
+      };
     </script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/chart.js') }}"
+    ></script>
   </body>
 </html>
