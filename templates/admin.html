@@ -61,6 +61,8 @@
                 <!-- Mudar com dados do banco de dados -->
                 <h3>Total de Alunos</h3>
                 <h1>{{alunos.query.count()}}</h1>
+                <h3>Total de Alunos Bolsistas</h3>
+                <h1>{{alunos.query.filter_by(bolsa=True).count()}}</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso"></div>
               </div>
@@ -86,10 +88,13 @@
             <div class="status">
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
-                <h3>Porcentagem em Cada Curso</h3>
-                <h1>{{alunos.query.filter_by(curso="Academia").count()}}</h1>
+                <h3>Quantidade em Cada Curso</h3>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso"></div>
+                <div class="progresso-bar">
+                  <div>
+                    <canvas id="quantidade-por-curso"></canvas>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -209,6 +214,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       const ctx = document.getElementById("bolsa-porcentagem");
+      const ctx2 = document.getElementById("quantidade-por-curso");
 
       const bolsaPorcentagem = new Chart(ctx, {
         type: "doughnut",
@@ -217,6 +223,31 @@
           datasets: [
             {
               data: ["{{porcentagem_bolsa}}", 100 - "{{porcentagem_bolsa}}"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+
+      const quantidadeCurso = new Chart(ctx2, {
+        type: "bar",
+        data: {
+          labels: ["Academia", "Jiu-Jitsu", "Boxe", "HitBox"],
+          datasets: [
+            {
+              data: [
+                "{{alunos.query.filter_by(curso='Academia').count()}}",
+                "{{alunos.query.filter_by(curso='Jiu-Jitsu').count()}}",
+                "{{alunos.query.filter_by(curso='Box').count()}}",
+                "{{alunos.query.filter_by(curso='RitBox').count()}}",
+              ],
               borderWidth: 1,
             },
           ],
