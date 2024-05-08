@@ -32,6 +32,16 @@
 
 <!-- Corrigir display de flash-messages -->
 <script>
+  var flashMessage = "{{get_flashed_messages()}}";
+  window.addEventListener("DOMContentLoaded", () => {
+    if (flashMessage.length === 2) {
+      document.getElementById("flash").style.display = "none";
+      console.log("hellas");
+    } else {
+      document.getElementById("flash").style.display = "";
+    }
+  });
+
   const activePage = window.location.pathname;
   const navLinks = document.querySelectorAll("nav a").forEach((link) => {
     if (link.href.includes(`${activePage}`)) {
