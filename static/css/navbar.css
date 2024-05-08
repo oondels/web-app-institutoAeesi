@@ -13,7 +13,7 @@ body {
   font-family: "Poppins", sans-serif;
   user-select: none;
   overflow-x: hidden;
-  background-color: #e7e7e7;
+  background-color: #ffffff;
   color: black;
   position: absolute;
 }
@@ -53,6 +53,7 @@ body {
 
 /* NavBar */
 .nav-bar {
+  position: absolute;
   top: 0;
   left: 0;
   height: 70px;
@@ -66,7 +67,7 @@ body {
   font-size: 18px;
   font-weight: 500;
   text-decoration: none;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .nav-bar .icon {
@@ -164,7 +165,7 @@ a:is(:link, :active, :visited).active {
 
 .sobre-vantagens .wrapper-cards {
   width: 60vh;
-  height: 50vh;
+  height: 65vh;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
   margin: 3rem auto;
   overflow: hidden;
@@ -570,10 +571,10 @@ a:is(:link, :active, :visited).active {
   list-style-type: none;
 }
 
-/*Link*/
+/* Link */
 .wrapper a {
   text-decoration: none;
-  color: #61b390;
+  color: black;
 }
 
 .wrapper a:hover {
@@ -591,7 +592,6 @@ a:is(:link, :active, :visited).active {
 
 /* Pagamento */
 /* Upload Arquivos */
-
 #aluno-pesquisa {
   padding-bottom: 50px;
 }

@@ -2,10 +2,6 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/navbar.css')}}"
 />
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
 
 <nav id="topNav" class="nav-bar">
   <a class="logo" href="{{url_for('home')}}"
@@ -30,7 +26,6 @@
   </a>
 </nav>
 
-<!-- Corrigir display de flash-messages -->
 <script>
   var flashMessage = "{{get_flashed_messages()}}";
   window.addEventListener("DOMContentLoaded", () => {
