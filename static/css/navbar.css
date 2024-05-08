@@ -159,13 +159,12 @@ a:is(:link, :active, :visited).active {
   display: grid;
   grid-template-columns: 500px auto;
   grid-row-start: initial;
-  padding-top: 50px;
   padding-bottom: 70px;
 }
 
 .sobre-vantagens .wrapper-cards {
-  width: 55vh;
-  height: 60vh;
+  width: 60vh;
+  height: 50vh;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
   margin: 3rem auto;
   overflow: hidden;
