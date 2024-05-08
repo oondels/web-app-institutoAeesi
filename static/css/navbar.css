@@ -179,25 +179,29 @@ a:is(:link, :active, :visited).active {
 }
 
 #slider-img-1 {
-  background-image: url(../img/slide-home/jiuJitsu.jpg);
+  background-image: linear-gradient(transparent 30%, #222222),
+    url(../img/slide-home/jiuJitsu.jpg);
   background-position: center;
   background-size: cover;
 }
 
 #slider-img-2 {
-  background-image: url(../img/slide-home/Boxe.jpg);
+  background-image: linear-gradient(transparent 30%, #000000),
+    url(../img/slide-home/Boxe.jpg);
   background-position: center;
   background-size: cover;
 }
 
 #slider-img-3 {
-  background-image: url(../img/slide-home/academia.jpg);
+  background-image: linear-gradient(transparent 30%, #222222),
+    url(../img/slide-home/academia.jpg);
   background-position: center;
   background-size: cover;
 }
 
 #slider-img-4 {
-  background-image: url(../img/slide-home/runner.jpg);
+  background-image: linear-gradient(transparent 30%, #000000),
+    url(../img/slide-home/runner.jpg);
   background-position: top;
   background-size: cover;
 }
@@ -276,7 +280,8 @@ a:is(:link, :active, :visited).active {
 }
 
 .slider-foto-1 {
-  background-image: url(../img/cards/maefilhas.jpg);
+  background-image: linear-gradient(transparent 30%, #2b2a2a),
+    url(../img/cards/maefilhas.jpg);
   background-position: center;
   background-size: cover;
   display: flex;
@@ -291,7 +296,8 @@ a:is(:link, :active, :visited).active {
 }
 
 .slider-foto-2 {
-  background-image: url(../img/cards/colegio.jpg);
+  background-image: linear-gradient(transparent 30%, #2b2a2a),
+    url(../img/cards/colegio.jpg);
   background-position: center;
   background-size: cover;
   display: flex;
@@ -306,7 +312,8 @@ a:is(:link, :active, :visited).active {
 }
 
 .slider-foto-3 {
-  background-image: url(../img/cards/medalhas.jpg);
+  background-image: linear-gradient(transparent 30%, #2b2a2a),
+    url(../img/cards/medalhas.jpg);
   background-position: center;
   background-size: cover;
   display: flex;
