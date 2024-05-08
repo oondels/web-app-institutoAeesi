@@ -280,8 +280,9 @@ def admin():
     alunos = Aluno()
     users = User.query.all()
     admin = User.query.filter_by(id=current_user.id).first()
+    porcentagem_bolsa = round((alunos.query.filter_by(bolsa=True).count()/alunos.query.count())*100,2)
     if current_user.admin == 1:
-        return render_template("admin.html", users=users, admin=admin, alunos=alunos, reversed=reversed)
+        return render_template("admin.html", users=users, admin=admin, alunos=alunos, reversed=reversed, porcentagem_bolsa=porcentagem_bolsa)
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
