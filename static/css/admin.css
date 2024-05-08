@@ -184,7 +184,7 @@ main {
 
 main .analyse {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1.6rem;
 }
 
@@ -214,38 +214,9 @@ main .analyse h3 {
 
 main .analyse .progresso {
   position: relative;
-  width: 92px;
-  height: 92px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
-}
-
-main .analyse svg {
-  width: 7rem;
-  height: 7rem;
-}
-
-main .analyse svg circle {
-  fill: none;
-  stroke-width: 10;
-  stroke-linecap: round;
-  transform: translate(5px, 5px);
-}
-
-main .analyse .parametro svg circle {
-  stroke: var(--color-success);
-  stroke-dashoffset: -30;
-  stroke-dasharray: 200;
-}
-
-main .analyse .progresso .percentage {
-  position: absolute;
-  top: -3px;
-  left: -1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
 }
 
 /*Tabelas Alunos Novos*/
