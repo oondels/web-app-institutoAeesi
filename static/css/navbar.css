@@ -413,7 +413,7 @@ a:is(:link, :active, :visited).active {
   bottom: 0%;
   left: 0%;
   right: 0%;
-  background-image: url(../img/cursos/bg-cursos.jpg);
+  background-image: url(../img/bgs/bg-cursos.jpg);
   font-size: 20px;
   font-weight: 600;
 }
