@@ -51,10 +51,7 @@
         </div>
       </aside>
       <!-- End SideBar -->
-
-      <!-- End SideBar -->
       <main>
-        <!-- Mudar para nome da página atual se necessário -->
         <h1>Dashboard</h1>
         <!--Analise-->
         <div class="analyse">
@@ -65,14 +62,7 @@
                 <h3>Total de Alunos</h3>
                 <h1>{{alunos.query.count()}}</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso">
-                  <svg>
-                    <circle cx="38" cy="38" r="36"></circle>
-                  </svg>
-                  <div class="percentage">
-                    <p>+20%</p>
-                  </div>
-                </div>
+                <div class="progresso"></div>
               </div>
             </div>
           </div>
@@ -81,14 +71,11 @@
             <div class="status">
               <div class="info">
                 <h3>Porcentagem Com Bolsa de Estudos</h3>
-                <h1>{{alunos.query.filter_by(bolsa=True).count()}}</h1>
+                <h1>{{porcentagem_bolsa}}%</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
                 <div class="progresso">
-                  <svg>
-                    <circle cx="38" cy="38" r="36"></circle>
-                  </svg>
-                  <div class="percentage">
-                    <p>+20%</p>
+                  <div>
+                    <canvas id="bolsa-porcentagem"></canvas>
                   </div>
                 </div>
               </div>
@@ -99,17 +86,10 @@
             <div class="status">
               <div class="info">
                 <!-- Mudar com dados do banco de dados -->
-                <h3>Aviversariante(s) do Mês</h3>
-                <h1>Pegar info depois</h1>
+                <h3>Porcentagem em Cada Curso</h3>
+                <h1>{{alunos.query.filter_by(curso="Academia").count()}}</h1>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso">
-                  <svg>
-                    <circle cx="38" cy="38" r="36"></circle>
-                  </svg>
-                  <div class="percentage">
-                    <p>+20%</p>
-                  </div>
-                </div>
+                <div class="progresso"></div>
               </div>
             </div>
           </div>
@@ -121,14 +101,7 @@
                 <h3>Porcentagem em cada curso</h3>
                 <h2>...</h2>
                 <!-- Mudar para gráfico Matplotlib com dados BG -->
-                <div class="progresso">
-                  <svg>
-                    <circle cx="38" cy="38" r="36"></circle>
-                  </svg>
-                  <div class="percentage">
-                    <p>+20%</p>
-                  </div>
-                </div>
+                <div class="progresso"></div>
               </div>
             </div>
           </div>
@@ -149,7 +122,6 @@
               </tr>
             </thead>
 
-
             <tbody>
               {%for aluno in reversed(alunos.query.all()[-5:])%}
               <tr>
@@ -161,57 +133,38 @@
                 <td>{{aluno.curso}}</td>
                 <td>{{aluno.idade}}</td>
                 <td>
-                  {% for pag in aluno.pagamento %} 
-                    {% if pag.pagamento %} 
-                      Pago 
-                    {% else %} 
-                      Não Pago 
-                    {% endif %} 
-                  {% endfor %}
+                  {% for pag in aluno.pagamento %} {% if pag.pagamento %} Pago
+                  {% else %} Não Pago {% endif %} {% endfor %}
                 </td>
                 <td>
-                  {% if aluno.bolsa %}
-                    Possui Bolsa
-                  {% else %}
-                    Não Possui
-                  {% endif %}
+                  {% if aluno.bolsa %} Possui Bolsa {% else %} Não Possui {%
+                  endif %}
                 </td>
               </tr>
               {%endfor%}
 
-              <section class="itens-toShow" style="display: none;">
-                  {%for aluno in reversed(alunos.query.all()[0:-5])%}
-                  <tr>
-                    <td>
-                        <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
-                          >{{aluno.nome}}</a
-                        >
-                      </td>
-                      <td>{{aluno.curso}}</td>
-                      <td>{{aluno.idade}}</td>
-                      <td>
-                        {% for pag in aluno.pagamento %} 
-                          {% if pag.pagamento %} 
-                            Pago 
-                          {% else %} 
-                            Não Pago 
-                          {% endif %} 
-                        {% endfor %}
-                      </td>
-                      <td>
-                        {% if aluno.bolsa %}
-                          Possui Bolsa
-                        {% else %}
-                          Não Possui
-                        {% endif %}
-                      </td>
-                    </tr>
-                  {%endfor%}
+              <section class="itens-toShow" style="display: none">
+                {%for aluno in reversed(alunos.query.all()[0:-5])%}
+                <tr>
+                  <td>
+                    <a href="{{url_for('aluno', aluno_id=aluno.id)}}"
+                      >{{aluno.nome}}</a
+                    >
+                  </td>
+                  <td>{{aluno.curso}}</td>
+                  <td>{{aluno.idade}}</td>
+                  <td>
+                    {% for pag in aluno.pagamento %} {% if pag.pagamento %} Pago
+                    {% else %} Não Pago {% endif %} {% endfor %}
+                  </td>
+                  <td>
+                    {% if aluno.bolsa %} Possui Bolsa {% else %} Não Possui {%
+                    endif %}
+                  </td>
+                </tr>
+                {%endfor%}
               </section>
-              
-
             </tbody>
-
           </table>
 
           <button class="mostrar-itens">Mostrar Todos</button>
@@ -253,6 +206,29 @@
       </div>
     </div>
 
-    <script src="../static/js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById("bolsa-porcentagem");
+
+      const bolsaPorcentagem = new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Com Bolsa", "Sem Bolsa"],
+          datasets: [
+            {
+              data: ["{{porcentagem_bolsa}}", 100 - "{{porcentagem_bolsa}}"],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    </script>
   </body>
 </html>
