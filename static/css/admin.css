@@ -219,6 +219,12 @@ main .analyse .progresso {
   border-radius: 50%;
 }
 
+main .analyse .progresso-bar {
+  position: relative;
+  width: 450px;
+  border-radius: 50%;
+}
+
 /*Tabelas Alunos Novos*/
 main .recent-alunos {
   margin-top: 1.3rem;
