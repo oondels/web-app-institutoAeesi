@@ -2,7 +2,13 @@
   rel="stylesheet"
   href="{{ url_for('static', filename='css/navbar.css')}}"
 />
-
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"
+/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="../static/js/main.js"></script>
 <nav id="topNav" class="nav-bar">
   <a class="logo" href="{{url_for('home')}}"
     ><img src="../static/img/logo2.png" alt="logo AEESI"
@@ -24,38 +30,10 @@
     <a href="{{url_for('admin')}}">Admin</a>
     {%endif%}
   </div>
-  <a href="javascript:void(0)" class="icon" onclick="myFunction()">
+  <a href="javascript:void(0)" id="menuButton" class="icon">
     Menu<i class="fa fa-bars"></i>
   </a>
 </nav>
-
-<script>
-  var flashMessage = "{{get_flashed_messages()}}";
-  window.addEventListener("DOMContentLoaded", () => {
-    if (flashMessage.length === 2) {
-      document.getElementById("flash").style.display = "none";
-      console.log("hellas");
-    } else {
-      document.getElementById("flash").style.display = "";
-    }
-  });
-
-  const activePage = window.location.pathname;
-  const navLinks = document.querySelectorAll("nav a").forEach((link) => {
-    if (link.href.includes(`${activePage}`)) {
-      link.classList.add("active");
-    }
-  });
-
-  function myFunction() {
-    var x = document.getElementById("topNav");
-    if (x.className === "nav-bar") {
-      x.className += " responsive";
-    } else {
-      x.className = "nav-bar";
-    }
-  }
-</script>
 
 <div id="flash" class="flash-message">
   {%for message in get_flashed_messages()%}
