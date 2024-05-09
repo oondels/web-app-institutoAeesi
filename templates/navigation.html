@@ -9,15 +9,18 @@
   /></a>
   <div class="menu-nav">
     <a href="{{url_for('home')}}">Home</a>
+    {% if not current_user.is_authenticated %}
     <a href="{{url_for('register')}}">Register</a>
     <a href="{{url_for('login')}}">Login</a>
-    {% if current_user.admin == 1 %}
+    {% endif %} {% if current_user.admin == 1 %}
     <a href="{{url_for('pagamentos')}}">Pagamentos</a>
     {% endif %} {% if current_user.is_authenticated %}
     <a href="{{url_for('user_page',user_id=current_user.get_id())}}"
       >Página do Usuário</a
     >
-    {%endif%} {%if current_user.admin == 1 %}
+    {%endif%}
+    <a href="{{url_for('alunos_cadastrados')}}">Alunos</a>
+    {%if current_user.admin == 1 %}
     <a href="{{url_for('admin')}}">Admin</a>
     {%endif%}
   </div>
