@@ -16,14 +16,20 @@
   <body>
     <div class="container-admin">
       <!-- SideBar -->
-      <aside>
+      <aside id="Aside" class="menuAside">
         <div class="toggle">
           <div class="logo-sidebar">
             <img src="../static/img/logo2.png" />
             <h2>AEESI - Instituto</h2>
           </div>
           <div class="close" id="close-btn">
-            <span class="material-symbols-outlined"> close </span>
+            <span
+              href="javascript:void(0)"
+              onclick="closeMenu()"
+              class="material-symbols-outlined"
+            >
+              close
+            </span>
           </div>
         </div>
 
@@ -149,8 +155,6 @@
               {% endif %} {% endfor %} {% endif %} {% endfor %}
             </tbody>
           </table>
-
-          <button class="mostrar-itens">Mostrar Todos</button>
         </div>
       </main>
 
@@ -158,12 +162,18 @@
       <div class="right-section">
         <!-- nav-->
         <div class="nav">
-          <button id="menu-btn">
+          <button href="javascript:void(0)" onclick="showMenu()" id="menu-btn">
             <span class="material-symbols-outlined"> menu </span>
           </button>
 
           <div class="dark-mode">
-            <span class="material-symbols-outlined"> dark_mode </span>
+            <span
+              href="javascript:void(0)"
+              onclick="darkMode()"
+              class="material-symbols-outlined"
+            >
+              dark_mode
+            </span>
             <span class="material-symbols-outlined"> light_mode </span>
           </div>
 
@@ -206,5 +216,25 @@
       type="text/javascript"
       src="{{ url_for('static', filename='js/chart.js') }}"
     ></script>
+    <script>
+      const showMenu = () => {
+        var menu = document.getElementById("Aside");
+        if (menu.className === "menuAside") {
+          menu.className += " responsive";
+        } else {
+          menu.className = "menuAside";
+        }
+        console.log(menu.className);
+      };
+
+      const closeMenu = () => {
+        var menu = document.getElementById("Aside");
+        if (menu.className === "menuAside responsive") {
+          menu.className = "menuAside";
+        } else {
+          menu.className = "menuAside responsive";
+        }
+      };
+    </script>
   </body>
 </html>

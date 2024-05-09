@@ -225,6 +225,12 @@ main .analyse .progresso-bar {
   border-radius: 50%;
 }
 
+.analyse .parametro {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
 /*Tabelas Alunos Novos*/
 main .recent-alunos {
   margin-top: 1.3rem;
@@ -399,7 +405,7 @@ main .recent-alunos a {
     padding: 0 var(--padding-1);
   }
 
-  aside {
+  .menuAside {
     position: fixed;
     background-color: var(--color-white);
     width: 15rem;
@@ -408,6 +414,18 @@ main .recent-alunos a {
     height: 100vh;
     left: -100%;
     display: none;
+    animation: showMenu 0.4s ease forwards;
+  }
+
+  .menuAside.responsive {
+    position: fixed;
+    background-color: var(--color-white);
+    width: 15rem;
+    z-index: 3;
+    box-shadow: 1rem 3rem 4rem var(--color-light);
+    height: 100vh;
+    left: -100%;
+    display: inherit;
     animation: showMenu 0.4s ease forwards;
   }
 
@@ -504,5 +522,11 @@ main .recent-alunos a {
 
   .right-section .nav button span {
     font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  main .parametro {
+    width: 85%;
   }
 }
