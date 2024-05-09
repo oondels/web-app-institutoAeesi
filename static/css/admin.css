@@ -399,10 +399,25 @@ main .recent-alunos a {
 }
 
 @media screen and (max-width: 768px) {
+  .container-admin main {
+    margin: 0;
+  }
+
   .container-admin {
     width: 100%;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column-reverse;
     padding: 0 var(--padding-1);
+  }
+
+  .container-admin:last-child {
+    order: 1;
+  }
+
+  .container-admin .right-section {
+    padding-top: 80px;
+    margin-bottom: 0;
+    width: 90%;
   }
 
   .menuAside {
@@ -476,6 +491,7 @@ main .recent-alunos a {
   main .recent-alunos table {
     width: 100%;
     margin: 0;
+    margin-bottom: 40px;
   }
 
   .right-section {
@@ -495,10 +511,6 @@ main .recent-alunos a {
     z-index: 2;
     box-shadow: 0 1rem 1rem var(--color-light);
     margin: 0;
-  }
-
-  .right-section .aeesi-profile {
-    display: none;
   }
 
   .right-section .nav .dark-mode {
