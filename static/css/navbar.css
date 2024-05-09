@@ -13,7 +13,7 @@ body {
   font-family: "Poppins", sans-serif;
   user-select: none;
   overflow-x: hidden;
-  background-color: #ffffff;
+  background-color: #f5f1f1;
   color: black;
   position: absolute;
 }
@@ -25,6 +25,7 @@ body {
   align-items: center;
   min-height: 100%;
   flex-direction: column;
+  padding-top: 70px;
   padding-bottom: 130px;
 }
 
@@ -131,6 +132,8 @@ a:is(:link, :active, :visited).active {
   bottom: 0%;
   left: 0%;
   right: 0%;
+  box-shadow: 10px 10px 20px rgba(185, 185, 185, 0.6);
+  z-index: -1;
 }
 
 .text-matricula {
@@ -895,6 +898,14 @@ a:is(:link, :active, :visited).active {
     padding-bottom: 20px;
   }
 
+  .nav-bar {
+    background-color: white;
+  }
+
+  .banner-home {
+    padding-top: 50px;
+  }
+
   .footer-basic .copyright {
     margin-top: 5px;
     text-align: center;
@@ -948,10 +959,20 @@ a:is(:link, :active, :visited).active {
     height: 60px;
     padding-top: 0;
     padding-bottom: 0;
+    transition: all 0.3s ease;
   }
 
   .nav-bar.responsive {
     height: 275px;
+    background-color: white;
+    animation: showNav 0.4s ease forwards;
+    top: -100%;
+  }
+
+  @keyframes showNav {
+    to {
+      top: 0;
+    }
   }
 
   .nav-bar.responsive a {
