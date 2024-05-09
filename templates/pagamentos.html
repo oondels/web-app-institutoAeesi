@@ -26,17 +26,19 @@
               <div class="input-box input">
                 <input type="text" placeholder="Data" name="mes-pagamento" />
               </div>
-              {% for aluno in alunos %} {% if aluno.bolsa != True %} {% for pag
+              {% for aluno in alunos[0:20] %} {% if aluno.bolsa != True %} {% for pag
               in aluno.pagamento %} {% if not pag.pagamento %}
               <li>
-                <p>
+                <div class="checkbox-wrapper-13">
+                  <img src="../static/icon/aluno-icon.png" alt="">
+                  <a href="{{ url_for("aluno", aluno_id=aluno.id) }}"> {{aluno.nome}} </a>
                   <input
                     type="checkbox"
                     name="aluno-pesquisa"
                     value="{{aluno.id}}"
                   />
-                  <a href="#"> {{aluno.nome}} </a>
-                </p>
+                  
+                </div>
               </li>
               {% endif %} {% endfor %} {% endif %} {% endfor %} {{
               file_form.hidden_tag() }}
