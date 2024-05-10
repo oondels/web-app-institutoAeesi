@@ -128,7 +128,6 @@
                 <th>Curso</th>
                 <th>Idade</th>
                 <th>Pagamento</th>
-                <th>Bolsa?</th>
               </tr>
             </thead>
 
@@ -146,10 +145,6 @@
                 <td>
                   {% for pag in aluno.pagamento %} {% if pag.pagamento %} Pago
                   {% else %} Não Pago {% endif %} {% endfor %}
-                </td>
-                <td>
-                  {% if aluno.bolsa %} Possui Bolsa {% else %} Não Possui {%
-                  endif %}
                 </td>
               </tr>
               {% endif %} {% endfor %} {% endif %} {% endfor %}
