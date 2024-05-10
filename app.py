@@ -281,7 +281,7 @@ def login():
 @app.route('/user_page/<user_id>')
 @login_required
 def user_page(user_id):
-    if current_user.get_id() == user_id:
+    if (current_user.get_id() == user_id) or (current_user.dev == 1):
         user = User.query.filter_by(id=user_id).first()
         return render_template('user_page.html', user=user)
     else: 
@@ -320,12 +320,12 @@ def admin():
 @app.route("/user/<user_id>")
 @login_required
 def edit_user(user_id):
-    user_edit = User.query.filter_by(id = user_id).first()
-    if current_user.dev == 1:
+    if (current_user.get_id() == user_id) or (current_user.dev == 1):
+        user_edit = User.query.filter_by(id = user_id).first()
         return render_template("edit_user.html", user_edit=user_edit)
     else:
         flash("Você não possui acesso a esta página!")
-        return(redirect(request.referrer))
+        return(redirect(url_for('home')))
 
 if __name__ == "__main__":
     app.run(debug=True)
