@@ -1,46 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/editar.css')}}"
-    />
-    <title>Document</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-
-    <div class="container">
-      <div class="wrapper">
-        <div>
-          <h2>Guia de Cadastro</h2>
-        </div>
-
-        <div>
-          <form method="POST">
-            {{ template_form.hidden_tag() }}
-            <div class="input-box">{{ template_form.nome() }}</div>
-            <div class="input-box">{{ template_form.idade() }}</div>
-            <div class="input-box">{{ template_form.cpf_aluno() }}</div>
-            <div class="input-box">{{ template_form.telefone() }}</div>
-            <div class="input-box">{{ template_form.horario() }}</div>
-            <div class="input-box">{{ template_form.email() }}</div>
-            <div class="input-box">{{ template_form.aniversario() }}</div>
-            <div class="bolsa-curso">
-              <div>
-                <p>Curso:</p>
-                {{ template_form.curso() }}
-              </div>
-              <div>
-                {{ template_form.bolsa.label }} {{template_form.bolsa()}}
-              </div>
-            </div>
-            <p>{{ template_form.submit() }}</p>
-          </form>
-        </div>
-      </div>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div>
+      <h2>Guia de Cadastro</h2>
     </div>
-  </body>
-</html>
+
+    <div>
+      <form method="POST">
+        {{ template_form.hidden_tag() }}
+        <div class="input-box">{{ template_form.nome() }}</div>
+        <div class="input-box">{{ template_form.idade() }}</div>
+        <div class="input-box">{{ template_form.cpf_aluno() }}</div>
+        <div class="input-box">{{ template_form.telefone() }}</div>
+        <div class="input-box">{{ template_form.horario() }}</div>
+        <div class="input-box">{{ template_form.email() }}</div>
+        <div class="input-box">{{ template_form.aniversario() }}</div>
+        <div class="bolsa-curso">
+          <div>
+            <p>Curso:</p>
+            {{ template_form.curso() }}
+          </div>
+          <div>{{ template_form.bolsa.label }} {{template_form.bolsa()}}</div>
+        </div>
+        <p>{{ template_form.submit() }}</p>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

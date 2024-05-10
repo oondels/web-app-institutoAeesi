@@ -1,44 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/register.css')}}"
-    />
-    <title>Document</title>
-  </head>
-
-  <body>
-    {%include 'navigation.html'%}
-    <div class="container">
-      <div class="wrapper">
-        <div class="title">
-          <h1>Página de Registro</h1>
-        </div>
-        <div class="registro">
-          <form method="POST">
-            {{register_form.hidden_tag()}}
-            <div class="register-inputs">
-              <div class="register-1">
-                <div class="input-box">{{register_form.nome()}}</div>
-                <div class="input-box">{{register_form.sobrenome()}}</div>
-                <div class="input-box">{{register_form.email()}}</div>
-              </div>
-              <div class="register-2">
-                <div class="input-box">{{register_form.password()}}</div>
-                <div class="input-box">{{register_form.password_repeat()}}</div>
-              </div>
-            </div>
-
-            <div>
-              <p>{{register_form.submit()}}</p>
-            </div>
-          </form>
-        </div>
-      </div>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div class="title">
+      <h1>Página de Registro</h1>
     </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+    <div class="registro">
+      <form method="POST">
+        {{register_form.hidden_tag()}}
+        <div class="register-inputs">
+          <div class="register-1">
+            <div class="input-box">{{register_form.nome()}}</div>
+            <div class="input-box">{{register_form.sobrenome()}}</div>
+            <div class="input-box">{{register_form.email()}}</div>
+          </div>
+          <div class="register-2">
+            <div class="input-box">{{register_form.password()}}</div>
+            <div class="input-box">{{register_form.password_repeat()}}</div>
+          </div>
+        </div>
+
+        <div>
+          <p>{{register_form.submit()}}</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

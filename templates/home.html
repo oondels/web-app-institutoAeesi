@@ -1,79 +1,67 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container-site">
-      <div class="wrapper-site">
-        <div class="banner-home">
-          <img src="../static/img/bgs/home-bg.png" alt="" />
-        </div>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container-site">
+  <div class="wrapper-site">
+    <div class="banner-home">
+      <img src="../static/img/bgs/home-bg.png" alt="" />
+    </div>
 
-        <div class="padding-main">
-          <div class="sobre-vantagens">
-            <div class="matricular">
-              <div class="title">
-                <h2>Porque se</h2>
-                <h2 class="destak">Matricular?</h2>
-              </div>
-              <div class="text-matricula">
-                Só a Bluefit reúne tudo que você precisa para não ter mais
-                desculpas para não ir treinar: academias espalhadas por todo
-                Brasil, abertas 24h, todos os dias da semana e com mais de 30
-                modalidades diferentes por um preço acessível. Escolha como,
-                onde e quando se movimentar.
-              </div>
-              <div class="assinar-button">
-                <button>Saiba Mais!</button>
-              </div>
-            </div>
-            <div class="wrapper-cards">
-              <div class="slide-cards">
-                <div id="slider-img-1"></div>
-                <div id="slider-img-2"></div>
-                <div id="slider-img-3"></div>
-                <div id="slider-img-4"></div>
-              </div>
-            </div>
+    <div class="padding-main">
+      <div class="sobre-vantagens">
+        <div class="matricular">
+          <div class="title">
+            <h2>Porque se</h2>
+            <h2 class="destak">Matricular?</h2>
+          </div>
+          <div class="text-matricula">
+            Só a Bluefit reúne tudo que você precisa para não ter mais desculpas
+            para não ir treinar: academias espalhadas por todo Brasil, abertas
+            24h, todos os dias da semana e com mais de 30 modalidades diferentes
+            por um preço acessível. Escolha como, onde e quando se movimentar.
+          </div>
+          <div class="assinar-button">
+            <button>Saiba Mais!</button>
           </div>
         </div>
-        <div class="home_section">
-          <div class="padding-main">
-            <div class="title">
-              <h2>Somos</h2>
-              <h2 class="destak">AEESI!</h2>
-            </div>
+        <div class="wrapper-cards">
+          <div class="slide-cards">
+            <div id="slider-img-1"></div>
+            <div id="slider-img-2"></div>
+            <div id="slider-img-3"></div>
+            <div id="slider-img-4"></div>
           </div>
-
-          <div class="slide-fotos">
-            <div class="slider-foto-1 slide">
-              <p>Somos mais de +200 Alunos</p>
-            </div>
-            <div class="slider-foto-2 slide">
-              <p>Ajudando mais de +300 alunos em Escolas Públicas</p>
-            </div>
-            <div class="slider-foto-3 slide">
-              <p>Conquistando o cenário esportivo! Mais de +250 medalhas!</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="padding-main">
-          <div class="frase-efeito">
-            <h2 class="destak">Comece a treinar Hoje!!</h2>
-            <img src="../static/img/logo2.png" alt="" />
-          </div>
-        </div>
-
-        <div class="fotos_academia">
-          Imagem da academia, arredores, paisagem
         </div>
       </div>
     </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+    <div class="home_section">
+      <div class="padding-main">
+        <div class="title">
+          <h2>Somos</h2>
+          <h2 class="destak">AEESI!</h2>
+        </div>
+      </div>
+
+      <div class="slide-fotos">
+        <div class="slider-foto-1 slide">
+          <p>Somos mais de +200 Alunos</p>
+        </div>
+        <div class="slider-foto-2 slide">
+          <p>Ajudando mais de +300 alunos em Escolas Públicas</p>
+        </div>
+        <div class="slider-foto-3 slide">
+          <p>Conquistando o cenário esportivo! Mais de +250 medalhas!</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="padding-main">
+      <div class="frase-efeito">
+        <h2 class="destak">Comece a treinar Hoje!!</h2>
+        <img src="../static/img/logo2.png" alt="" />
+      </div>
+    </div>
+
+    <div class="fotos_academia">Imagem da academia, arredores, paisagem</div>
+  </div>
+</div>
+{% endblock %}

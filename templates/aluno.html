@@ -1,59 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/aluno.css')}}"
-    />
-    <title>AEESI: Aluno</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container">
-      <div class="wrapper">
-        <div class="aluno-name">
-          <h3>Dados do aluno: {{aluno.nome}}</h3>
-        </div>
-        <div class="dados-aluno">
-
-          <table>
-            <thead>
-             <tr>
-              <th>Curso</th>
-              <th>Idade</th>
-              <th>Possui Bolsa?</th>
-              <th>Email</th>
-              <th>Telefone</th>
-              <th>Horário</th>
-             </tr>
-            </thead>
-
-            <tbody>
-              <tr>
-                <td>{{aluno.curso}}</td>
-                <td>{{aluno.idade}}</td>
-                <td>
-                  {%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}
-                </td>
-                <td>{{aluno.email}}</td>
-                <td>{{aluno.telefone}}</td>
-                <td>{{aluno.horario}}</td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-        
-          <div class="button">
-            <a
-              href="{{url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)}}"
-              ><button class="btn">Editar informações</button></a
-            >
-          </div>
-
-      </div>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div class="aluno-name">
+      <h3>Dados do aluno: {{aluno.nome}}</h3>
     </div>
-  </body>
-</html>
+    <div class="dados-aluno">
+      <table>
+        <thead>
+          <tr>
+            <th>Curso</th>
+            <th>Idade</th>
+            <th>Possui Bolsa?</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Horário</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>{{aluno.curso}}</td>
+            <td>{{aluno.idade}}</td>
+            <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
+            <td>{{aluno.email}}</td>
+            <td>{{aluno.telefone}}</td>
+            <td>{{aluno.horario}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="button">
+      <a
+        href="{{url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)}}"
+        ><button class="btn">Editar informações</button></a
+      >
+    </div>
+  </div>
+</div>
+{% endblock %}

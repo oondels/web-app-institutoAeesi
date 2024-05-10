@@ -1,60 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="../static/js/search_aluno.js"></script>
-    <title>AEESI: Upload</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container">
-      <div class="wrapper">
-        <div class="pagamentos">
-          <h1>Pagamentos</h1>
-          <div class="input-box input">
-            <input
-              type="text"
-              id="input-pesquisa"
-              onkeyup="search_aluno()"
-              placeholder="Pesquisar Aluno"
-            />
-          </div>
-
-          <form method="POST" enctype="multipart/form-data">
-            <div class="input-box input">
-              <input type="text" placeholder="Data" name="mes-pagamento" />
-            </div>
-            <ul id="aluno-pesquisa">
-              {% for aluno in alunos[0:20] %} {% if aluno.bolsa != True %} {%
-              for pag in aluno.pagamento %} {% if not pag.pagamento %}
-              <li>
-                <div class="checkbox-wrapper-13">
-                  <img src="../static/icon/aluno-icon.png" alt="" />
-                  <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
-                    {{aluno.nome}}
-                  </a>
-                  <input
-                    type="checkbox"
-                    name="aluno-pesquisa"
-                    value="{{aluno.id}}"
-                  />
-                </div>
-              </li>
-              {% endif %} {% endfor %} {% endif %} {% endfor %}
-            </ul>
-            {{ file_form.hidden_tag() }}
-            <fieldset class="upload">
-              <legend>O que deseja fazer?</legend>
-              {{ file_form.directory() }}
-            </fieldset>
-            <div class="upload-submit">
-              {{ file_form.file_up() }} {{file_form.submit() }}
-            </div>
-          </form>
-        </div>
+{% extends "base.html" %} {% block title %}Pagamentos{% endblock %} {% block
+head %} {{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div class="pagamentos">
+      <h1>Pagamentos</h1>
+      <div class="input-box input">
+        <input
+          type="text"
+          id="input-pesquisa"
+          onkeyup="search_aluno()"
+          placeholder="Pesquisar Aluno"
+        />
       </div>
+
+      <form method="POST" enctype="multipart/form-data">
+        <div class="input-box input">
+          <input type="text" placeholder="Data" name="mes-pagamento" />
+        </div>
+        <ul id="aluno-pesquisa">
+          {% for aluno in alunos[0:20] %} {% if aluno.bolsa != True %} {% for
+          pag in aluno.pagamento %} {% if not pag.pagamento %}
+          <li>
+            <div class="checkbox-wrapper-13">
+              <img src="../static/icon/aluno-icon.png" alt="" />
+              <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
+                {{aluno.nome}}
+              </a>
+              <input
+                type="checkbox"
+                name="aluno-pesquisa"
+                value="{{aluno.id}}"
+              />
+            </div>
+          </li>
+          {% endif %} {% endfor %} {% endif %} {% endfor %}
+        </ul>
+        {{ file_form.hidden_tag() }}
+        <fieldset class="upload">
+          <legend>O que deseja fazer?</legend>
+          {{ file_form.directory() }}
+        </fieldset>
+        <div class="upload-submit">
+          {{ file_form.file_up() }} {{file_form.submit() }}
+        </div>
+      </form>
     </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+  </div>
+</div>
+{% endblock %}

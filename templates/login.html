@@ -1,55 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
-    <title>Login</title>
-  </head>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <form method="POST">
+      <h1>Login</h1>
+      {{login_form.hidden_tag()}}
 
-  <body>
-    {%include 'navigation.html'%}
-
-    <div class="container">
-      <div class="wrapper">
-        <form method="POST">
-          <h1>Login</h1>
-          {{login_form.hidden_tag()}}
-
-          <div class="input-box input">
-            {{login_form.email()}}
-            <i class="bx bxs-user"></i>
-          </div>
-
-          <div class="input-box input">
-            {{login_form.password()}}
-            <i class="bx bxs-lock-alt"></i>
-          </div>
-
-          <div class="remember-forgot">
-            <label><input type="checkbox" id="remember" /> Remember me</label>
-            <a href="#">Esqueceu a senha?</a>
-          </div>
-          <div>{{login_form.submit()}}</div>
-          <div class="registe-link">
-            <p>
-              Não tem uma conta?
-              <a href="{{url_for('register')}}">Registre-se</a>
-            </p>
-          </div>
-        </form>
+      <div class="input-box input">
+        {{login_form.email()}}
+        <i class="bx bxs-user"></i>
       </div>
-    </div>
 
-    {%with messages = get_flashed_messages()%} {%if messages%} {%for message in
-    messages%}
-    <strong>{{message}}</strong><br />
-    Caso ainda não tenha cadastro:
-    <a href="{{url_for('register')}}">Regitre-se</a>
-    {%endfor%} {%endif%} {%endwith%}
-    {%include "footer.html"%}
-  </body>
-</html>
+      <div class="input-box input">
+        {{login_form.password()}}
+        <i class="bx bxs-lock-alt"></i>
+      </div>
+
+      <div class="remember-forgot">
+        <label><input type="checkbox" id="remember" /> Remember me</label>
+        <a href="#">Esqueceu a senha?</a>
+      </div>
+      <div>{{login_form.submit()}}</div>
+      <div class="registe-link">
+        <p>
+          Não tem uma conta?
+          <a href="{{url_for('register')}}">Registre-se</a>
+        </p>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

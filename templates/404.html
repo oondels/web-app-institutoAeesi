@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>404 - Not Found</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container">
-      <div class="wrapper">
-        <h1>Error - Página não encontrada</h1>
-      </div>
-    </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <h1>Error - Página não encontrada</h1>
+  </div>
+</div>
+{% endblock %}

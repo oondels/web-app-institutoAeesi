@@ -1,95 +1,82 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Professores</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container-site">
-      <div class="resume">
-        <h1>Professores</h1>
-      </div>
-      <div class="professores">
-        <div class="professor">
-          <img
-            src="../static/img/professores/laudeci.jpeg"
-            alt=""
-            class="profile-icon"
-          />
-          <div class="profile-name">Professor Laudeci</div>
-          <h3>Formação</h3>
-          <ul>
-            <li>Educação Física</li>
-            <li>Personal Treinaer</li>
-            <li>Psicopedagogo</li>
-            <li>Psicanalista</li>
-            <li>Faixa Preta Jiu-Jitsu</li>
-          </ul>
-        </div>
-        <div class="professor">
-          <img
-            src="../static/img/professores/laudeci.jpeg"
-            alt=""
-            class="profile-icon"
-          />
-          <h2>Ludimila Magalhães</h2>
-          <div class="image"></div>
-          <h3>Formação</h3>
-          <ul>
-            <li>Educação Física</li>
-            <li>Educação Inclusica</li>
-            <li>Fisiologia do Exercício</li>
-          </ul>
-        </div>
-        <div class="professor">
-          <img
-            src="../static/img/professores/laudeci.jpeg"
-            alt=""
-            class="profile-icon"
-          />
-          <h2>Luan Silva - "Luan Topázio"</h2>
-          <h3>Formação</h3>
-          <div class="image"></div>
-          <ul>
-            <li>Mestre de capoeira</li>
-          </ul>
-        </div>
-        <div class="professor">
-          <img
-            src="../static/img/professores/laudeci.jpeg"
-            alt=""
-            class="profile-icon"
-          />
-          <h2>Jailton Meneses</h2>
-          <div class="image"></div>
-          <h3>Formação</h3>
-          <ul>
-            <li>Personal fight</li>
-            <li>
-              Instrutor da federação de boxe amador e profissional da Bahia
-            </li>
-          </ul>
-        </div>
-        <div class="professor">
-          <img
-            src="../static/img/professores/laudeci.jpeg"
-            alt=""
-            class="profile-icon"
-          />
-          <h2>Jailton Meneses</h2>
-          <div class="image"></div>
-          <h3>Formação</h3>
-          <ul>
-            <li>Personal fight</li>
-            <li>
-              Instrutor da federação de boxe amador e profissional da Bahia
-            </li>
-          </ul>
-        </div>
-      </div>
+{% extends "base.html" %} {% block title %}Professores{% endblock %} {% block
+head %} {{ super() }} {% endblock %} {% block content %}
+<div class="container-site">
+  <div class="resume">
+    <h1>Professores</h1>
+  </div>
+  <div class="professores">
+    <div class="professor">
+      <img
+        src="../static/img/professores/laudeci.jpeg"
+        alt=""
+        class="profile-icon"
+      />
+      <div class="profile-name">Professor Laudeci</div>
+      <h3>Formação</h3>
+      <ul>
+        <li>Educação Física</li>
+        <li>Personal Treinaer</li>
+        <li>Psicopedagogo</li>
+        <li>Psicanalista</li>
+        <li>Faixa Preta Jiu-Jitsu</li>
+      </ul>
     </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+    <div class="professor">
+      <img
+        src="../static/img/professores/laudeci.jpeg"
+        alt=""
+        class="profile-icon"
+      />
+      <h2>Ludimila Magalhães</h2>
+      <div class="image"></div>
+      <h3>Formação</h3>
+      <ul>
+        <li>Educação Física</li>
+        <li>Educação Inclusica</li>
+        <li>Fisiologia do Exercício</li>
+      </ul>
+    </div>
+    <div class="professor">
+      <img
+        src="../static/img/professores/laudeci.jpeg"
+        alt=""
+        class="profile-icon"
+      />
+      <h2>Luan Silva - "Luan Topázio"</h2>
+      <h3>Formação</h3>
+      <div class="image"></div>
+      <ul>
+        <li>Mestre de capoeira</li>
+      </ul>
+    </div>
+    <div class="professor">
+      <img
+        src="../static/img/professores/laudeci.jpeg"
+        alt=""
+        class="profile-icon"
+      />
+      <h2>Jailton Meneses</h2>
+      <div class="image"></div>
+      <h3>Formação</h3>
+      <ul>
+        <li>Personal fight</li>
+        <li>Instrutor da federação de boxe amador e profissional da Bahia</li>
+      </ul>
+    </div>
+    <div class="professor">
+      <img
+        src="../static/img/professores/laudeci.jpeg"
+        alt=""
+        class="profile-icon"
+      />
+      <h2>Jailton Meneses</h2>
+      <div class="image"></div>
+      <h3>Formação</h3>
+      <ul>
+        <li>Personal fight</li>
+        <li>Instrutor da federação de boxe amador e profissional da Bahia</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

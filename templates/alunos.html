@@ -1,74 +1,65 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="../static/js/search_aluno.js" defer></script>
-    <title>AEESI: Alunos</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container">
-      <div class="wrapper">
-        <div>
-          <h1>Alunos Cadastrados</h1>
-        </div>
-
-        <div class="dados-aluno">
-          <div class="input-box input">
-            <input
-              type="text"
-              id="input-pesquisa"
-              onkeyup="search_aluno_table()"
-              placeholder="Pesquisar Aluno"
-            />
-          </div>
-
-          <table table-fill>
-            <thead>
-              <tr>
-                <th>Nome</th>
-                <th>Curso</th>
-                <th>Idade</th>
-                <th>Possui Bolsa</th>
-                <th>Telefone</th>
-                <th>Horário</th>
-              </tr>
-            </thead>
-
-            <tbody id="aluno-pesquisa_table">
-              <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
-              {% for aluno in alunos %}
-              <tr>
-                <td>
-                  <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
-                    {{aluno.nome}}
-                  </a>
-                </td>
-                <td>{{aluno.curso}}</td>
-                <td>{{aluno.idade}}</td>
-                <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
-                <td>{{aluno.telefone}}</td>
-                <td>{{aluno.horario}}</td>
-              </tr>
-              {% endfor %}
-            </tbody>
-          </table>
-        </div>
-
-        <div class="cadastrar-aluno">
-          <div>
-            <a href="{{ url_for('cadastro_aluno') }}"
-              ><button class="btn">Cadastrar Aluno</button></a
-            >
-          </div>
-        </div>
-        <div class="pagamento">
-          <a href="{{url_for('pagamentos')}}">
-            <button class="btn">Pagamentos</button>
-          </a>
-        </div>
-        
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block head %}
+{{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div>
+      <h1>Alunos Cadastrados</h1>
     </div>
-  </body>
-</html>
+
+    <div class="dados-aluno">
+      <div class="input-box input">
+        <input
+          type="text"
+          id="input-pesquisa"
+          onkeyup="search_aluno_table()"
+          placeholder="Pesquisar Aluno"
+        />
+      </div>
+
+      <table table-fill>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Curso</th>
+            <th>Idade</th>
+            <th>Possui Bolsa</th>
+            <th>Telefone</th>
+            <th>Horário</th>
+          </tr>
+        </thead>
+
+        <tbody id="aluno-pesquisa_table">
+          <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
+          {% for aluno in alunos %}
+          <tr>
+            <td>
+              <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
+                {{aluno.nome}}
+              </a>
+            </td>
+            <td>{{aluno.curso}}</td>
+            <td>{{aluno.idade}}</td>
+            <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
+            <td>{{aluno.telefone}}</td>
+            <td>{{aluno.horario}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cadastrar-aluno">
+      <div>
+        <a href="{{ url_for('cadastro_aluno') }}"
+          ><button class="btn">Cadastrar Aluno</button></a
+        >
+      </div>
+    </div>
+    <div class="pagamento">
+      <a href="{{url_for('pagamentos')}}">
+        <button class="btn">Pagamentos</button>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

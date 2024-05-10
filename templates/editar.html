@@ -1,34 +1,26 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container">
-      <div class="wrapper">
-        <div>
-          <h2>Edição do Aluno: {{ aluno_edite.nome }}</h2>
-        </div>
-
-        <div class="edit-form">
-          <form method="POST">
-            {{ editar_form.hidden_tag() }}
-            <div class="input-box">{{ editar_form.email() }}</div>
-            <div class="input-box">{{ editar_form.telefone() }}</div>
-            <div class="input-box">{{ editar_form.horario() }}</div>
-            <div> {{editar_form.bolsa.label}} {{ editar_form.bolsa () }}</div>
-            <div>{{ editar_form.curso() }}</div>
-
-            <p>{{ editar_form.submit() }}</p>
-            <div class="deletar">
-              <a href="">Deletar Aluno</a>
-            </div>
-          </form>
-        </div>
-      </div>
+{% extends "base.html" %} {% block title %}Editar: {{ aluno_edite.nome }}{%
+endblock %} {% block head %} {{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <div>
+      <h2>Edição do Aluno: {{ aluno_edite.nome }}</h2>
     </div>
-  </body>
-</html>
+
+    <div class="edit-form">
+      <form method="POST">
+        {{ editar_form.hidden_tag() }}
+        <div class="input-box">{{ editar_form.email() }}</div>
+        <div class="input-box">{{ editar_form.telefone() }}</div>
+        <div class="input-box">{{ editar_form.horario() }}</div>
+        <div>{{editar_form.bolsa.label}} {{ editar_form.bolsa () }}</div>
+        <div>{{ editar_form.curso() }}</div>
+
+        <p>{{ editar_form.submit() }}</p>
+        <div class="deletar">
+          <a href="">Deletar Aluno</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

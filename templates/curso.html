@@ -1,56 +1,47 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Curso</title>
-  </head>
-  <body>
-    {%include "navigation.html"%}
-    <div class="container-site">
-      <div class="banner-curso"></div>
-      <div class="wrapper-cursos">
-        <div class="title-curso">
-          <h1>Aulas de {{curso}}</h1>
+{% extends "base.html" %} {% block title %}{{curso}}{% endblock %} {% block head
+%} {{ super() }} {% endblock %} {% block content %}
+<div class="container-site">
+  <div class="banner-curso"></div>
+  <div class="wrapper-cursos">
+    <div class="title-curso">
+      <h1>Aulas de {{curso}}</h1>
+    </div>
+    <!-- Colocar fotos de exemplo da aula selecionada -->
+    <div class="foto-example-curso"></div>
+    <div class="aula-beneficio-content">
+      <div class="title-beneficio"></div>
+      <div class="beneficio-aula">
+        <div class="beneficio-um">
+          <img src="../static/img/cursos/icons/fogocaloria.png" alt="" />
+          <h2>Queima Calórica</h2>
+          <p>Queima X calorias por hora, o equivalente a...</p>
         </div>
-        <!-- Colocar fotos de exemplo da aula selecionada -->
-        <div class="foto-example-curso"></div>
-        <div class="aula-beneficio-content">
-          <div class="title-beneficio"></div>
-          <div class="beneficio-aula">
-            <div class="beneficio-um">
-              <img src="../static/img/cursos/icons/fogocaloria.png" alt="" />
-              <h2>Queima Calórica</h2>
-              <p>Queima X calorias por hora, o equivalente a...</p>
-            </div>
-            <div class="beneficio-dois">
-              <img src="../static/img/cursos/icons/saude.png" alt="" />
-              <h2>Saúde</h2>
-              <p>Essa atividade proporciona X na sua vida e mais X coisas...</p>
-            </div>
-          </div>
-        </div>
-        <div class="professores-section">
-          <h2>Proefssores</h2>
-          <p>Essa atividade conta com os professores X...</p>
-        </div>
-        <div class="horarios-section">
-          <h2>Horários</h2>
-          <div class="horarios">
-            <ul>
-              <li>Segunda</li>
-              <li>Terça</li>
-              <li>Quarta</li>
-              <li>Quinta</li>
-              <li>Sexta</li>
-            </ul>
-          </div>
-        </div>
-        <div class="valor">
-          <h2>Valor das aulas de {{curso}}</h2>
+        <div class="beneficio-dois">
+          <img src="../static/img/cursos/icons/saude.png" alt="" />
+          <h2>Saúde</h2>
+          <p>Essa atividade proporciona X na sua vida e mais X coisas...</p>
         </div>
       </div>
     </div>
-    {%include "footer.html"%}
-  </body>
-</html>
+    <div class="professores-section">
+      <h2>Proefssores</h2>
+      <p>Essa atividade conta com os professores X...</p>
+    </div>
+    <div class="horarios-section">
+      <h2>Horários</h2>
+      <div class="horarios">
+        <ul>
+          <li>Segunda</li>
+          <li>Terça</li>
+          <li>Quarta</li>
+          <li>Quinta</li>
+          <li>Sexta</li>
+        </ul>
+      </div>
+    </div>
+    <div class="valor">
+      <h2>Valor das aulas de {{curso}}</h2>
+    </div>
+  </div>
+</div>
+{% endblock %}
