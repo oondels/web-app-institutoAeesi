@@ -981,10 +981,16 @@ a:is(:link, :active, :visited).active {
   }
 
   .nav-bar.responsive {
-    height: 275px;
+    height: auto;
     background-color: white;
-    animation: showNav 0.4s ease forwards;
+    animation: showNav 0.4s ease-in-out forwards;
     top: -100%;
+  }
+
+  @keyframes showNav {
+    to {
+      top: 0;
+    }
   }
 
   .sobre-vantagens {
@@ -1009,12 +1015,6 @@ a:is(:link, :active, :visited).active {
 
   .matricular {
     width: 95%;
-  }
-
-  @keyframes showNav {
-    to {
-      top: 0;
-    }
   }
 
   .nav-bar.responsive a {
