@@ -377,7 +377,7 @@ main .recent-alunos a {
 
   main .recent-alunos {
     width: 94%;
-    position: absolute;
+    position: relative;
     left: 50%;
     transform: translateX(-50%);
     margin: 2rem 0 0 0.8rem;
@@ -399,40 +399,29 @@ main .recent-alunos a {
 }
 
 @media screen and (max-width: 768px) {
-  .container-admin main {
-    margin: 0;
-  }
-
   .container-admin {
-    width: 100%;
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    width: 100%;
     padding: 0 var(--padding-1);
   }
 
-  .container-admin:last-child {
-    order: 1;
+  .aeesi-profile {
+    margin-bottom: 40px;
+    width: 95%;
   }
 
-  .container-admin .right-section {
-    padding-top: 80px;
-    margin-bottom: 0;
-    width: 90%;
-  }
-
-  /* .menuAside {
+  .menuAside {
     position: fixed;
     background-color: var(--color-white);
     width: 15rem;
-    z-index: 3;
     box-shadow: 1rem 3rem 4rem var(--color-light);
     height: 100vh;
-    left: -100%;
     display: none;
-    animation: showMenu 0.4s ease forwards;
-  } */
+    transition: all 0.3s ease;
+  }
 
-  /* .menuAside.responsive {
+  .menuAside.responsive {
     position: fixed;
     background-color: var(--color-white);
     width: 15rem;
@@ -448,7 +437,7 @@ main .recent-alunos a {
     to {
       left: 0;
     }
-  } */
+  }
 
   aside .logo-sidebar {
     margin-left: 1rem;
@@ -492,11 +481,6 @@ main .recent-alunos a {
     width: 100%;
     margin: 0;
     margin-bottom: 40px;
-  }
-
-  .right-section {
-    width: 50%;
-    margin: 0 auto 4rem;
   }
 
   .right-section .nav {
