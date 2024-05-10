@@ -57,7 +57,6 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  height: 70px;
   width: 100%;
   padding: 20px 100px;
   display: flex;
@@ -102,6 +101,7 @@ a:is(:link, :active, :visited).active {
 /* Flash Message */
 #flash {
   display: flex;
+  align-items: center;
   flex-direction: row;
   justify-content: center;
   color: #000000;
@@ -110,11 +110,21 @@ a:is(:link, :active, :visited).active {
   font-size: large;
 }
 
+.flash-message {
+  margin-top: 70px;
+}
+
 #flash button {
   border-radius: 40px;
   background: transparent;
-  color: #feffdf;
+  color: #ff0000;
   font-weight: 600;
+  background-color: white;
+  padding: 5px;
+}
+
+#flash button:hover {
+  cursor: pointer;
 }
 
 .wrapper h3 {

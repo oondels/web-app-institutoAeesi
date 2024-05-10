@@ -37,9 +37,19 @@
 
 <div id="flash" class="flash-message">
   {%for message in get_flashed_messages()%}
-  <strong id="flash">{{message}}</strong><br />
+  <strong id="flash">{{message}}</strong>
   <button onclick="document.getElementById('flash').style.display = 'none';">
     X
   </button>
   {%endfor%}
 </div>
+
+<script>
+  var flashMessage = "{{ get_flashed_messages() }}";
+  console.log("{{ get_flashed_messages() }}".length);
+  if (flashMessage.length === 2) {
+    document.getElementById("flash").style.display = "none";
+  } else {
+    document.getElementById("flash").style.display = "";
+  }
+</script>
