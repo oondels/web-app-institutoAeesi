@@ -420,7 +420,7 @@ main .recent-alunos a {
     width: 90%;
   }
 
-  .menuAside {
+  /* .menuAside {
     position: fixed;
     background-color: var(--color-white);
     width: 15rem;
@@ -430,9 +430,9 @@ main .recent-alunos a {
     left: -100%;
     display: none;
     animation: showMenu 0.4s ease forwards;
-  }
+  } */
 
-  .menuAside.responsive {
+  /* .menuAside.responsive {
     position: fixed;
     background-color: var(--color-white);
     width: 15rem;
@@ -440,7 +440,7 @@ main .recent-alunos a {
     box-shadow: 1rem 3rem 4rem var(--color-light);
     height: 100vh;
     left: -100%;
-    display: inherit;
+    display: block;
     animation: showMenu 0.4s ease forwards;
   }
 
@@ -448,7 +448,7 @@ main .recent-alunos a {
     to {
       left: 0;
     }
-  }
+  } */
 
   aside .logo-sidebar {
     margin-left: 1rem;
