@@ -92,14 +92,23 @@ def admin_acces():
             return True
         else: return False
 
+# Tratar erros de url - 404
+@app.errorhandler(404)
+def not_found(e):
+    return render_template("404.html")
+
 @app.route('/home')
 def home():
     return render_template('home.html')
 
 @app.route("/alunos", methods=["GET", "POST"])
 def alunos_cadastrados():
-    alunos = Aluno.query.all()
-    return render_template('alunos.html', alunos = alunos)
+    if admin_acces():
+        alunos = Aluno.query.all()
+        return render_template('alunos.html', alunos = alunos)
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
 
 @app.route("/pesquisa")
 def pesquisa():
@@ -119,7 +128,9 @@ def aluno(aluno_id):
         for pag in aluno.pagamento:
             print(pag.pagamento)
         return render_template("aluno.html", aluno=aluno)
-    return "Acesso Bloqueado"
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 @login_required
@@ -143,7 +154,9 @@ def cadastro_aluno():
             db.session.add(aluno)
             db.session.commit()
             return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
-    else: return "Acesso Bloqueado"
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
     return render_template("cadastro.html", template_form=cadastrar_form)
 
 # Finalizar Route
@@ -161,7 +174,9 @@ def editar_aluno(aluno_name, aluno_id):
             aluno_edite.bolsa = editar_form.bolsa.data
             db.session.commit()
             return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
-    else: return "Acesso bloqueado!"
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
     return render_template("editar.html", editar_form=editar_form, aluno_edite = aluno_edite)
 
 @app.route("/cursos")
@@ -175,56 +190,60 @@ def curso(nameCourse):
 # Rota para registrar pagamento de alunos e upload de comprovantes/fotos
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
-def pagamentos():       
-    file_form = Upload_File()
-    alunos = Aluno.query.all()
+def pagamentos():
+    if admin_acces():     
+        file_form = Upload_File()
+        alunos = Aluno.query.all()
 
-    # Resetando pagamento de todos os alunos para falso no primeiro dia do mês (Menos bolsistas)
-    if date.today().day == 1:
-        for aluno in alunos:
-            if aluno.bolsa == False:
-                for pag in aluno.pagamento:
-                    pag.pagamento = False
-                    db.session.commit()
+        # Resetando pagamento de todos os alunos para falso no primeiro dia do mês (Menos bolsistas)
+        if date.today().day == 1:
+            for aluno in alunos:
+                if aluno.bolsa == False:
+                    for pag in aluno.pagamento:
+                        pag.pagamento = False
+                        db.session.commit()
 
-    # Verificando se tem envio de dados
-    if file_form.validate_on_submit():
-        selection = file_form.directory.data
-        arquivo = file_form.file_up.data
-        filename = secure_filename(arquivo.filename)
-        mes_pagamento = request.form.get("mes-pagamento").replace("/", "-").strip()
+        # Verificando se tem envio de dados
+        if file_form.validate_on_submit():
+            selection = file_form.directory.data
+            arquivo = file_form.file_up.data
+            filename = secure_filename(arquivo.filename)
+            mes_pagamento = request.form.get("mes-pagamento").replace("/", "-").strip()
 
-        # Formarto de Data
-        format = "%d-%m-%Y"
-        try:
-            # Verificando se o formato de dato é válido
-            datetime.strptime(mes_pagamento, format)
+            # Formarto de Data
+            format = "%d-%m-%Y"
+            try:
+                # Verificando se o formato de dato é válido
+                datetime.strptime(mes_pagamento, format)
 
-            # Verificando se um aluno foi selecionado para fazer pagamento
-            if request.method == "POST":
-            # Atualizando informação de pagamento
-                try:
-                    aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
-                    for pay in aluno_pesquisado.pagamento:
-                        pay.pagamento = True
-                        db.session.commit() 
-                except:
-                    flash("Erro ao efetuar pagamento do aluno!")
+                # Verificando se um aluno foi selecionado para fazer pagamento
+                if request.method == "POST":
+                # Atualizando informação de pagamento
+                    try:
+                        aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
+                        for pay in aluno_pesquisado.pagamento:
+                            pay.pagamento = True
+                            db.session.commit() 
+                    except:
+                        flash("Erro ao efetuar pagamento do aluno!")
 
-            # Verificando se existe o caminho, caso contrário criando o folder
-            save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.nome}-{aluno_pesquisado.id}" + f"/{mes_pagamento}")
-            if os.path.exists(save_path):
-                arquivo.save(os.path.join(save_path, filename))
-            else:
-                os.makedirs(save_path)
-                arquivo.save(os.path.join(save_path, filename))
-                flash("Arquivo enviado")
-        
-        except:
-            flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
-        return redirect(url_for('pagamentos'))
+                # Verificando se existe o caminho, caso contrário criando o folder
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.nome}-{aluno_pesquisado.id}" + f"/{mes_pagamento}")
+                if os.path.exists(save_path):
+                    arquivo.save(os.path.join(save_path, filename))
+                else:
+                    os.makedirs(save_path)
+                    arquivo.save(os.path.join(save_path, filename))
+                    flash("Arquivo enviado")
+            
+            except:
+                flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
+            return redirect(url_for('pagamentos'))
 
-    return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
+        return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
 
 @app.route("/professores")
 def professores():
@@ -232,19 +251,22 @@ def professores():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    register_form = Register_User(csrf_enabled=False)
-    if register_form.validate_on_submit():
-        user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                    email=register_form.email.data, admin=False, dev=False)
-        user.set_password(register_form.password.data)
-        db.session.add(user)
-        db.session.commit()
-    return render_template("register.html", register_form=register_form)
+    if admin_acces():
+        register_form = Register_User(csrf_enabled=False)
+        if register_form.validate_on_submit():
+            user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
+                        email=register_form.email.data, admin=False, dev=False)
+            user.set_password(register_form.password.data)
+            db.session.add(user)
+            db.session.commit()
+        return render_template("register.html", register_form=register_form)
+    else:
+        flash("Você não possui acesso a esta página!")
+        return(redirect(url_for('home')))
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
     login_form = Login_User()
-
     if not current_user.is_authenticated:
         if login_form.validate_on_submit():
             user = User.query.filter_by(email=login_form.email.data).first()
@@ -278,7 +300,6 @@ def logout():
 @login_required
 def admin():
     alunos = Aluno()
-
     # Contagem de Alunos que já pagaram
     pago = 0
     alunos_query = Aluno.query.all()
