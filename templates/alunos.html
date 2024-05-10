@@ -16,47 +16,42 @@
 
         <div class="dados-aluno">
           <div class="input-box input">
-            <input type="text" id="input-pesquisa" onkeyup="search_aluno_table()" placeholder="Pesquisar Aluno">
+            <input
+              type="text"
+              id="input-pesquisa"
+              onkeyup="search_aluno_table()"
+              placeholder="Pesquisar Aluno"
+            />
           </div>
 
-          <table>
+          <table table-fill>
             <thead>
-             <tr>
-              <th>Nome</th>
-              <th>Curso</th>
-              <th>Idade</th>
-              <th>Possui Bolsa</th>
-              <th>Telefone</th>
-              <th>Horário</th>
-             </tr>
+              <tr>
+                <th>Nome</th>
+                <th>Curso</th>
+                <th>Idade</th>
+                <th>Possui Bolsa</th>
+                <th>Telefone</th>
+                <th>Horário</th>
+              </tr>
             </thead>
 
             <tbody id="aluno-pesquisa_table">
-                  <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
-                  {% for aluno in alunos %}
-                    <tr>
-                      <td>
-                        <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
-                          {{aluno.nome}}
-                        </a>
-                      </td>
-                      <td>
-                        {{aluno.curso}}
-                      </td>
-                      <td>
-                        {{aluno.idade}}
-                      </td>
-                      <td>
-                        {%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}
-                      </td>
-                      <td>
-                        {{aluno.telefone}}
-                      </td>
-                      <td>
-                        {{aluno.horario}}
-                      </td>
-                    </tr>
-                  {% endfor %}
+              <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
+              {% for aluno in alunos %}
+              <tr>
+                <td>
+                  <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
+                    {{aluno.nome}}
+                  </a>
+                </td>
+                <td>{{aluno.curso}}</td>
+                <td>{{aluno.idade}}</td>
+                <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
+                <td>{{aluno.telefone}}</td>
+                <td>{{aluno.horario}}</td>
+              </tr>
+              {% endfor %}
             </tbody>
           </table>
         </div>
@@ -73,7 +68,7 @@
             <button class="btn">Pagamentos</button>
           </a>
         </div>
-      </div>
+        
     </div>
   </body>
 </html>
