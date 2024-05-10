@@ -251,18 +251,14 @@ def professores():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if admin_acces():
-        register_form = Register_User(csrf_enabled=False)
-        if register_form.validate_on_submit():
-            user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                        email=register_form.email.data, admin=False, dev=False)
-            user.set_password(register_form.password.data)
-            db.session.add(user)
-            db.session.commit()
-        return render_template("register.html", register_form=register_form)
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
+    register_form = Register_User(csrf_enabled=False)
+    if register_form.validate_on_submit():
+        user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
+                    email=register_form.email.data, admin=False, dev=False)
+        user.set_password(register_form.password.data)
+        db.session.add(user)
+        db.session.commit()
+    return render_template("register.html", register_form=register_form)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
