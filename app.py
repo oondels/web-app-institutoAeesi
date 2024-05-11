@@ -12,10 +12,13 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
 folder = os.path.join(path, "database/files")
 
+db = SQLAlchemy(app)
+
 app.config['UPLOAD_FOLDER'] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://sywbfrfepbxmmb:7c151d8ee719755d1d05c90e6e251fd952d1b536da569fb6d635a785261fe191@ec2-52-23-12-61.compute-1.amazonaws.com:5432/d76n6ndo9mji2m'
+app.config['SQLALCHEMY_DATABASE_URI'] = ''
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -28,8 +31,6 @@ def load_user(user_id):
 @login_manager.unauthorized_handler
 def unauthorized():
   return redirect(url_for('login'))
-
-db = SQLAlchemy(app)
 
 # Classe para databse do usuário
 class User(UserMixin, db.Model):
@@ -56,14 +57,14 @@ class User(UserMixin, db.Model):
     
 class Aluno(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String(20))
+    nome = db.Column(db.String())
     idade = db.Column(db.Integer())
     cpf = db.Column(db.Integer())
-    curso = db.Column(db.String(128))
+    curso = db.Column(db.String())
     telefone = db.Column(db.Integer())
-    horario= db.Column(db.String(128))
-    email = db.Column(db.String(128))
-    aniversario = db.Column(db.String(128))
+    horario= db.Column(db.String())
+    email = db.Column(db.String())
+    aniversario = db.Column(db.String())
     bolsa = db.Column(db.Boolean())
     pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
 
