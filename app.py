@@ -12,11 +12,9 @@ path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
 app = Flask(__name__)
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+
 # with app.app_context(): 
 #         db.create_all()
-
 app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config['UPLOAD_FOLDER'] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
@@ -24,6 +22,9 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ubldlai8g393bf:p252aa443b6c3
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SQLALCHEMY_RECORD_QUERIES"] = True
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
