@@ -13,7 +13,8 @@ app.config["SECRET_KEY"] = "mysecret" #Editar senha depois
 folder = os.path.join(path, "database/files")
 
 app.config['UPLOAD_FOLDER'] = folder
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kofntiovsbspst:e7cfd6445eb4ea97fc9a3f5f7bbdff3b10c5c750fd253eba72b9ac6f345b3371@ec2-44-215-176-210.compute-1.amazonaws.com:5432/d72r86ju5ro7k'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_BINDS'] = {
    'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db'),
