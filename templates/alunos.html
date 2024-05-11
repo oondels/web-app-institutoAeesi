@@ -48,17 +48,9 @@
       </table>
     </div>
 
-    <div class="cadastrar-aluno">
-      <div>
-        <a href="{{ url_for('cadastro_aluno') }}"
-          ><button class="btn">Cadastrar Aluno</button></a
-        >
-      </div>
-    </div>
-    <div class="pagamento">
-      <a href="{{url_for('pagamentos')}}">
-        <button class="btn">Pagamentos</button>
-      </a>
+    <div class="cadastrar-pagamento">
+      <a class="btn" href="{{ url_for('cadastro_aluno') }}">Cadastrar Aluno</a>
+      <a class="btn" href="{{url_for('pagamentos')}}"> Pagamentos </a>
     </div>
   </div>
 </div>

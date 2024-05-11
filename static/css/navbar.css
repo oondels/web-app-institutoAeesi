@@ -349,6 +349,64 @@ a:is(:link, :active, :visited).active {
   font-size: 25px;
 }
 
+/* User */
+.small-section {
+  padding: 10px;
+  padding-left: 25px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  width: 800px;
+  background-color: white;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+.dashboard-user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  max-width: 800px;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  padding: 10px;
+  padding-left: 25px;
+}
+
+.dashboard-user img {
+  width: 150px;
+  margin-right: 35px;
+}
+
+.user-dados {
+  padding: 10px 0;
+  font-weight: 300;
+}
+
+.button-edit-del-att {
+  margin: 15px 0;
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 300px;
+}
+
+.button-edit-del-att a {
+  padding: 10px;
+  border-radius: 10px;
+  width: auto;
+  background-color: grey;
+  text-decoration: none !important;
+}
+
+.button-edit-del-att a:hover {
+  text-decoration: none;
+  background-color: rgb(151, 149, 149);
+}
+
 /* Professores */
 .resume {
   text-align: center;
@@ -604,10 +662,6 @@ a:is(:link, :active, :visited).active {
 
 /* Pagamento */
 /* Upload Arquivos */
-#aluno-pesquisa {
-  padding-bottom: 50px;
-}
-
 .upload {
   margin: 20px 0;
   display: flex;
@@ -617,6 +671,7 @@ a:is(:link, :active, :visited).active {
 .upload legend {
   text-align: center;
   padding-bottom: 10px;
+  color: #000;
 }
 
 .input-up {
@@ -625,13 +680,13 @@ a:is(:link, :active, :visited).active {
   background: transparent;
   border: none;
   outline: none;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid #727171;
   border-radius: 40px;
   font-size: 16px;
-  color: #ffffff;
   padding: 10px 35px 10px 10px;
   font-weight: 400;
   text-align: center;
+  color: #000;
 }
 
 .upload-submit {
@@ -649,8 +704,8 @@ a:is(:link, :active, :visited).active {
   align-items: center;
 }
 
-.pagamentos fieldset {
-  color: #dbdbdb;
+#directory li {
+  color: #000;
 }
 
 .pagamentos fieldset li {
@@ -773,6 +828,19 @@ a:is(:link, :active, :visited).active {
 
 .checkbox-wrapper-13 img {
   width: 40px;
+}
+
+.cadastrar-pagamento {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.cadastrar-pagamento a {
+  padding: 10px !important;
+  text-align: center;
+  width: 200px !important;
 }
 
 /* Login */
