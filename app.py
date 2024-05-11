@@ -9,17 +9,13 @@ from datetime import datetime, date
 
 path = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
-app.config["SECRET_KEY"] = "mysecret" #Editar senha depois
+app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
 folder = os.path.join(path, "database/files")
 
 app.config['UPLOAD_FOLDER'] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kofntiovsbspst:e7cfd6445eb4ea97fc9a3f5f7bbdff3b10c5c750fd253eba72b9ac6f345b3371@ec2-44-215-176-210.compute-1.amazonaws.com:5432/d72r86ju5ro7k'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_BINDS'] = {
-   'user_database': 'sqlite:///' + os.path.join(path, 'database/user_database.db'),
-   'aluno_database': 'sqlite:///' + os.path.join(path, 'database/aluno_database.db')
-}
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -37,7 +33,6 @@ db = SQLAlchemy(app)
 
 # Classe para databse do usuário
 class User(UserMixin, db.Model):
-    __bind_key__ = 'user_database'
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(120))
     sobrenome = db.Column(db.String(120))
@@ -60,7 +55,6 @@ class User(UserMixin, db.Model):
         return self.dev
     
 class Aluno(db.Model):
-    __bind_key__ =  "aluno_database"
     id = db.Column(db.Integer, primary_key = True)
     nome = db.Column(db.String(20))
     idade = db.Column(db.Integer())
@@ -77,7 +71,6 @@ class Aluno(db.Model):
         return f"{self.nome}"
 
 class Pagamento(db.Model):
-    __bind_key__ =  "aluno_database"
     id = db.Column(db.Integer, primary_key=True)
     pagamento = db.Column(db.Boolean())
     mes = db.Column(db.DateTime, default=date.today())
