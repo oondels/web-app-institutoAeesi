@@ -12,7 +12,9 @@ folder = os.path.join(path, "database/files")
 
 db = SQLAlchemy()
 app = Flask(__name__)
-db.init_app(app)
+# db.init_app(app)
+# with app.app_context(): 
+#         db.create_all()
 
 app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
 app.config['UPLOAD_FOLDER'] = folder
@@ -324,6 +326,4 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    with app.app_context(): 
-        db.create_all()
     app.run(debug=True)
