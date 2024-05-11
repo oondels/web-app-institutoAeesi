@@ -323,5 +323,5 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    db.create_all()
+    db.create_all(app=app)
     app.run(debug=True)
