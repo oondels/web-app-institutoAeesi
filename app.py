@@ -16,7 +16,7 @@ app = Flask(__name__)
 # with app.app_context(): 
 #         db.create_all()
 
-app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
+app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config['UPLOAD_FOLDER'] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ubldlai8g393bf:p252aa443b6c334ea727f23092bd7138a715707651a8b415a1230355746683c12@cb5ajfjosdpmil.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dafm2p9faq3kmb'
@@ -26,7 +26,6 @@ app.config["SQLALCHEMY_RECORD_QUERIES"] = True
 
 login_manager = LoginManager()
 login_manager.init_app(app)
-
 login_manager.login_view = "login"
 
 @login_manager.user_loader
@@ -328,4 +327,7 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    db.init_app(app)
+    with app.app_context():
+        db.create_all()
+    app.run()
