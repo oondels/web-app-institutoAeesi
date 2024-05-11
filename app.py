@@ -14,7 +14,7 @@ path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
 app = Flask(__name__)
-ckeditor = CKEditor(app)
+
 # with app.app_context(): 
 #         db.create_all()
 app.config["SECRET_KEY"] = "wa0i4Ochu"
@@ -25,12 +25,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SQLALCHEMY_RECORD_QUERIES"] = True
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
-
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
+db = SQLAlchemy(app)
 
 @login_manager.user_loader
 def load_user(user_id):
