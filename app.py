@@ -10,8 +10,8 @@ from datetime import datetime, date
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
-app = Flask(__name__)
 db = SQLAlchemy(Flask(__name__))
+app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
 app.config['UPLOAD_FOLDER'] = folder
@@ -323,5 +323,6 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
+    app.app_context().push()
     db.create_all()
     app.run(debug=True)
