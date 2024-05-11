@@ -12,7 +12,7 @@ folder = os.path.join(path, "database/files")
 
 db = SQLAlchemy()
 app = Flask(__name__)
-# db.init_app(app)
+
 # with app.app_context(): 
 #         db.create_all()
 
@@ -22,6 +22,7 @@ app.config['UPLOAD_FOLDER'] = folder
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ubldlai8g393bf:p252aa443b6c334ea727f23092bd7138a715707651a8b415a1230355746683c12@cb5ajfjosdpmil.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dafm2p9faq3kmb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
