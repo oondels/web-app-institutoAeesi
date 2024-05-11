@@ -12,6 +12,7 @@ folder = os.path.join(path, "database/files")
 
 db = SQLAlchemy()
 app = Flask(__name__)
+db.init_app(app)
 
 app.config["SECRET_KEY"] = "wa0i4Ochu" #Editar senha depois
 app.config['UPLOAD_FOLDER'] = folder
