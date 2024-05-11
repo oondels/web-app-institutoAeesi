@@ -328,6 +328,6 @@ def edit_user(user_id):
 
 if __name__ == "__main__":
     db.init_app(app)
-    with app.app_context():
+    with app.app_context().push():
         db.create_all()
     app.run()
