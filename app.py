@@ -6,13 +6,14 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
+from flask_migrate import Migrate
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
-db = SQLAlchemy()
 app = Flask(__name__)
-
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 # with app.app_context(): 
 #         db.create_all()
 
@@ -327,7 +328,4 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    db.init_app(app)
-    with app.app_context().push():
-        db.create_all()
     app.run()
