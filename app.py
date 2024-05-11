@@ -7,12 +7,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
 from flask_migrate import Migrate
+from flask_ckeditor import CKEditor
+
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
 app = Flask(__name__)
-
+ckeditor = CKEditor(app)
 # with app.app_context(): 
 #         db.create_all()
 app.config["SECRET_KEY"] = "wa0i4Ochu"
