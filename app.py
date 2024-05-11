@@ -92,7 +92,7 @@ def admin_acces():
 def not_found(e):
     return render_template("404.html")
 
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template('home.html')
 
