@@ -27,7 +27,6 @@ app.config["SQLALCHEMY_RECORD_QUERIES"] = True
 db = SQLAlchemy()
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-db.init_app(app)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -328,4 +327,5 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
+    db.init_app(app)
     app.run()
