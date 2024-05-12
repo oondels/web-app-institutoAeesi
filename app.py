@@ -10,7 +10,6 @@ from datetime import datetime, date
 from dotenv import load_dotenv
 
 load_dotenv()
-database_url = os.environ.get("DATABASE_URL")
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
@@ -20,9 +19,9 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config["UPLOAD_FOLDER"] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
-app.config["SQLALCHEMY_DATABASE_URI"] = database_url
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
+# db.init_app(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
@@ -281,5 +280,4 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    db.init_app(app)
     app.run()
