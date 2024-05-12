@@ -10,7 +10,7 @@ from datetime import datetime, date
 from dotenv import load_dotenv
 
 load_dotenv()
-database_url = os.getenv("DATABASE_URL")
+database_url = os.environ.get("DATABASE_URL")
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
