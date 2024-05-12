@@ -25,10 +25,10 @@ app.config["SQLALCHEMY_ECHO"] = True
 app.config["SQLALCHEMY_RECORD_QUERIES"] = True
 
 db = SQLAlchemy()
-login_manager = LoginManager()
-login_manager.init_app(app)
+login_manager = LoginManager(app)
 login_manager.login_view = "login"
 # db.init_app(app)   cnfigurar depois
+# db.init_app()
 
 @login_manager.user_loader
 def load_user(user_id):
