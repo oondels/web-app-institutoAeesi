@@ -69,3 +69,4 @@ tzdata==2023.4
 wcwidth==0.2.12
 Werkzeug==3.0.1
 WTForms==3.1.2
+psycopg2-binary==2.9.9
