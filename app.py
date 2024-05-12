@@ -24,7 +24,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SQLALCHEMY_ECHO"] = True
 app.config["SQLALCHEMY_RECORD_QUERIES"] = True
 
-db = SQLAlchemy()
+db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
@@ -327,5 +327,5 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    db.init_app(app)
+    
     app.run()
