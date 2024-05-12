@@ -7,22 +7,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
 
-app = Flask(__name__)
-
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
 
+app = Flask(__name__)
+
 app.config["SECRET_KEY"] = "wa0i4Ochu"
-app.config['UPLOAD_FOLDER'] = folder
+app.config["UPLOAD_FOLDER"] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://ubldlai8g393bf:p252aa443b6c334ea727f23092bd7138a715707651a8b415a1230355746683c12@cb5ajfjosdpmil.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dafm2p9faq3kmb'
+app.config["SQLALCHEMY_DATABASE_URI"] = 'postgres://ubldlai8g393bf:p252aa443b6c334ea727f23092bd7138a715707651a8b415a1230355746683c12@cb5ajfjosdpmil.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/dafm2p9faq3kmb'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SQLALCHEMY_ECHO"] = True
-app.config["SQLALCHEMY_RECORD_QUERIES"] = True
+db.init_app(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-db.init_app(app)
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -33,52 +32,53 @@ def unauthorized():
   return redirect(url_for('login'))
 
 # Classe para databse do usuário
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String(120))
-    sobrenome = db.Column(db.String(120))
-    email = db.Column(db.String(120), unique=True, index=True)
-    password_hash = db.Column(db.String(128))
-    dev = db.Column(db.Boolean())
-    admin = db.Column(db.Boolean())
+with app.app_context():
+    class User(UserMixin, db.Model):
+        id = db.Column(db.Integer, primary_key = True)
+        nome = db.Column(db.String())
+        sobrenome = db.Column(db.String())
+        email = db.Column(db.String(), unique=True, index=True)
+        password_hash = db.Column(db.String())
+        dev = db.Column(db.Boolean())
+        admin = db.Column(db.Boolean())
 
-    def __repr__(self):
-        return f'{self.nome}'
+        def __repr__(self):
+            return f'{self.nome}'
 
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
+        def set_password(self, password):
+            self.password_hash = generate_password_hash(password)
 
-    @property
-    def is_admin(self):
-        return self.admin
-    @property
-    def is_dev(self):
-        return self.dev
+        @property
+        def is_admin(self):
+            return self.admin
+        @property
+        def is_dev(self):
+            return self.dev
     
-class Aluno(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    nome = db.Column(db.String())
-    idade = db.Column(db.Integer())
-    cpf = db.Column(db.Integer())
-    curso = db.Column(db.String())
-    telefone = db.Column(db.Integer())
-    horario= db.Column(db.String())
-    email = db.Column(db.String())
-    aniversario = db.Column(db.String())
-    bolsa = db.Column(db.Boolean())
-    pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
+    class Aluno(db.Model):
+        id = db.Column(db.Integer, primary_key = True)
+        nome = db.Column(db.String())
+        idade = db.Column(db.Integer())
+        cpf = db.Column(db.Integer())
+        curso = db.Column(db.String())
+        telefone = db.Column(db.Integer())
+        horario= db.Column(db.String())
+        email = db.Column(db.String())
+        aniversario = db.Column(db.String())
+        bolsa = db.Column(db.Boolean())
+        pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
 
-    def __repr__(self):
-        return f"{self.nome}"
+        def __repr__(self):
+            return f"{self.nome}"
 
-class Pagamento(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    pagamento = db.Column(db.Boolean())
-    mes = db.Column(db.DateTime, default=date.today())
-    aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
+    class Pagamento(db.Model):
+        id = db.Column(db.Integer, primary_key=True)
+        pagamento = db.Column(db.Boolean())
+        mes = db.Column(db.DateTime, default=date.today())
+        aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
 
-    def __repr__(self):
-        return f'<{self.pagamento}>'
+        def __repr__(self):
+            return f'<{self.pagamento}>'
 
 def admin_acces():
     if current_user.is_authenticated:
