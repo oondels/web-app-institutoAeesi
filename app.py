@@ -32,7 +32,7 @@ def unauthorized():
   return redirect(url_for('login'))
 
 # Classe para databse do usuário
-with app.app_context():
+with app.app_context().push():
     class User(UserMixin, db.Model):
         id = db.Column(db.Integer, primary_key = True)
         nome = db.Column(db.String())
