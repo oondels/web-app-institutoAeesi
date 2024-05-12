@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
@@ -21,7 +22,8 @@ app.config["UPLOAD_FOLDER"] = folder
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(path, 'database/geral.db')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db.init_app(app)
+
+db = SQLAlchemy(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
