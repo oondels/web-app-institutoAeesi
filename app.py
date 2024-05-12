@@ -1,5 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
+from flask_sqlalchemy import SQLAlchemy
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from extension import db
 from werkzeug.utils import secure_filename
