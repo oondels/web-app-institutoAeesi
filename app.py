@@ -328,6 +328,11 @@ def admin():
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
 
+@app.route("/admin/users")
+def users():
+    users = User.query.all()
+    return render_template("users.html", users=users)
+
 @app.route("/user/<user_id>")
 @login_required
 def edit_user(user_id):
