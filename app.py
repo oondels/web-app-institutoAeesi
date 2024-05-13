@@ -2,17 +2,15 @@ import os
 from flask import Flask, render_template, redirect, url_for, flash, request
 from flask_sqlalchemy import SQLAlchemy
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
+from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
-from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash
-from flask_login import UserMixin
-from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
+# from dotenv import load_dotenv
 
-load_dotenv()
+# load_dotenv()
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
@@ -26,58 +24,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@local
 # app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+db.init_app(app)
+
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-
-db = SQLAlchemy(app)
-
-class User(UserMixin, db.Model):
-        id = db.Column(db.Integer, primary_key = True)
-        nome = db.Column(db.String(200))
-        sobrenome = db.Column(db.String(200))
-        email = db.Column(db.String(40), unique=True, index=True)
-        password_hash = db.Column(db.String(200))
-        dev = db.Column(db.Boolean())
-        admin = db.Column(db.Boolean())
-
-        def __repr__(self):
-            return f'{self.nome}'
-
-        def set_password(self, password):
-            self.password_hash = generate_password_hash(password)
-
-        @property
-        def is_admin(self):
-            return self.admin
-        @property
-        def is_dev(self):
-            return self.dev
-    
-class Aluno(db.Model):
-        id = db.Column(db.Integer, primary_key = True)
-        nome = db.Column(db.String(200))
-        idade = db.Column(db.Integer())
-        cpf = db.Column(db.Integer())
-        curso = db.Column(db.String(40))
-        telefone = db.Column(db.Integer())
-        horario= db.Column(db.String(200))
-        email = db.Column(db.String(200))
-        aniversario = db.Column(db.String(200))
-        bolsa = db.Column(db.Boolean())
-        pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
-
-        def __repr__(self):
-            return f"{self.nome}"
-
-class Pagamento(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        pagamento = db.Column(db.Boolean())
-        mes = db.Column(db.DateTime, default=date.today())
-        aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
-
-        def __repr__(self):
-            return f'<{self.pagamento}>'
-
 
 @login_manager.user_loader
 def load_user(user_id):
