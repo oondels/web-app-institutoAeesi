@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
 from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 # from dotenv import load_dotenv
 
 # load_dotenv()
@@ -24,12 +25,10 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@local
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+migrate = Migrate(app, db)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
-
-
-
 
 @login_manager.user_loader
 def load_user(user_id):
