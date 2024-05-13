@@ -20,10 +20,13 @@ app = Flask(__name__)
 
 app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config["UPLOAD_FOLDER"] = folder
-# Mysql DB
+
+# Teste Local
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
+# Mysql DB
+# Deploys app
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
-# app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
