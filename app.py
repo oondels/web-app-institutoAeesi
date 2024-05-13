@@ -22,10 +22,10 @@ app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config["UPLOAD_FOLDER"] = folder
 
 # Teste Local
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
 # Mysql DB
 # Deploys app
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -305,12 +305,18 @@ def admin():
     pago = 0
     alunos_query = Aluno.query.all()
     for aluno in alunos_query:
-        for pay in aluno.pagamento:
-            if pay.pagamento == True:
-                pago += 1
-    alunoPago = round((pago/alunos.query.count() * 100), 2)
-    # Porcentagem de Bolsistaas
-    porcentagem_bolsa = round((alunos.query.filter_by(bolsa=True).count()/alunos.query.count())*100,2)
+        if not aluno.bolsa:
+            for pay in aluno.pagamento:
+                if pay.pagamento == True:
+                    pago += 1
+
+    porcentagem_bolsa = 0
+    alunoPago = 0
+
+    if alunos.query.count() != 0:
+        alunoPago = round((pago/alunos.query.filter_by(bolsa=0).count() * 100), 2)
+        # Porcentagem de Bolsistaas
+        porcentagem_bolsa = round((alunos.query.filter_by(bolsa=True).count()/alunos.query.count())*100,2)
 
     users = User.query.all()
     admin = User.query.filter_by(id=current_user.id).first()
@@ -333,4 +339,4 @@ def edit_user(user_id):
         return(redirect(url_for('home')))
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True)
