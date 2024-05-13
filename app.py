@@ -1,8 +1,6 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
-from flask_sqlalchemy import SQLAlchemy
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
-from models import db, User, Aluno, Pagamento
 from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -10,9 +8,7 @@ from flask_login import UserMixin, LoginManager, login_required, login_user, cur
 from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
 # from dotenv import load_dotenv
-# from dotenv import load_dotenv
 
-# load_dotenv()
 # load_dotenv()
 
 path = os.path.abspath(os.path.dirname(__file__))
