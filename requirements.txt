@@ -32,7 +32,6 @@ nest-asyncio==1.5.8
 packaging==24.0
 parso==0.8.4
 platformdirs==4.1.0
-psycopg2==2.9.9
 psycopg2-binary==2.9.9
 pure-eval==0.2.2
 py-mysql==1.0
