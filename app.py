@@ -58,7 +58,7 @@ class Aluno(db.Model):
         id = db.Column(db.Integer, primary_key = True)
         nome = db.Column(db.String(200))
         idade = db.Column(db.Integer())
-        cpf = db.Column(db.String(15))
+        cpf = db.Column(db.String(200))
         curso = db.Column(db.String(40))
         telefone = db.Column(db.String(25))
         horario= db.Column(db.String(200))

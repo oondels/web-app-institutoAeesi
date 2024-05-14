@@ -9,7 +9,7 @@ class Cadastro_Form(FlaskForm):
     idade = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Idade", "class":"edit", "required pattern":"[0-9]{2,3}"})
     cpf_aluno = StringField("Cpf", validators=[DataRequired()], render_kw={"placeholder":"Cpf", "class":"edit"})
     curso = RadioField("Curso:", choices=cursos, render_kw={"class": "lista-cursos"})
-    telefone = IntegerField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Telefone", "class":"edit"})
+    telefone = StringField("Idade", validators=[DataRequired()], render_kw={"placeholder":"Telefone", "class":"edit"})
     horario = StringField("Horário", validators=[DataRequired()], render_kw={"placeholder":"Horário", "class":"edit"})
     email = StringField("Email", validators=[DataRequired()], render_kw={"placeholder":"Email", "class":"edit"})
     aniversario = StringField("Aniversário", validators=[DataRequired()], render_kw={"placeholder":"Aniversário", "class":"edit"})
