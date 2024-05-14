@@ -9,9 +9,9 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from datetime import datetime, date
-# from dotenv import load_dotenv
+from dotenv import load_dotenv, dotenv_values
 
-# load_dotenv()
+load_dotenv()
 
 path = os.path.abspath(os.path.dirname(__file__))
 folder = os.path.join(path, "database/files")
@@ -22,10 +22,13 @@ app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config["UPLOAD_FOLDER"] = folder
 
 # Teste Local
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
 # Mysql DB
 # Deploys app
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
+# Database URL
+# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
+
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
