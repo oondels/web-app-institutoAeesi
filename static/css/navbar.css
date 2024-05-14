@@ -173,6 +173,7 @@ a:is(:link, :active, :visited).active {
   grid-template-columns: 500px auto;
   grid-row-start: initial;
   padding-bottom: 70px;
+  padding-top: 30px;
 }
 
 .sobre-vantagens .wrapper-cards {
@@ -475,7 +476,7 @@ a:is(:link, :active, :visited).active {
   background-attachment: inherit;
   background-position: 50% 25%;
   padding-left: 80px;
-  padding-top: 250px;
+  padding-top: 200px;
   padding-bottom: 150px;
   height: 100%;
   width: 100%;
@@ -483,13 +484,16 @@ a:is(:link, :active, :visited).active {
   bottom: 0%;
   left: 0%;
   right: 0%;
-  background-image: url(../img/bgs/bg-cursos.jpg);
+  background-image: linear-gradient(transparent 30%, #000000),
+    url(../img/bgs/bg-cursos.jpg);
   font-size: 20px;
   font-weight: 600;
+  color: white;
+  box-shadow: 5px 5px 20px rgba(44, 44, 44, 0.6);
 }
 
 .aulas-info {
-  margin: 20px 0;
+  margin: 50px 0;
 }
 
 .cursos-info {
@@ -502,6 +506,10 @@ a:is(:link, :active, :visited).active {
   align-items: center;
   flex-direction: column;
   padding: 0 150px;
+}
+
+.card-content h3 {
+  padding: 15px;
 }
 
 .title {
@@ -552,6 +560,7 @@ a:is(:link, :active, :visited).active {
   min-height: 17rem;
   position: relative;
   overflow: hidden;
+  box-shadow: 2px 2px 20px rgba(51, 51, 51, 0.6);
 }
 
 .card-image img {
@@ -872,6 +881,115 @@ a:is(:link, :active, :visited).active {
   font-size: medium;
 }
 
+/* Table-Test-Alunos */
+.table-fill {
+  background: white;
+  border-radius: 3px;
+  border-collapse: collapse;
+  height: 320px;
+  margin: auto;
+  max-width: 600px;
+  padding: 5px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  animation: float 5s infinite;
+}
+
+th {
+  color: #d5dde5;
+  background: #1b1e24;
+  border-right: 1px solid #343a45;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 12px;
+  text-align: left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+}
+
+th:last-child {
+  border-top-right-radius: 3px;
+  border-right: none;
+}
+
+tr {
+  border-top: 1px solid #c1c3d1;
+  border-bottom: 1px solid #c1c3d1;
+  color: #666b85;
+  font-size: 15px;
+  font-weight: normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+tr:hover td {
+  background: #777779;
+  color: #ffffff;
+  border-top: 1px solid #22262e;
+}
+
+tr:first-child {
+  border-top: none;
+}
+
+tr:last-child {
+  border-bottom: none;
+}
+
+tr:nth-child(odd) td {
+  background: #ebebeb;
+}
+
+tr:nth-child(odd):hover td {
+  background: #777779;
+}
+
+tr:last-child td:first-child {
+  border-bottom-left-radius: 3px;
+}
+
+tr:last-child td:last-child {
+  border-bottom-right-radius: 3px;
+}
+
+td {
+  background: #ffffff;
+  padding: 18px;
+  text-align: left;
+  vertical-align: middle;
+  font-weight: 300;
+  font-size: 15px;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #c1c3d1;
+}
+
+td:last-child {
+  border-right: 0px;
+}
+
+th.text-left {
+  text-align: left;
+}
+
+th.text-center {
+  text-align: center;
+}
+
+th.text-right {
+  text-align: right;
+}
+
+td.text-left {
+  text-align: left;
+}
+
+td.text-center {
+  text-align: center;
+}
+
+td.text-right {
+  text-align: right;
+}
+
 /* Aluno */
 .wrapper .dados-aluno {
   margin-top: 1.3rem;
@@ -986,6 +1104,20 @@ a:is(:link, :active, :visited).active {
     padding-top: 50px;
   }
 
+  .padding-main {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .sobre-vantagens .matricular {
+    width: 80%;
+  }
+
+  .sobre-vantagens .wrapper-cards {
+    width: 100%;
+    margin: 0;
+  }
+
   .footer-basic .copyright {
     margin-top: 5px;
     text-align: center;
@@ -1060,13 +1192,23 @@ a:is(:link, :active, :visited).active {
     }
   }
 
+  .sobre-vantagens .wrapper-cards {
+    margin: 70px 0;
+    width: 100%;
+    height: 400px;
+  }
+
+  .title h1 {
+    font-size: 35px;
+  }
+
   .sobre-vantagens {
-    padding-top: 50px;
-    padding-bottom: 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding-top: 50px;
+    padding-bottom: 0;
   }
 
   .slide-fotos {
@@ -1168,16 +1310,24 @@ a:is(:link, :active, :visited).active {
     display: none;
   }
 
+  /* Cursos */
   .cursos-content {
-    padding-left: 20px;
-    padding-right: 40px;
+    padding: 0 60px;
+  }
+
+  .card {
+    width: auto;
+  }
+
+  .card h3 {
+    padding-bottom: 0;
   }
 
   .card-image {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     min-width: 10rem;
-    min-height: 17rem;
+    min-height: 24rem;
     position: relative;
     overflow: hidden;
   }
@@ -1194,119 +1344,24 @@ a:is(:link, :active, :visited).active {
     font-weight: 900;
     font-size: 23px;
   }
+}
 
-  .sobre-vantagens .wrapper-cards {
-    margin: 70px 0;
-    width: 100%;
-    height: 400px;
+@media (max-width: 480px) {
+  .cursos-content {
+    padding: 0 30px;
   }
-}
 
-/* Table-Test-Alunos */
-.table-fill {
-  background: white;
-  border-radius: 3px;
-  border-collapse: collapse;
-  height: 320px;
-  margin: auto;
-  max-width: 600px;
-  padding: 5px;
-  width: 100%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  animation: float 5s infinite;
-}
+  .card .curso-descricao {
+    font-size: 14px;
+  }
 
-th {
-  color: #d5dde5;
-  background: #1b1e24;
-  border-right: 1px solid #343a45;
-  font-size: 18px;
-  font-weight: 100;
-  padding: 12px;
-  text-align: left;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  vertical-align: middle;
-}
+  .card a {
+    font-size: 14.3px;
+    padding: 0 10px;
+    padding-bottom: 5px;
+  }
 
-th:last-child {
-  border-top-right-radius: 3px;
-  border-right: none;
-}
-
-tr {
-  border-top: 1px solid #c1c3d1;
-  border-bottom: 1px solid #c1c3d1;
-  color: #666b85;
-  font-size: 15px;
-  font-weight: normal;
-  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-}
-
-tr:hover td {
-  background: #777779;
-  color: #ffffff;
-  border-top: 1px solid #22262e;
-}
-
-tr:first-child {
-  border-top: none;
-}
-
-tr:last-child {
-  border-bottom: none;
-}
-
-tr:nth-child(odd) td {
-  background: #ebebeb;
-}
-
-tr:nth-child(odd):hover td {
-  background: #777779;
-}
-
-tr:last-child td:first-child {
-  border-bottom-left-radius: 3px;
-}
-
-tr:last-child td:last-child {
-  border-bottom-right-radius: 3px;
-}
-
-td {
-  background: #ffffff;
-  padding: 18px;
-  text-align: left;
-  vertical-align: middle;
-  font-weight: 300;
-  font-size: 15px;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #c1c3d1;
-}
-
-td:last-child {
-  border-right: 0px;
-}
-
-th.text-left {
-  text-align: left;
-}
-
-th.text-center {
-  text-align: center;
-}
-
-th.text-right {
-  text-align: right;
-}
-
-td.text-left {
-  text-align: left;
-}
-
-td.text-center {
-  text-align: center;
-}
-
-td.text-right {
-  text-align: right;
+  .card-image {
+    width: 6rem;
+  }
 }
