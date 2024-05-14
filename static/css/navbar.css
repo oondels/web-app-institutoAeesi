@@ -1074,6 +1074,7 @@ a:is(:link, :active, :visited).active {
     width: auto;
     height: 100%;
     padding: 0 50px;
+    padding-bottom: 50px;
   }
 
   .slide {
@@ -1197,6 +1198,7 @@ a:is(:link, :active, :visited).active {
   .sobre-vantagens .wrapper-cards {
     margin: 70px 0;
     width: 100%;
+    height: 400px;
   }
 }
 
