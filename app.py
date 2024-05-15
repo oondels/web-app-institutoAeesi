@@ -20,7 +20,7 @@ app = Flask(__name__)
 # Db
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = os.getenv("SECRET_KEY_APP") 
+app.config["SECRET_KEY"] = 'wa0i4Ochu'
 app.config["UPLOAD_FOLDER"] = folder
 
 db = SQLAlchemy(app)
