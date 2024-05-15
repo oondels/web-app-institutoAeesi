@@ -4,7 +4,6 @@ from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
-from datetime import datetime, date
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
@@ -18,19 +17,11 @@ folder = os.path.join(path, "database/files")
 
 app = Flask(__name__)
 
+# Db
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL") 
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = "wa0i4Ochu"
 app.config["UPLOAD_FOLDER"] = folder
-
-# Teste Local
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:wa0i4OchuSql@localhost/geral'
-# Mysql DB
-# Deploys app
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
-# Database URL
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URL")
-
-
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
