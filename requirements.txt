@@ -2,8 +2,10 @@ alembic==1.13.1
 asttokens==2.4.1
 bcrypt==4.1.2
 blinker==1.7.0
+cffi==1.16.0
 click==8.1.7
 colorama==0.4.6
+cryptography==42.0.7
 debugpy==1.8.0
 decorator==5.1.1
 dnspython==2.6.1
@@ -35,11 +37,13 @@ platformdirs==4.1.0
 psycopg2==2.9.9
 pure-eval==0.2.2
 py-mysql==1.0
+pycparser==2.22
 Pygments==2.17.2
 PyMySQL==1.1.0
 pyparsing==3.1.1
 python-dateutil==2.8.2
 python-dotenv==1.0.1
+pywin32==306
 pyzmq==26.0.3
 six==1.16.0
 SQLAlchemy==2.0.27
