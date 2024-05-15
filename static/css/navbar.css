@@ -656,6 +656,19 @@ a:is(:link, :active, :visited).active {
   height: 100%;
 }
 
+.horarios {
+  width: 600px;
+  height: 300px;
+  border: 1px solid rgba(0, 120, 255, 0);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  border-radius: 30px;
+}
+
+.horarios:hover {
+  border: 1px solid #018749;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
 /* Inputbox */
 .wrapper .input-box {
   width: 100%;
