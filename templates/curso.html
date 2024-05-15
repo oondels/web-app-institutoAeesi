@@ -1,46 +1,65 @@
 {% extends "base.html" %} {% block title %}{{curso}}{% endblock %} {% block head
 %} {{ super() }} {% endblock %} {% block content %}
 <div class="container-site">
-  <div class="banner-curso"></div>
-  <div class="wrapper-cursos">
-    <div class="title-curso">
-      <h1>Aulas de {{curso}}</h1>
-    </div>
-    <!-- Colocar fotos de exemplo da aula selecionada -->
-    <div class="foto-example-curso"></div>
-    <div class="aula-beneficio-content">
-      <div class="title-beneficio"></div>
-      <div class="beneficio-aula">
-        <div class="beneficio-um">
-          <img src="../static/img/cursos/icons/fogocaloria.png" alt="" />
-          <h2>Queima Calórica</h2>
-          <p>Queima X calorias por hora, o equivalente a...</p>
+  <div class="wrapper-site">
+    <div class="banner-curso"></div>
+    <div class="wrapper-cursos">
+      <div class="padding-main">
+        <div class="title-curso">
+          <h1>Aulas de {{curso}}</h1>
         </div>
-        <div class="beneficio-dois">
-          <img src="../static/img/cursos/icons/saude.png" alt="" />
-          <h2>Saúde</h2>
-          <p>Essa atividade proporciona X na sua vida e mais X coisas...</p>
+
+        <div class="aula-beneficio-content">
+          <div class="beneficio">
+            <h1 class="destak">Benefícios</h1>
+            <p>
+              Os principais e mais notórios benefícios à saúde dessa aula são:
+            </p>
+          </div>
+          <div class="beneficio-aula">
+            <div class="beneficio-um benef">
+              <img src="../static/img/cursos/icons/fogocaloria.png" alt="" />
+              <h2>Queima Calórica</h2>
+              <p>Queima X calorias por hora, o equivalente a...</p>
+            </div>
+            <div class="beneficio-dois benef">
+              <img src="../static/img/cursos/icons/saude.png" alt="" />
+              <h2>Saúde</h2>
+              <p>Essa atividade proporciona X na sua vida e mais X coisas...</p>
+            </div>
+          </div>
+        </div>
+        <div class="professores-section">
+          <h1 class="destak">Professores</h2>
+          <div class="card">
+            <div class="card-image">
+              <img src="../static/img/cursos/boxe/box-card-image.jpg" alt="" />
+            </div>
+            <div class="card-content">
+              <h3>Aulas de Jiu-Jitsu</h3>
+              <div class="curso-descricao">
+                Essa atividade conta com os professores: <br>
+                <strong>Laudeci Conceição de Santana</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="horarios-section">
+          <h2>Horários</h2>
+          <div class="horarios">
+            <ul>
+              <li>Segunda</li>
+              <li>Terça</li>
+              <li>Quarta</li>
+              <li>Quinta</li>
+              <li>Sexta</li>
+            </ul>
+          </div>
+        </div>
+        <div class="valor">
+          <h2>Valor das aulas de {{curso}}</h2>
         </div>
       </div>
-    </div>
-    <div class="professores-section">
-      <h2>Proefssores</h2>
-      <p>Essa atividade conta com os professores X...</p>
-    </div>
-    <div class="horarios-section">
-      <h2>Horários</h2>
-      <div class="horarios">
-        <ul>
-          <li>Segunda</li>
-          <li>Terça</li>
-          <li>Quarta</li>
-          <li>Quinta</li>
-          <li>Sexta</li>
-        </ul>
-      </div>
-    </div>
-    <div class="valor">
-      <h2>Valor das aulas de {{curso}}</h2>
     </div>
   </div>
 </div>
