@@ -18,9 +18,9 @@ folder = os.path.join(path, "database/files")
 app = Flask(__name__)
 
 # Db
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://uftu2hj60jqhe8:p1713e72b5a4b69168f4e9832c3e43912b38be9947621448782b8c750362b9335@c5hilnj7pn10vb.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/deiodn8elck6ib'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config["SECRET_KEY"] = 'wa0i4Ochu'
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
 
 db = SQLAlchemy(app)
