@@ -9,7 +9,7 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from datetime import datetime, date
-from dotenv import load_dotenv, dotenv_values
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -270,6 +270,8 @@ def register():
         user.set_password(register_form.password.data)
         db.session.add(user)
         db.session.commit()
+        flash("Registrado com sucesso!")
+        return redirect(url_for("login"))
     return render_template("register.html", register_form=register_form)
 
 @app.route("/login", methods=["GET", "POST"])
