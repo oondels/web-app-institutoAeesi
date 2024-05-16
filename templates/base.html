@@ -17,11 +17,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
     <script src="../static/js/main.js"></script>
+    <script src="../static/js/search_aluno.js"></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
-
     <link
       rel="apple-touch-icon"
       sizes="180x180"
@@ -84,36 +84,32 @@
       </button>
       {%endfor%}
     </div>
-    {% block content %}{% endblock %}
-
-    <div class="footer-block">
-      {% block footer %}
-      <div class="footer-basic">
-        <!-- Mudar esse ícones horríveis -->
-        <footer>
-          <div class="social">
-            <a href="#"><i class="icon ion-social-instagram"></i></a
-            ><a href="#"><i class="icon ion-social-facebook"></i></a>
-          </div>
-          <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Home</a></li>
-            <li class="list-inline-item"><a href="#">Serviços</a></li>
-            <li class="list-inline-item"><a href="#">Sobre nós</a></li>
-            <li class="list-inline-item"><a href="#">Termos</a></li>
-            <li class="list-inline-item">
-              <a href="#">Política de Privacidade</a>
-            </li>
-          </ul>
-          <p class="copyright">
-            Copyright ©2024 | Desined by: <a href="#">Hendrius Félix</a>
-          </p>
-        </footer>
-      </div>
-      {% endblock %}
+    <div class="container">{% block content %}{% endblock %}</div>
+    {% block footer %}
+    <div class="footer-basic">
+      <!-- Mudar esse ícones horríveis -->
+      <footer>
+        <div class="social">
+          <a href="#"><i class="icon ion-social-instagram"></i></a
+          ><a href="#"><i class="icon ion-social-facebook"></i></a>
+        </div>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Home</a></li>
+          <li class="list-inline-item"><a href="#">Serviços</a></li>
+          <li class="list-inline-item"><a href="#">Sobre nós</a></li>
+          <li class="list-inline-item"><a href="#">Termos</a></li>
+          <li class="list-inline-item">
+            <a href="#">Política de Privacidade</a>
+          </li>
+        </ul>
+        <p class="copyright">
+          Copyright ©2024 | Desined by: <a href="#">Hendrius Félix</a>
+        </p>
+      </footer>
     </div>
+    {% endblock %}
     <script>
       var flashMessage = "{{ get_flashed_messages() }}";
-      console.log("{{ get_flashed_messages() }}".length);
       if (flashMessage.length === 2) {
         document.getElementById("flash").style.display = "none";
       } else {

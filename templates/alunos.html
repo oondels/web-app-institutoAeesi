@@ -1,57 +1,55 @@
 {% extends "base.html" %} {% block title %}Alunos{% endblock %} {% block head %}
 {{ super() }} {% endblock %} {% block content %}
-<div class="container">
-  <div class="wrapper">
-    <div>
-      <h1>Alunos Cadastrados</h1>
+<div class="wrapper">
+  <div>
+    <h1>Alunos Cadastrados</h1>
+  </div>
+
+  <div class="dados-aluno">
+    <div class="input-box input">
+      <input
+        type="text"
+        id="input-pesquisa"
+        onkeyup="search_aluno_table()"
+        placeholder="Pesquisar Aluno"
+      />
     </div>
 
-    <div class="dados-aluno">
-      <div class="input-box input">
-        <input
-          type="text"
-          id="input-pesquisa"
-          onkeyup="search_aluno_table()"
-          placeholder="Pesquisar Aluno"
-        />
-      </div>
+    <table table-fill>
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Curso</th>
+          <th>Idade</th>
+          <th>Possui Bolsa</th>
+          <th>Telefone</th>
+          <th>Horário</th>
+        </tr>
+      </thead>
 
-      <table table-fill>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Curso</th>
-            <th>Idade</th>
-            <th>Possui Bolsa</th>
-            <th>Telefone</th>
-            <th>Horário</th>
-          </tr>
-        </thead>
+      <tbody id="aluno-pesquisa_table">
+        <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
+        {% for aluno in alunos %}
+        <tr>
+          <td>
+            <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
+              {{aluno.nome}}
+            </a>
+          </td>
+          <td>{{aluno.curso}}</td>
+          <td>{{aluno.idade}}</td>
+          <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
+          <td>{{aluno.telefone}}</td>
+          <td>{{aluno.horario}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-        <tbody id="aluno-pesquisa_table">
-          <!--Corrigir Pesquisa (Atualmente se a lista for grande, irá cobrir toda a página)-->
-          {% for aluno in alunos %}
-          <tr>
-            <td>
-              <a href="{{ url_for('aluno', aluno_id=aluno.id) }}">
-                {{aluno.nome}}
-              </a>
-            </td>
-            <td>{{aluno.curso}}</td>
-            <td>{{aluno.idade}}</td>
-            <td>{%if aluno.bolsa == True: %} Sim {%else%} Não {%endif%}</td>
-            <td>{{aluno.telefone}}</td>
-            <td>{{aluno.horario}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-
-    <div class="cadastrar-pagamento">
-      <a class="btn" href="{{ url_for('cadastro_aluno') }}">Cadastrar Aluno</a>
-      <a class="btn" href="{{url_for('pagamentos')}}"> Pagamentos </a>
-    </div>
+  <div class="cadastrar-pagamento">
+    <a class="btn" href="{{ url_for('cadastro_aluno') }}">Cadastrar Aluno</a>
+    <a class="btn" href="{{url_for('pagamentos')}}"> Pagamentos </a>
   </div>
 </div>
 {% endblock %}

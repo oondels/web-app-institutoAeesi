@@ -1,33 +1,31 @@
 {% extends "base.html" %} {% block title %}Login{% endblock %} {% block head %}
 {{ super() }} {% endblock %} {% block content %}
-<div class="container">
-  <div class="wrapper">
-    <form method="POST">
-      <h1>Login</h1>
-      {{login_form.hidden_tag()}}
+<div class="wrapper">
+  <form method="POST">
+    <h1>Login</h1>
+    {{login_form.hidden_tag()}}
 
-      <div class="input-box input">
-        {{login_form.email()}}
-        <i class="bx bxs-user"></i>
-      </div>
+    <div class="input-box input">
+      {{login_form.email()}}
+      <i class="bx bxs-user"></i>
+    </div>
 
-      <div class="input-box input">
-        {{login_form.password()}}
-        <i class="bx bxs-lock-alt"></i>
-      </div>
+    <div class="input-box input">
+      {{login_form.password()}}
+      <i class="bx bxs-lock-alt"></i>
+    </div>
 
-      <div class="remember-forgot">
-        <label><input type="checkbox" id="remember" /> Remember me</label>
-        <a href="#">Esqueceu a senha?</a>
-      </div>
-      <div>{{login_form.submit()}}</div>
-      <div class="registe-link">
-        <p>
-          Não tem uma conta?
-          <a href="{{url_for('register')}}">Registre-se</a>
-        </p>
-      </div>
-    </form>
-  </div>
+    <div class="remember-forgot">
+      <label><input type="checkbox" id="remember" /> Remember me</label>
+      <a href="#">Esqueceu a senha?</a>
+    </div>
+    <div>{{login_form.submit()}}</div>
+    <div class="registe-link">
+      <p>
+        Não tem uma conta?
+        <a href="{{url_for('register')}}">Registre-se</a>
+      </p>
+    </div>
+  </form>
 </div>
 {% endblock %}

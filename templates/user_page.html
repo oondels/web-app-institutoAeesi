@@ -1,38 +1,36 @@
 {% extends "base.html" %} {% block title %}Usuario {{user.nome}}{% endblock %}
 {% block head %} {{ super() }} {% endblock %} {% block content %}
-<div class="container">
-  <div class="wrapper">
-    <h1>Dashboard</h1>
-    <div class="small-section">
-      <h4>{{user.nome}}</h4>
+<div class="wrapper">
+  <h1>Dashboard</h1>
+  <div class="small-section">
+    <h4>{{user.nome}}</h4>
+  </div>
+  <div class="dashboard-user">
+    <div class="user">
+      <div class="user-dados">
+        <strong>Name: </strong>{{user.nome}} {{user.sobrenome}} <br />
+        <strong>User Id:</strong> {{ user.id }} <br />
+        <strong>Email:</strong> {{ user.email }} <br />
+        <strong>Nível de Acesso:</strong> {% if user.dev == 1 %} Acesso de
+        Administrador (dev) {% elif user.dev == 1 %} Acesso de Administrador {%
+        else %}Acesso Básico{% endif %}
+      </div>
+      <div class="button-edit-del-att">
+        <div class="logout">
+          <a href="{{url_for('logout')}}">Sair</a>
+        </div>
+        <div class="edit-user">
+          <a href="{{ url_for('edit_user', user_id=user.id) }}"
+            >Atualizar Perfil</a
+          >
+        </div>
+        <div class="delete-user">
+          <a href="#">Delete</a>
+        </div>
+      </div>
     </div>
-    <div class="dashboard-user">
-      <div class="user">
-        <div class="user-dados">
-          <strong>Name: </strong>{{user.nome}} {{user.sobrenome}} <br />
-          <strong>User Id:</strong> {{ user.id }} <br />
-          <strong>Email:</strong> {{ user.email }} <br />
-          <strong>Nível de Acesso:</strong> {% if current_user.dev == 1 %}
-          Acesso de Administrador (dev) {% elif current_user.dev == 1 %} Acesso
-          de Administrador {% else %}Acesso Básico{% endif %}
-        </div>
-        <div class="button-edit-del-att">
-          <div class="logout">
-            <a href="{{url_for('logout')}}">Sair</a>
-          </div>
-          <div class="edit-user">
-            <a href="{{ url_for('edit_user', user_id=user.id) }}"
-              >Atualizar Perfil</a
-            >
-          </div>
-          <div class="delete-user">
-            <a href="#">Delete</a>
-          </div>
-        </div>
-      </div>
-      <div class="profile-foto">
-        <img src="../static/icon/profile.png" alt="" />
-      </div>
+    <div class="profile-foto">
+      <img src="../static/icon/profile.png" alt="" />
     </div>
   </div>
 </div>

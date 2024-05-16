@@ -5,9 +5,9 @@ endblock %} {% block head %} {{ super() }} {% endblock %} {% block content %}
     <h1>Lista de Usuários</h1>
     <div class="lista-users">
       {% for user in users %}
-      <a href="{{ url_for('user_page', user_id=user.id) }}">{{user}}</a> {% if
-      user.dev == True %} (Dev) {% endif %} {% if user.admin == True %} (Admin)
-      {% endif %}
+      <a href="{{ url_for('user_page', user_id=user.id) }}">{{user}}</a>
+      {% if user.dev == True %} (Dev) {% endif %} {% if user.admin == True %}
+      (Admin) {% else %} (User Básico) {% endif %}
       <br />
       {% endfor %}
     </div>

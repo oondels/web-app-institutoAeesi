@@ -1,31 +1,29 @@
 {% extends "base.html" %} {% block title %}Cadastro{% endblock %} {% block head
 %} {{ super() }} {% endblock %} {% block content %}
-<div class="container">
-  <div class="wrapper">
-    <div>
-      <h2>Guia de Cadastro</h2>
-    </div>
+<div class="wrapper">
+  <div>
+    <h2>Guia de Cadastro</h2>
+  </div>
 
-    <div>
-      <form method="POST">
-        {{ template_form.hidden_tag() }}
-        <div class="input-box">{{ template_form.nome() }}</div>
-        <div class="input-box">{{ template_form.idade() }}</div>
-        <div class="input-box">{{ template_form.cpf_aluno() }}</div>
-        <div class="input-box">{{ template_form.telefone() }}</div>
-        <div class="input-box">{{ template_form.horario() }}</div>
-        <div class="input-box">{{ template_form.email() }}</div>
-        <div class="input-box">{{ template_form.aniversario() }}</div>
-        <div class="bolsa-curso">
-          <div>
-            <p>Curso:</p>
-            {{ template_form.curso() }}
-          </div>
-          <div>{{ template_form.bolsa.label }} {{template_form.bolsa()}}</div>
+  <div>
+    <form method="POST">
+      {{ template_form.hidden_tag() }}
+      <div class="input-box">{{ template_form.nome() }}</div>
+      <div class="input-box">{{ template_form.idade() }}</div>
+      <div class="input-box">{{ template_form.cpf_aluno() }}</div>
+      <div class="input-box">{{ template_form.telefone() }}</div>
+      <div class="input-box">{{ template_form.horario() }}</div>
+      <div class="input-box">{{ template_form.email() }}</div>
+      <div class="input-box">{{ template_form.aniversario() }}</div>
+      <div class="bolsa-curso">
+        <div>
+          <p>Curso:</p>
+          {{ template_form.curso() }}
         </div>
-        <p>{{ template_form.submit() }}</p>
-      </form>
-    </div>
+        <div>{{ template_form.bolsa.label }} {{template_form.bolsa()}}</div>
+      </div>
+      <p>{{ template_form.submit() }}</p>
+    </form>
   </div>
 </div>
 {% endblock %}
