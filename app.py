@@ -9,6 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash
 from datetime import datetime, date
 from dotenv import load_dotenv
+from curso_info import cursos_info
 
 load_dotenv()
 
@@ -188,7 +189,8 @@ def cursos():
 
 @app.route("/cursos/<nameCourse>")
 def curso(nameCourse):
-    return render_template("curso.html", curso=nameCourse)
+    print(cursos_info['Jiu-Jitsu']['beneficios'])
+    return render_template("curso.html", curso=nameCourse, cursos_info=cursos_info)
 
 # Rota para registrar pagamento de alunos e upload de comprovantes/fotos
 @app.route("/pagamentos", methods=["GET", "POST"])
