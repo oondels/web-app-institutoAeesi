@@ -316,7 +316,7 @@ def admin():
     alunoPago = 0
 
     if alunos.query.count() != 0:
-        alunoPago = round((pago/alunos.query.filter_by(bolsa=0).count() * 100), 2)
+        alunoPago = round((pago/alunos.query.filter_by(bolsa=False).count() * 100), 2)
         # Porcentagem de Bolsistaas
         porcentagem_bolsa = round((alunos.query.filter_by(bolsa=True).count()/alunos.query.count())*100,2)
 
