@@ -53,3 +53,4 @@ traitlets==5.14.0
 typing_extensions==4.10.0
 Werkzeug==3.0.1
 WTForms==3.1.2
+Flask-Mail==0.9.1

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block title %}Pagamentos{% endblock %} {% block
+head %} {{ super() }} {% endblock %} {% block content %}
+
+<div class="wrapper">
+  <h1>Bem vindo!</h1>
+  <br />
+  <p>
+    Você ainda não confirmou seu email. Por favor verifique sua caixa de entrada
+    (e sua caixa de Spam) - Você deve ter recebido um email com um link de
+    confirmação.
+  </p>
+  <p>
+    Não recebeu o email?<br />
+    <a href="{{ url_for('resend_confirmation') }}">Reenviar Email</a>
+  </p>
+</div>
+
+{% endblock %}

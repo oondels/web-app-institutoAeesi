@@ -1,16 +1,17 @@
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
+from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, LoginManager, login_required, login_user, current_user, logout_user
+from werkzeug.security import check_password_hash
+from flask_login import LoginManager, login_required, login_user, current_user, logout_user
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash
 from datetime import datetime, date
 from dotenv import load_dotenv
 from curso_info import cursos_info
 from functools import wraps
+from itsdangerous import URLSafeTimedSerializer
+from flask_mail import Mail, Message
 
 load_dotenv()
 
@@ -24,52 +25,40 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL_AWS")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
+app.config["SECURITY_PASSWORD_SALT"] = os.environ.get("SECURITY_PASSWORD_SALT")
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER")
+db.init_app(app)
 
-db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-
-class User(UserMixin, db.Model):
-        id = db.Column(db.Integer, primary_key = True)
-        nome = db.Column(db.String(200))
-        sobrenome = db.Column(db.String(200))
-        email = db.Column(db.String(40), unique=True, index=True)
-        password_hash = db.Column(db.String(200))
-        dev = db.Column(db.Boolean())
-        admin = db.Column(db.Boolean())
-
-        def __repr__(self):
-            return f'{self.nome}'
-
-        def set_password(self, password):
-            self.password_hash = generate_password_hash(password)
-    
-class Aluno(db.Model):
-        id = db.Column(db.Integer, primary_key = True)
-        nome = db.Column(db.String(200))
-        idade = db.Column(db.Integer())
-        cpf = db.Column(db.String(200))
-        curso = db.Column(db.String(40))
-        telefone = db.Column(db.String(25))
-        horario= db.Column(db.String(200))
-        email = db.Column(db.String(200))
-        aniversario = db.Column(db.String(200))
-        bolsa = db.Column(db.Boolean())
-        pagamento = db.relationship('Pagamento', backref='aluno', lazy='dynamic')
-
-        def __repr__(self):
-            return f"{self.nome}"
-
-class Pagamento(db.Model):
-        id = db.Column(db.Integer, primary_key=True)
-        pagamento = db.Column(db.Boolean())
-        mes = db.Column(db.DateTime, default=date.today())
-        aluno_id = db.Column(db.Integer, db.ForeignKey('aluno.id'))
-
-        def __repr__(self):
-            return f'<{self.pagamento}>'
+mail = Mail(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
+
+def send_mail(to, subject, template):
+    msg = Message(
+        subject, 
+        recipients = {to},
+        html = template,
+        sender = app.config["MAIL_DEFAULT_SENDER"],
+    )
+    mail.send(msg)
+
+# Token Generator for emails
+def generate_token(email):
+    serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+    return serializer.dumps(email, app.config["SECURITY_PASSWORD_SALT"])
+
+def confirm_token(token, expiration=3600):
+    serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
+    try:
+        email= serializer.loads(
+            token, salt=app.config["SECURITY_PASSWORD_SALT"], max_age=expiration
+            )
+        
+        return email
+    except Exception:
+        return False
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -90,17 +79,25 @@ def admin_access(func):
         return func(*args, **kwargs)
     return decorated_admin
 
+def check_is_confirmed(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if current_user.is_confirmed is False:
+            flash("Por favor confirme sua conta!", "warning")
+            return redirect(url_for("inactive"))
+        return func(*args, **kwargs)
+
+    return decorated_function
+
 # Tratar erros de url - 404
 @app.errorhandler(404)
 def not_found(e):
     return render_template("404.html")
 
 @app.route('/')
+@login_required
+@check_is_confirmed
 def home():
-    hendrius = User.query.filter_by(id=1).first()
-    hendrius.dev = True
-    hendrius.admin = True
-    db.session.commit()
     return render_template('home.html')
 
 @app.route("/alunos", methods=["GET", "POST"])
@@ -238,17 +235,70 @@ def professores():
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    register_form = Register_User(csrf_enabled=False)
-    if register_form.validate_on_submit():
-        user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                    email=register_form.email.data, admin=False, dev=False)
-        user.set_password(register_form.password.data)
+    if not current_user.is_authenticated:
+        register_form = Register_User(csrf_enabled=False)
+        if register_form.validate_on_submit():
+            user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
+                        email=register_form.email.data, admin=False, dev=False)
+            user.set_password(register_form.password.data)
+            db.session.add(user)
+            db.session.commit()
+            
+            token = generate_token(user.email)
+            confirm_url = url_for("confirm_email", token=token, _external=True)
+            html = render_template("confirm_email.html", confirm_url=confirm_url)
+            subject = "Por favor confirme seu email - Academia AEESI"
+            send_mail(user.email, subject, html)
+
+            login_user(user)
+            
+            flash("Um link de confirmação foi enviado para seu Email.", "success")
+            return redirect(url_for("inactive"))
+        
+        return render_template("register.html", register_form=register_form)
+    else:
+        flash("Faça logout para cadastrar.")
+        return(redirect(url_for("home")))
+    
+@app.route("/confirm/<token>")
+@login_required
+def confirm_email(token):
+    if current_user.is_confirmed:
+        flash("Conta Verificada.", "success")
+        return(redirect(url_for("home")))
+    email = confirm_token(token)
+    user = User.query.filter_by(emial=current_user.email).first_or_404()
+    if user.email == email:
+        user.is_confirmed == True
+        user.confirmed_on == date.today()
         db.session.add(user)
         db.session.commit()
-        flash("Registrado com sucesso!")
-        return redirect(url_for("login"))
-    return render_template("register.html", register_form=register_form)
+        flash("O link de confirmação foi enviado ao seu email. Obrigado!", "success")
+    else:
+        flash("O link de confirmação está inválido ou expirou.", "danger")
+    return(redirect(url_for("home")))
 
+@app.route("/inactive")
+def inactive():
+    if current_user.is_confirmed:
+        return(redirect(url_for("home")))
+    return render_template("inactive.html")
+
+@app.route("/resend")
+@login_required
+def resend_confirmation():
+    if current_user.is_confirmed:
+        flash("Sua conta ja foi confirmada!", "success")
+        return(redirect(url_for("home")))
+    token = generate_token(current_user.email)
+    confirm_url = url_for("confirm_email", token=token, _external=True)
+    html = render_template("confirm_email.html", confirm_url=confirm_url)
+    subject = "Por favor confirme seu email - Academia AEESI"
+    send_mail(current_user.email, subject, html)
+    flash("Um novo link de confirmação foi enviado para seu Email.", "success")
+    return(redirect(url_for("inactive")))
+    
+    
 @app.route("/login", methods=["GET", "POST"])
 def login():
     login_form = Login_User()
