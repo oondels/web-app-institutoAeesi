@@ -2,13 +2,12 @@
 %} {{ super() }} {% endblock %} {% block content %}
 <div class="container-site">
   <div class="wrapper-site">
-    <div class="banner-curso"></div>
+    <div class="banner-curso">
+      <img src="../static/img/cursos/bg-curso/{{ curso }}.jpg" alt="" />
+      <figcaption>Aulas de {{curso}}</figcaption>
+    </div>
     <div class="wrapper-cursos">
       <div class="padding-main">
-        <div class="title-curso">
-          <h1>Aulas de {{curso}}</h1>
-        </div>
-
         <div class="aula-beneficio-content">
           <div class="beneficio">
             <h1 class="destak">Benefícios</h1>
@@ -20,37 +19,49 @@
             <div class="beneficio-um benef">
               <img src="../static/img/cursos/icons/fogocaloria.png" alt="" />
               <h2>Queima Calórica</h2>
-              <p>Queima X calorias por hora, o equivalente a...</p>
+              <p>
+                Queima {{ cursos_info[curso]['beneficios']}} por hora, o
+                equivalente a...
+              </p>
             </div>
             <div class="beneficio-dois benef">
               <img src="../static/img/cursos/icons/saude.png" alt="" />
               <h2>Saúde</h2>
-              <p>Essa atividade proporciona X na sua vida e mais X coisas...</p>
+              <p>{{ cursos_info[curso]['saude']}}</p>
             </div>
           </div>
         </div>
         <div class="professores-section">
-          <h1 class="destak">Professores</h2>
-          <div class="card">
-            <div class="card-image">
-              <img src="../static/img/cursos/boxe/box-card-image.jpg" alt="" />
-            </div>
-            <div class="card-content">
-              <h3>Aulas de Jiu-Jitsu</h3>
-              <div class="curso-descricao">
-                Essa atividade conta com os professores: <br>
-                <strong>Laudeci Conceição de Santana</strong>
+          <div class="professores-content">
+            <h1 class="destak">Professores</h1>
+            <div class="card">
+              <div class="card-image">
+                <img
+                  src="../static/img/cursos/boxe/box-card-image.jpg"
+                  alt=""
+                />
+              </div>
+              <div class="card-content">
+                <h2 class="destak">Aulas de {{ curso }}</h2>
+                <div class="curso-descricao">
+                  Essa atividade conta com os professores: <br />
+                  <strong> {{ cursos_info[curso]['professores']}} </strong>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="horarios-section">
-          <div class="horarios">
-            <h1 class="destak">Horários</h1>
-          <img src="../static/icon/relogio.png" alt="">
-          <p>Segunda a Sexta: 05:00 às 23:00 <br>
-            Sábados: 07:00 às 14:00 <br>
-            Domingos e feriados: 08:00 às 13:00</p>
+          <div class="horarios-section">
+            <div class="horarios-title">
+              <img src="../static/icon/relogio.png" alt="" />
+              <h1 class="destak">Horários</h1>
+            </div>
+            <div class="horarios-content">
+              <p>
+                {% for k, v in cursos_info[curso]['horarios'].items() %} {{k}}:
+                {{v}} <br />
+                {% endfor %}
+              </p>
+            </div>
           </div>
         </div>
         <div class="valor">
