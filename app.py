@@ -10,6 +10,7 @@ from werkzeug.security import generate_password_hash
 from datetime import datetime, date
 from dotenv import load_dotenv
 from curso_info import cursos_info
+from functools import wraps
 
 load_dotenv()
 
@@ -41,13 +42,6 @@ class User(UserMixin, db.Model):
 
         def set_password(self, password):
             self.password_hash = generate_password_hash(password)
-
-        @property
-        def is_admin(self):
-            return self.admin
-        @property
-        def is_dev(self):
-            return self.dev
     
 class Aluno(db.Model):
         id = db.Column(db.Integer, primary_key = True)
@@ -85,12 +79,16 @@ def load_user(user_id):
 def unauthorized():
   return redirect(url_for('login'))
 
-def admin_acces():
-    if current_user.is_authenticated:
+# Decorator para verificar se usuário tem acesso de administrador
+def admin_access(func):
+    @wraps(func)
+    def decorated_admin(*args, **kwargs):
         user = User.query.filter_by(id=current_user.get_id()).first()
-        if user.is_admin:
-            return True
-        else: return False
+        if user.admin == False:
+            flash("Você não tem acesso a essa página!")
+            return(redirect(url_for('home')))
+        return func(*args, **kwargs)
+    return decorated_admin
 
 # Tratar erros de url - 404
 @app.errorhandler(404)
@@ -106,13 +104,12 @@ def home():
     return render_template('home.html')
 
 @app.route("/alunos", methods=["GET", "POST"])
+@login_required
+@admin_access
 def alunos_cadastrados():
-    if admin_acces():
-        alunos = Aluno.query.all()
-        return render_template('alunos.html', alunos = alunos)
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
+    alunos = Aluno.query.all()
+    return render_template('alunos.html', alunos = alunos)
+    
 
 @app.route("/pesquisa")
 def pesquisa():
@@ -125,62 +122,51 @@ def pesquisa():
 
 @app.route("/aluno/<aluno_id>")
 @login_required
+@admin_access
 def aluno(aluno_id):
-    if admin_acces():
-        aluno = Aluno.query.filter_by(id=aluno_id).first()
-        # Pegar pagamento do aluno -> Colocar no arquivo .html
-        for pag in aluno.pagamento:
-            print(pag.pagamento)
-        return render_template("aluno.html", aluno=aluno)
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
+    aluno = Aluno.query.filter_by(id=aluno_id).first() 
+    return render_template("aluno.html", aluno=aluno)
+
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 @login_required
+@admin_access
 def cadastro_aluno():
     cadastrar_form = Cadastro_Form()
-    if admin_acces():
-        if cadastrar_form.validate_on_submit():
-            nome = cadastrar_form.nome.data
-            idade = cadastrar_form.idade.data
-            cpf_aluno = cadastrar_form.cpf_aluno.data
-            curso = cadastrar_form.curso.data
-            telefone = cadastrar_form.telefone.data
-            horario = cadastrar_form.horario.data
-            email = cadastrar_form.email.data
-            aniversario = cadastrar_form.aniversario.data
-            bolsa = cadastrar_form.bolsa.data
+    
+    if cadastrar_form.validate_on_submit():
+        nome = cadastrar_form.nome.data
+        idade = cadastrar_form.idade.data
+        cpf_aluno = cadastrar_form.cpf_aluno.data
+        curso = cadastrar_form.curso.data
+        telefone = cadastrar_form.telefone.data
+        horario = cadastrar_form.horario.data
+        email = cadastrar_form.email.data
+        aniversario = cadastrar_form.aniversario.data
+        bolsa = cadastrar_form.bolsa.data
 
-            aluno = Aluno(nome=nome, idade=idade, cpf=cpf_aluno, curso=curso, telefone=telefone, horario=horario, email=email, aniversario=aniversario, bolsa=bolsa)
-            pag_aluno = Pagamento(pagamento=False, mes=date.today(), aluno=aluno)
-            db.session.add(pag_aluno)
-            db.session.add(aluno)
-            db.session.commit()
-            return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
+        aluno = Aluno(nome=nome, idade=idade, cpf=cpf_aluno, curso=curso, telefone=telefone, horario=horario, email=email, aniversario=aniversario, bolsa=bolsa)
+        pag_aluno = Pagamento(pagamento=False, mes=date.today(), aluno=aluno)
+        db.session.add(pag_aluno)
+        db.session.add(aluno)
+        db.session.commit()
+        return redirect(url_for("cadastro_aluno", _external=True, _scheme='http'))
     return render_template("cadastro.html", template_form=cadastrar_form)
 
-# Finalizar Route
+
 @app.route('/editar_aluno/<aluno_name>/<aluno_id>', methods=["GET", "POST"])
 @login_required
+@admin_access
 def editar_aluno(aluno_name, aluno_id):
     editar_form = Editar_Form()
     aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
-    if admin_acces():
-        if editar_form.validate_on_submit():
-            aluno_edite.email = editar_form.email.data
-            aluno_edite.telefone = editar_form.telefone.data
-            aluno_edite.horario = editar_form.horario.data
-            aluno_edite.curso = editar_form.curso.data
-            aluno_edite.bolsa = editar_form.bolsa.data
-            db.session.commit()
-            return redirect(url_for("alunos_cadastrados", _external=True, _scheme='http'))
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
+    if editar_form.validate_on_submit():
+        aluno_edite.email = editar_form.email.data
+        aluno_edite.telefone = editar_form.telefone.data
+        aluno_edite.horario = editar_form.horario.data
+        aluno_edite.curso = editar_form.curso.data
+        aluno_edite.bolsa = editar_form.bolsa.data
+        db.session.commit()
     return render_template("editar.html", editar_form=editar_form, aluno_edite = aluno_edite)
 
 @app.route("/cursos")
@@ -195,8 +181,8 @@ def curso(nameCourse):
 # Rota para registrar pagamento de alunos e upload de comprovantes/fotos
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
-def pagamentos():
-    if admin_acces():     
+@admin_access
+def pagamentos():    
         file_form = Upload_File()
         alunos = Aluno.query.all()
 
@@ -240,15 +226,11 @@ def pagamentos():
                     os.makedirs(save_path)
                     arquivo.save(os.path.join(save_path, filename))
                     flash("Arquivo enviado")
-            
             except:
                 flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
             return redirect(url_for('pagamentos'))
 
         return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
-    else:
-        flash("Você não possui acesso a esta página!")
-        return(redirect(url_for('home')))
 
 @app.route("/professores")
 def professores():
