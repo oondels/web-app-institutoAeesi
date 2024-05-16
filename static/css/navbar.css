@@ -155,7 +155,7 @@ a:is(:link, :active, :visited).active {
   line-height: 1.5;
 }
 
-.assinar-button button {
+.assinar-button a {
   width: 150px;
   padding: 15px;
   border-radius: 25px;
@@ -165,6 +165,10 @@ a:is(:link, :active, :visited).active {
   font-weight: 400;
   cursor: pointer;
   font-family: Montserrat, sans-serif;
+}
+
+.assinar-button a:hover {
+  background-color: #0d9757;
 }
 
 .sobre-vantagens {
@@ -496,6 +500,10 @@ a:is(:link, :active, :visited).active {
   margin: 50px 0;
 }
 
+.aulas-info .resume {
+  font-weight: 300;
+}
+
 .cursos-info {
   width: 100%;
   max-width: 90rem;
@@ -513,7 +521,7 @@ a:is(:link, :active, :visited).active {
 }
 
 .title {
-  font-size: 25px;
+  font-size: 22px;
 }
 
 .title,
@@ -595,11 +603,40 @@ a:is(:link, :active, :visited).active {
 }
 
 /* Curso */
+.banner-curso {
+  position: relative;
+  background: linear-gradient(transparent 30%, #000000);
+  overflow: hidden;
+}
+
+.banner-curso figcaption {
+  font-weight: 900;
+  color: white;
+  position: absolute;
+  top: 350px;
+  left: 100px;
+  font-size: 40px;
+}
+
+.banner-curso img {
+  object-fit: cover;
+  width: 100%;
+  height: 500px;
+  position: relative;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
 .title-curso {
   padding-top: 70px;
 }
 
 .aula-beneficio-content {
+  width: auto;
   padding: 50px 0;
   grid-column-gap: 16px;
   grid-row-gap: 16px;
@@ -610,7 +647,7 @@ a:is(:link, :active, :visited).active {
 }
 
 .beneficio {
-  width: 500px;
+  width: auto;
 }
 
 .beneficio h1 {
@@ -631,10 +668,11 @@ a:is(:link, :active, :visited).active {
   justify-content: space-between;
   align-items: center;
   display: grid;
+  width: auto;
 }
 
 .beneficio-aula .benef {
-  width: 330px;
+  width: auto;
 }
 
 .beneficio-aula img {
@@ -642,11 +680,12 @@ a:is(:link, :active, :visited).active {
 }
 
 .professores-section {
-  width: 100%;
-  height: 80%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 80%;
   align-items: center;
+  justify-content: center;
 }
 
 .professores-section .card {
@@ -657,23 +696,55 @@ a:is(:link, :active, :visited).active {
   height: 100%;
 }
 
+.professores-section .card-content {
+  padding: 15px;
+}
+
+.professores-content h2 {
+  text-align: center;
+}
+
 .professores-section .card-image {
-  max-width: 25rem;
-  max-height: 15rem;
+  max-width: 26rem;
+  width: auto;
+  height: auto;
   border-bottom-right-radius: 1rem;
 }
 
-.horarios {
-  width: 600px;
-  height: 300px;
+.horarios-section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  width: auto;
+  min-height: 250px;
+  height: auto;
   border: 1px solid rgba(0, 120, 255, 0);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 30px;
 }
 
-.horarios:hover {
+.horarios-section:hover {
   border: 1px solid #018749;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
+.horarios-title {
+  padding-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.horarios-title img {
+  text-align: center;
+  margin-right: 10px;
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.horario-aulas {
+  padding: 70px 0;
 }
 
 /* Inputbox */
@@ -1303,6 +1374,7 @@ td.text-right {
 
   .slide {
     margin: 5px;
+    font-size: 25px;
   }
 
   .matricular {
@@ -1353,7 +1425,6 @@ td.text-right {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     min-width: 10rem;
-    min-height: 23rem;
     position: relative;
     overflow: hidden;
   }
@@ -1368,6 +1439,19 @@ td.text-right {
     padding-top: 60px;
     padding-bottom: 60px;
     font-size: 15px;
+  }
+
+  .aula-beneficio-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .aula-beneficio-content h1 {
+    font-size: 35px;
+  }
+
+  .padding-main {
+    padding: 0 30px;
   }
 }
 
@@ -1409,7 +1493,6 @@ td.text-right {
     border-top-left-radius: 1rem;
     border-bottom-left-radius: 1rem;
     min-width: 10rem;
-    min-height: 24rem;
     position: relative;
     overflow: hidden;
   }
@@ -1425,6 +1508,11 @@ td.text-right {
     color: #039752;
     font-weight: 900;
     font-size: 23px;
+  }
+
+  .aula-beneficio-content p {
+    font-size: 16px;
+    text-align: justify;
   }
 }
 
