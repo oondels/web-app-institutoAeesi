@@ -27,16 +27,15 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
 app.config["SECURITY_PASSWORD_SALT"] = os.environ.get("SECURITY_PASSWORD_SALT")
-app.config["EMAIL_USER"] = os.environ.get("EMAIL_USER")
-app.config["EMAIL_PASSWORD"] = os.environ.get("EMAIL_PASSWORD")
+
 app.config["MAIL_DEFAULT_SENDER"] = "noreply@flask.com"
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_SERVER"] = "smtp-mail.outlook.com"
 app.config["MAIL_PORT"] = 465
 app.config["MAIL_USE_TLS"] = False
 app.config["MAIL_USE_SSL"] = True
 app.config["MAIL_DEBUG"] = False
-app.config["MAIL_USERNAME "] = "my_username@gmail.com"
-app.config["MAIL_PASSWORD "] = "my_password"
+app.config["MAIL_USERNAME "] = os.environ.get("EMAIL_USER")
+app.config["MAIL_PASSWORD "] = os.environ.get("EMAIL_PASSWORD")
 db.init_app(app)
 
 migrate = Migrate(app, db)
@@ -50,7 +49,7 @@ def send_mail(to, subject, template):
         subject, 
         recipients = [to],
         html = template,
-        sender = app.config["MAIL_DEFAULT_SENDER"],
+        sender = "academia.aeesi@outlook.com",
     )
     mail.send(msg)
 
