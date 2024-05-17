@@ -21,12 +21,22 @@ folder = os.path.join(path, "database/files")
 app = Flask(__name__)
 
 # Db
+# DATABASE_URL_AWS = mysql+pymysql://root:wa0i4OchuSql@localhost/geral
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL_AWS") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
 app.config["SECURITY_PASSWORD_SALT"] = os.environ.get("SECURITY_PASSWORD_SALT")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER")
+app.config["EMAIL_USER"] = "hendriussantana23@gmail.com"
+app.config["EMAIL_PASSWORD"] = "643219Google436387"
+app.config["MAIL_DEFAULT_SENDER"] = "noreply@flask.com"
+app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_PORT"] = 465
+app.config["MAIL_USE_TLS"] = False
+app.config["MAIL_USE_SSL"] = True
+app.config["MAIL_DEBUG"] = False
+app.config["MAIL_USERNAME "] = "my_username@gmail.com"
+app.config["MAIL_PASSWORD "] = "my_password"
 db.init_app(app)
 
 migrate = Migrate(app, db)
@@ -38,7 +48,7 @@ login_manager.login_view = "login"
 def send_mail(to, subject, template):
     msg = Message(
         subject, 
-        recipients = {to},
+        recipients = [to],
         html = template,
         sender = app.config["MAIL_DEFAULT_SENDER"],
     )
