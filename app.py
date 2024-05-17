@@ -1,3 +1,4 @@
+
 import os
 from flask import Flask, render_template, redirect, url_for, flash, request
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
@@ -27,16 +28,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
 app.config["SECURITY_PASSWORD_SALT"] = os.environ.get("SECURITY_PASSWORD_SALT")
-app.config["EMAIL_USER"] = os.environ.get("EMAIL_USER")
-app.config["EMAIL_PASSWORD"] = os.environ.get("EMAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = "noreply@flask.com"
+
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
-app.config["MAIL_PORT"] = 465
-app.config["MAIL_USE_TLS"] = False
-app.config["MAIL_USE_SSL"] = True
-app.config["MAIL_DEBUG"] = False
-app.config["MAIL_USERNAME "] = "my_username@gmail.com"
-app.config["MAIL_PASSWORD "] = "my_password"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USERNAME"] = "hendriussantana23@gmail.com"
+app.config["MAIL_PASSWORD"] = "rble ffqo iyqe qcin"
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USE_SSL"] = False
+
 db.init_app(app)
 
 migrate = Migrate(app, db)
@@ -47,11 +46,11 @@ login_manager.login_view = "login"
 
 def send_mail(to, subject, template):
     msg = Message(
-        subject, 
-        recipients = [to],
-        html = template,
-        sender = app.config["MAIL_DEFAULT_SENDER"],
-    )
+            subject = subject, 
+            sender = app.config["MAIL_USERNAME"],
+            recipients = [to],
+            )
+    msg.body = template
     mail.send(msg)
 
 # Token Generator for emails
@@ -105,8 +104,6 @@ def not_found(e):
     return render_template("404.html")
 
 @app.route('/')
-@login_required
-@check_is_confirmed
 def home():
     return render_template('home.html')
 
@@ -249,17 +246,19 @@ def register():
         register_form = Register_User(csrf_enabled=False)
         if register_form.validate_on_submit():
             user = User(nome=register_form.nome.data, sobrenome = register_form.sobrenome.data,
-                        email=register_form.email.data, admin=False, dev=False)
+                        email=register_form.email.data)
             user.set_password(register_form.password.data)
             db.session.add(user)
             db.session.commit()
             
             token = generate_token(user.email)
+            
             confirm_url = url_for("confirm_email", token=token, _external=True)
             html = render_template("confirm_email.html", confirm_url=confirm_url)
             subject = "Por favor confirme seu email - Academia AEESI"
+            
             send_mail(user.email, subject, html)
-
+            
             login_user(user)
             
             flash("Um link de confirmação foi enviado para seu Email.", "success")
@@ -273,17 +272,19 @@ def register():
 @app.route("/confirm/<token>")
 @login_required
 def confirm_email(token):
+    user = User.query.filter_by(id=current_user.id).first()
     if current_user.is_confirmed:
         flash("Conta Verificada.", "success")
         return(redirect(url_for("home")))
     email = confirm_token(token)
-    user = User.query.filter_by(emial=current_user.email).first_or_404()
-    if user.email == email:
-        user.is_confirmed == True
-        user.confirmed_on == date.today()
+
+    if current_user.email == email:
+        user.is_confirmed = True
+        user.confirmed_on = date.today()
+        
         db.session.add(user)
         db.session.commit()
-        flash("O link de confirmação foi enviado ao seu email. Obrigado!", "success")
+        flash("Sua conta foi confirmada. Obrigado!", "success")
     else:
         flash("O link de confirmação está inválido ou expirou.", "danger")
     return(redirect(url_for("home")))
