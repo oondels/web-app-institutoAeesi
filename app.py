@@ -23,7 +23,7 @@ app = Flask(__name__)
 
 # Db
 # DATABASE_URL_AWS = mysql+pymysql://root:wa0i4OchuSql@localhost/geral
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL_AWS") 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
 app.config["UPLOAD_FOLDER"] = folder
