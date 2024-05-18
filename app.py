@@ -51,7 +51,7 @@ def send_mail(to, subject, template):
             sender = app.config["MAIL_USERNAME"],
             recipients = [to],
             )
-    msg.body = template
+    msg.html = template
     mail.send(msg)
 
 # Gerador de Tokens para verificar email
