@@ -1612,6 +1612,10 @@ td.text-right {
     width: 6rem;
   }
 
+  .card-image img {
+    height: 18rem;
+  }
+
   .aula-beneficio-content {
     margin-bottom: 50px;
   }
