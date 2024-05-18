@@ -25,7 +25,7 @@
           >
         </div>
         <div class="delete-user">
-          <a href="#">Delete</a>
+          <a href="{{ url_for('delete_user', user_id=user.id) }}">Delete</a>
         </div>
       </div>
     </div>
