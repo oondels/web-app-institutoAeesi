@@ -11,10 +11,10 @@ class User(UserMixin, db.Model):
         sobrenome = db.Column(db.String(200))
         email = db.Column(db.String(40), unique=True, index=True)
         password_hash = db.Column(db.String(200))
-        is_confirmed = db.Column(db.Boolean(), nullable=False, default=False)
+        is_confirmed = db.Column(db.Boolean(), default=False)
         confirmed_on = db.Column(db.DateTime(), nullable=True)
-        dev = db.Column(db.Boolean(), nullable=False, default=False)
-        admin = db.Column(db.Boolean(), nullable=False, default=False)
+        dev = db.Column(db.Boolean(), default=False)
+        admin = db.Column(db.Boolean(), default=False)
 
         def __repr__(self):
             return f'{self.nome}'
