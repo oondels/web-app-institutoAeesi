@@ -44,6 +44,7 @@ mail = Mail(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
+# Função para enviar email
 def send_mail(to, subject, template):
     msg = Message(
             subject = subject, 
@@ -53,11 +54,12 @@ def send_mail(to, subject, template):
     msg.body = template
     mail.send(msg)
 
-# Token Generator for emails
+# Gerador de Tokens para verificar email
 def generate_token(email):
     serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
     return serializer.dumps(email, app.config["SECURITY_PASSWORD_SALT"])
 
+# Confirmar token recebido
 def confirm_token(token, expiration=3600):
     serializer = URLSafeTimedSerializer(app.config["SECRET_KEY"])
     try:
@@ -88,6 +90,7 @@ def admin_access(func):
         return func(*args, **kwargs)
     return decorated_admin
 
+# Decorador para verificar se usuário está com a conta ativa
 def check_is_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
@@ -114,7 +117,6 @@ def alunos_cadastrados():
     alunos = Aluno.query.all()
     return render_template('alunos.html', alunos = alunos)
     
-
 @app.route("/pesquisa")
 def pesquisa():
     pesquisa = request.args.get("q")
@@ -130,7 +132,6 @@ def pesquisa():
 def aluno(aluno_id):
     aluno = Aluno.query.filter_by(id=aluno_id).first() 
     return render_template("aluno.html", aluno=aluno)
-
 
 @app.route("/cadastrar-aluno", methods=["GET", "POST"])
 @login_required
@@ -330,6 +331,7 @@ def login():
 
 @app.route('/user_page/<user_id>')
 @login_required
+# @check_is_confirmed
 def user_page(user_id):
     if (current_user.get_id() == user_id) or (current_user.dev == 1):
         user = User.query.filter_by(id=user_id).first()
@@ -387,6 +389,15 @@ def edit_user(user_id):
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
+
+@app.route("/user/<user_id>/delete")
+def delete_user(user_id):
+    user = User.query.filter_by(id=user_id).first()
+    print(user)
+    db.session.delete(user)
+    db.session.commit()
+    flash("usuario deletado")
+    return(redirect(url_for("home")))
 
 if __name__ == "__main__":
     app.run(debug=True)

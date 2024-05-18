@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -25,7 +27,7 @@ body {
   align-items: center;
   min-height: 100vh;
   flex-direction: column;
-  padding-top: 70px;
+  padding-top: 80px;
   padding-bottom: 130px;
   position: relative;
 }
@@ -40,12 +42,12 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  min-width: 700px;
+  width: 700px;
   min-height: 600px;
-  height: fit-content;
+  height: auto;
   border-radius: 45px;
   font-weight: 600;
-  padding: 20px 0;
+  margin: 50px 0;
   box-shadow: 10px 10px 20px rgba(73, 73, 73, 0.6);
 }
 
@@ -59,7 +61,7 @@ body {
   top: 0;
   left: 0;
   width: 100%;
-  padding: 20px 100px;
+  padding: 0 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -357,18 +359,6 @@ a:is(:link, :active, :visited).active {
 }
 
 /* User */
-.small-section {
-  padding: 10px;
-  padding-left: 25px;
-  display: flex;
-  justify-content: start;
-  align-items: start;
-  width: 800px;
-  background-color: white;
-  margin-bottom: 5px;
-  margin-top: 15px;
-}
-
 .dashboard-user {
   display: flex;
   justify-content: space-between;
@@ -473,6 +463,7 @@ a:is(:link, :active, :visited).active {
 .container-site {
   padding-bottom: 140px;
   margin: 0;
+  width: 100%;
 }
 
 .banner-cursos {
@@ -648,8 +639,14 @@ a:is(:link, :active, :visited).active {
   display: grid;
 }
 
+.aula-beneficio-content h1,
+h2,
+h3 {
+  font-weight: 400;
+}
+
 .beneficio {
-  width: auto;
+  width: 29rem;
 }
 
 .beneficio h1 {
@@ -675,10 +672,11 @@ a:is(:link, :active, :visited).active {
 
 .beneficio-aula .benef {
   width: auto;
+  height: 200px;
 }
 
 .beneficio-aula img {
-  width: 70px;
+  width: 50px;
 }
 
 .professores-section {
@@ -861,6 +859,10 @@ a:is(:link, :active, :visited).active {
   width: 120px;
 }
 
+.pagamentos {
+  padding-bottom: 60px;
+}
+
 .pagamentos form {
   display: flex;
   flex-direction: column;
@@ -999,6 +1001,7 @@ a:is(:link, :active, :visited).active {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-bottom: 30px;
 }
 
 .cadastrar-pagamento a {
@@ -1037,15 +1040,15 @@ a:is(:link, :active, :visited).active {
 }
 
 /* Table-Test-Alunos */
+.table {
+  overflow-x: auto;
+}
+
 .table-fill {
-  background: white;
-  border-radius: 3px;
   border-collapse: collapse;
-  height: 320px;
+  height: auto;
   margin: auto;
   max-width: 600px;
-  padding: 5px;
-  width: 100%;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   animation: float 5s infinite;
 }
@@ -1056,7 +1059,7 @@ th {
   border-right: 1px solid #343a45;
   font-size: 18px;
   font-weight: 100;
-  padding: 12px;
+  padding: 10px;
   text-align: left;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align: middle;
@@ -1108,7 +1111,7 @@ tr:last-child td:last-child {
 
 td {
   background: #ffffff;
-  padding: 18px;
+  padding: 16px;
   text-align: left;
   vertical-align: middle;
   font-weight: 300;
@@ -1146,23 +1149,17 @@ td.text-right {
 }
 
 /* Aluno */
-.wrapper .dados-aluno {
-  margin-top: 1.3rem;
-  margin-bottom: 2rem;
+.dados-aluno {
+  padding: 50px;
   width: 100%;
-  padding: 0 50px;
-}
-
-.wrapper h1 {
-  padding-top: 30px;
 }
 
 .dados-aluno table {
   width: 100%;
-  padding: 1.8rem;
   text-align: center;
   border-radius: 2rem;
   transition: all 0.3s ease;
+  margin-bottom: 30px;
 }
 
 .dados-aluno table:hover {
@@ -1175,8 +1172,14 @@ td.text-right {
   color: black;
 }
 
-/* Footer */
+/* User */
+.lista-users {
+  max-width: 700px;
+  text-align: center;
+  padding: 0 70px;
+}
 
+/* Footer */
 .footer-basic {
   padding-top: 20px;
   background-color: #0c0d0e;
@@ -1247,13 +1250,16 @@ td.text-right {
 @media (max-width: 1200px) {
   .wrapper {
     width: 90%;
+    margin-top: 100px;
   }
   .container {
-    padding-bottom: 20px;
+    padding-bottom: 140px;
+    padding-top: 0;
   }
 
   .nav-bar {
     background-color: white;
+    padding-left: 50px;
   }
 
   .banner-home {
@@ -1298,6 +1304,15 @@ td.text-right {
     padding-left: 50px;
     padding-right: 50px;
   }
+
+  .aula-beneficio-content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lista-users {
+    width: 600px;
+  }
 }
 
 @media (max-width: 800px) {
@@ -1317,14 +1332,23 @@ td.text-right {
 
 @media (max-width: 800px) {
   .container {
-    padding-bottom: 0;
+    padding-top: 0;
+    padding-bottom: 180px;
+  }
+
+  .container-site {
+    padding-top: 60px;
+  }
+
+  .banner-home {
+    padding-top: 0;
+    height: 80%;
   }
 
   .wrapper {
+    margin-top: 60px;
     height: 100%;
     width: 100%;
-    margin-top: 0;
-    margin-bottom: 30px;
     border-radius: 0;
   }
 
@@ -1421,7 +1445,7 @@ td.text-right {
   }
 
   .cursos-content {
-    padding: 0 90px;
+    padding: 0 50px;
   }
 
   .card-image {
@@ -1445,8 +1469,12 @@ td.text-right {
   }
 
   .aula-beneficio-content {
-    display: flex;
-    flex-direction: column;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+
+  .beneficio {
+    width: auto;
   }
 
   .aula-beneficio-content h1 {
@@ -1456,14 +1484,35 @@ td.text-right {
   .padding-main {
     padding: 0 30px;
   }
+
+  .profile-foto img {
+    width: 150px;
+  }
+
+  /* Alunos */
+  th {
+    font-size: 16px;
+  }
+
+  td {
+    padding: 10px;
+  }
+
+  .lista-users {
+    width: auto;
+  }
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding-bottom: 190px;
+  }
+
   .wrapper {
     height: 100%;
     width: 100%;
     border-radius: 0;
-    margin: 0;
+    margin-bottom: 0;
   }
 
   .footer-basic {
@@ -1481,7 +1530,8 @@ td.text-right {
 
   /* Cursos */
   .cursos-content {
-    padding: 0 60px;
+    padding: 0 30px;
+    font-size: 14px;
   }
 
   .card {
@@ -1515,13 +1565,37 @@ td.text-right {
 
   .aula-beneficio-content p {
     font-size: 16px;
-    text-align: justify;
+  }
+
+  .dashboard-user {
+    flex-direction: column;
+  }
+
+  .dados-aluno {
+    padding: 20px;
+  }
+
+  .dados-aluno h1 {
+    font-size: 25px;
+  }
+
+  .wrapper .btn {
+    font-size: 14px;
+  }
+
+  .cadastrar-pagamento {
+    padding-top: 30px;
   }
 }
 
 @media (max-width: 480px) {
   .cursos-content {
-    padding: 0 30px;
+    padding-left: 17px;
+    padding-right: 17px;
+  }
+
+  p {
+    font-size: 14px;
   }
 
   .card .curso-descricao {
@@ -1536,5 +1610,9 @@ td.text-right {
 
   .card-image {
     width: 6rem;
+  }
+
+  .aula-beneficio-content {
+    margin-bottom: 50px;
   }
 }
