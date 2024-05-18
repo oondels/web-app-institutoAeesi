@@ -511,8 +511,16 @@ main .recent-alunos a {
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 480px) {
+  .container-admin {
+    padding-right: 30px !important;
+  }
+
   main .parametro {
-    width: 85%;
+    width: 95%;
+  }
+
+  main .analyse .progresso-bar {
+    width: 370px;
   }
 }
