@@ -1,26 +1,18 @@
 {% extends "base.html" %} {% block title %}Usuario {{user.nome}}{% endblock %}
 {% block head %} {{ super() }} {% endblock %} {% block content %}
 <div id="popup" class="popup">
-  <img src="" />
-  <!-- Verificar formulário se esta ok e ver como colocar link no inpu ou mudar
-  o input para um link e ver como enviar formulário com isso!!
-  -->
-  <form methods="POST">
-    <div class="input-box">
-      <input id="email" type="text" placeholder="Email" />
-    </div>
-    <div class="input-box">
-      <input
-        id="password"
-        type="password"
-        name="password"
-        autocomplete="on"
-        placeholder="Senha"
-      />
-    </div>
-    <a href="{{ url_for('delete_user', user_id=user.id) }}"
-      ><input type="submit" value="Deletar"
-    /></a>
+  <div class="images-delete-user">
+    <div><img id="aviso-delete" src="../static/icon/aviso.png" /></div>
+    <div><img id="fechar-delete" src="../static/icon/fechar.png" /></div>
+  </div>
+  <h1>Faça Login novamente para confirmar.</h1>
+  <form method="POST">
+    {{login_form.hidden_tag()}}
+
+    <div class="input-box input">{{login_form.email()}}</div>
+
+    <div class="input-box input">{{login_form.password()}}</div>
+    <div>{{login_form.submit()}}</div>
   </form>
 </div>
 <div class="wrapper">
@@ -37,7 +29,7 @@
       </div>
       <div class="button-edit-del-att">
         <div class="logout">
-          <a href="{{url_for('logout')}}">Sair</a>
+          <a href="{{url_for('logout', user_id=user.id)}}">Sair</a>
         </div>
         <div class="edit-user">
           <a href="{{ url_for('edit_user', user_id=user.id) }}"
@@ -60,11 +52,17 @@
   // PopUp Messages
   let popup = document.getElementById("popup");
   var deleteButton = document.getElementById("delete-user-button");
+  var fecharPopup = document.getElementById("fechar-delete");
 
   let openPopup = () => {
     popup.classList.add("showpop");
   };
 
+  let closePopup = () => {
+    popup.classList.remove("showpop");
+  };
+
+  fecharPopup.addEventListener("click", closePopup);
   deleteButton.addEventListener("click", openPopup);
 </script>
 {% endblock %}
