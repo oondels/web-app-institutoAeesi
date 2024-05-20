@@ -389,14 +389,20 @@ def edit_user(user_id):
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
 
-@app.route("/user/<user_id>/delete")
+@app.route("/user/<user_id>/delete", methods=["GET", "POST"])
+@login_required
 def delete_user(user_id):
-    user = User.query.filter_by(id=user_id).first()
-    print(user)
-    db.session.delete(user)
-    db.session.commit()
-    flash("usuario deletado")
-    return(redirect(url_for("home")))
+    if request.method == "POST":
+        print("To aqui")
+        user = User.query.filter_by(id=user_id).first()
+        if user and check_password_hash(user.password_hash, request.form.get("password")):
+            db.session.delete(user)
+            db.session.commit()
+            flash("Usuario deletado")
+            return(redirect(url_for("home")))
+        else:
+            flash("Senha incorreta!")
+            return(redirect(url_for("user_page", user_id=user_id)))
 
 if __name__ == "__main__":
     app.run(debug=True)
