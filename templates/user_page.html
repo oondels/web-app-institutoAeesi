@@ -1,8 +1,30 @@
 {% extends "base.html" %} {% block title %}Usuario {{user.nome}}{% endblock %}
 {% block head %} {{ super() }} {% endblock %} {% block content %}
+<div id="popup" class="popup">
+  <img src="" />
+  <!-- Verificar formulário se esta ok e ver como colocar link no inpu ou mudar
+  o input para um link e ver como enviar formulário com isso!!
+  -->
+  <form methods="POST">
+    <div class="input-box">
+      <input id="email" type="text" placeholder="Email" />
+    </div>
+    <div class="input-box">
+      <input
+        id="password"
+        type="password"
+        name="password"
+        autocomplete="on"
+        placeholder="Senha"
+      />
+    </div>
+    <a href="{{ url_for('delete_user', user_id=user.id) }}"
+      ><input type="submit" value="Deletar"
+    /></a>
+  </form>
+</div>
 <div class="wrapper">
   <h1>Dashboard</h1>
-
   <div class="dashboard-user">
     <div class="user">
       <div class="user-dados">
@@ -22,8 +44,9 @@
             >Atualizar Perfil</a
           >
         </div>
+        <!-- Verificar essa sintaxe -->
         <div class="delete-user">
-          <a href="{{ url_for('delete_user', user_id=user.id) }}">Delete</a>
+          <a id="delete-user-button" href="javascript:void(0)">Delete</a>
         </div>
       </div>
     </div>
@@ -32,4 +55,16 @@
     </div>
   </div>
 </div>
+
+<script>
+  // PopUp Messages
+  let popup = document.getElementById("popup");
+  var deleteButton = document.getElementById("delete-user-button");
+
+  let openPopup = () => {
+    popup.classList.add("showpop");
+  };
+
+  deleteButton.addEventListener("click", openPopup);
+</script>
 {% endblock %}
