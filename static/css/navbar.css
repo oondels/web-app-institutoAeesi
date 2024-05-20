@@ -1249,23 +1249,37 @@ td.text-right {
 
 /* PopUp */
 .popup {
-  background: #b6b6b6;
+  background: #018749;
   width: 400px;
-  border-radius: 6px;
+  border-radius: 40px;
   position: absolute;
   top: 0;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.1);
-  color: black;
   text-align: center;
   padding: 0 30px 30px;
   visibility: hidden;
   transition: transform 0.4s, top 0.4s;
 }
 
+.popup .input-box input::placeholder {
+  color: #fff !important;
+}
+
+.popup .btn {
+  margin-top: 10px;
+  width: 50%;
+  height: 30px;
+  border-radius: 40px;
+}
+
+.popup .btn:hover {
+  background-color: #e6e3e3;
+  cursor: pointer;
+}
+
 .popup img {
   width: 100px;
-  margin-top: -50px;
   border-radius: 50%;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -1274,6 +1288,21 @@ td.text-right {
   visibility: visible;
   top: 30%;
   transform: translate(-50%, -50%) scale(1);
+}
+
+.images-delete-user #fechar-delete {
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 3%;
+}
+
+.popup h1 {
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 5px;
+  color: #fff;
 }
 
 @media (max-width: 1200px) {
@@ -1614,6 +1643,18 @@ td.text-right {
 
   .cadastrar-pagamento {
     padding-top: 30px;
+  }
+
+  .popup {
+    width: 300px;
+  }
+
+  .popup .input-box input {
+    height: 35px;
+  }
+
+  .popup h1 {
+    font-size: 16;
   }
 }
 
