@@ -1247,6 +1247,35 @@ td.text-right {
   margin-bottom: 0;
 }
 
+/* PopUp */
+.popup {
+  background: #b6b6b6;
+  width: 400px;
+  border-radius: 6px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  color: black;
+  text-align: center;
+  padding: 0 30px 30px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+}
+
+.popup img {
+  width: 100px;
+  margin-top: -50px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.showpop {
+  visibility: visible;
+  top: 30%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     width: 90%;
