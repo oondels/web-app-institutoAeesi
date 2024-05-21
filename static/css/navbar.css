@@ -581,7 +581,7 @@ a:is(:link, :active, :visited).active {
 
 .card-content a {
   position: absolute;
-  bottom: 0;
+  bottom: 8%;
   font-size: 18px;
   color: #018749;
   padding-left: 30px;
@@ -1682,11 +1682,15 @@ td.text-right {
     width: 6rem;
   }
 
-  .card-image img {
-    height: 18rem;
+  .card-image {
+    height: 20rem;
   }
 
   .aula-beneficio-content {
     margin-bottom: 50px;
+  }
+
+  .card-content a {
+    bottom: 2%;
   }
 }
