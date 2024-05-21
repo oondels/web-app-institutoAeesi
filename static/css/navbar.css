@@ -30,6 +30,8 @@ body {
   padding-top: 80px;
   padding-bottom: 130px;
   position: relative;
+  height: 100%;
+  width: 100%;
 }
 
 .padding-main {
@@ -262,6 +264,12 @@ a:is(:link, :active, :visited).active {
   100% {
     transform: translateX(0%);
   }
+}
+
+.slide-buttons a {
+  background-color: black;
+  padding: 15px;
+  border: 50%;
 }
 
 .matricular {
@@ -535,7 +543,7 @@ a:is(:link, :active, :visited).active {
 }
 
 .cursos-cardlist {
-  grid-column-gap: 1rem;
+  grid-column-gap: 4rem;
   grid-row-gap: 2rem;
   grid-template-rows: auto;
   grid-template-columns: 1fr 1fr;
@@ -553,21 +561,23 @@ a:is(:link, :active, :visited).active {
   box-shadow: 0 4px 10px rgba(255, 255, 255, 0.15);
 }
 
+.card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
 .card-image {
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
   min-width: 12rem;
   max-width: 12rem;
-  min-height: 17rem;
+  height: 17rem;
   position: relative;
-  overflow: hidden;
   box-shadow: 2px 2px 20px rgba(51, 51, 51, 0.6);
 }
 
 .card-image img {
   object-fit: cover;
   width: 100%;
-  max-width: 100%;
   height: 100%;
 }
 
@@ -581,7 +591,7 @@ a:is(:link, :active, :visited).active {
 
 .card-content a {
   position: absolute;
-  bottom: 0;
+  bottom: 8%;
   font-size: 18px;
   color: #018749;
   padding-left: 30px;
@@ -1247,6 +1257,64 @@ td.text-right {
   margin-bottom: 0;
 }
 
+/* PopUp */
+.popup {
+  background: #018749;
+  width: 400px;
+  border-radius: 40px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.1);
+  text-align: center;
+  padding: 0 30px 30px;
+  visibility: hidden;
+  transition: transform 0.4s, top 0.4s;
+}
+
+.popup .input-box input::placeholder {
+  color: #fff !important;
+}
+
+.popup .btn {
+  margin-top: 10px;
+  width: 50%;
+  height: 30px;
+  border-radius: 40px;
+}
+
+.popup .btn:hover {
+  background-color: #e6e3e3;
+  cursor: pointer;
+}
+
+.popup img {
+  width: 100px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.showpop {
+  visibility: visible;
+  top: 30%;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.images-delete-user #fechar-delete {
+  width: 30px;
+  cursor: pointer;
+  position: absolute;
+  right: 5%;
+  top: 3%;
+}
+
+.popup h1 {
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 5px;
+  color: #fff;
+}
+
 @media (max-width: 1200px) {
   .wrapper {
     width: 90%;
@@ -1264,11 +1332,6 @@ td.text-right {
 
   .banner-home {
     padding-top: 50px;
-  }
-
-  .padding-main {
-    padding-left: 80px;
-    padding-right: 80px;
   }
 
   .sobre-vantagens .matricular {
@@ -1363,7 +1426,7 @@ td.text-right {
     height: auto;
     background-color: white;
     animation: showNav 0.4s ease-in-out forwards;
-    top: -100%;
+    top: -5%;
   }
 
   @keyframes showNav {
@@ -1586,6 +1649,40 @@ td.text-right {
   .cadastrar-pagamento {
     padding-top: 30px;
   }
+
+  .popup {
+    width: 300px;
+  }
+
+  .popup .input-box input {
+    height: 35px;
+  }
+
+  .popup h1 {
+    font-size: 16;
+  }
+
+  .padding-main {
+    padding: 0 15px;
+  }
+
+  .aula-beneficio-content {
+    padding: 10px 15px;
+    padding-right: 10px;
+  }
+
+  .professores-section {
+    padding-top: 20px;
+  }
+
+  .beneficio-aula {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .banner-curso img {
+    background-size: 150%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1610,13 +1707,13 @@ td.text-right {
 
   .card-image {
     width: 6rem;
+    height: 20rem;
   }
-
-  .card-image img {
-    height: 18rem;
-  }
-
   .aula-beneficio-content {
     margin-bottom: 50px;
+  }
+
+  .card-content a {
+    bottom: 2%;
   }
 }

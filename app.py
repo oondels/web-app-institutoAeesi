@@ -22,7 +22,6 @@ folder = os.path.join(path, "database/files")
 app = Flask(__name__)
 
 # Db
-# DATABASE_URL_AWS = mysql+pymysql://root:wa0i4OchuSql@localhost/geral
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL_AWS") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
@@ -329,20 +328,47 @@ def login():
         flash("Você já está autenticado!")
         return redirect(request.referrer)
 
-@app.route('/user_page/<user_id>')
+@app.route('/user_page/<user_id>', methods=["GET", "POST"])
 @login_required
-# @check_is_confirmed
 def user_page(user_id):
     if (current_user.get_id() == user_id) or (current_user.dev == 1):
+        login_form = Login_User()
         user = User.query.filter_by(id=user_id).first()
-        return render_template('user_page.html', user=user)
+        
+        #  Formulário para deletar usuário        
+        if login_form.validate_on_submit():
+            #Verificando se o usuário atual é desenvolvedor
+            if current_user.dev == True:
+                if current_user and check_password_hash(current_user.password_hash, login_form.password.data) and login_form.email.data==current_user.email:
+                    db.session.delete(user)
+                    db.session.commit()
+                    flash("Usuario deletado")
+                    return(redirect(url_for("home")))
+                else:
+                    flash("Senha incorreta ou Email incorreto!", "danger")
+                return(redirect(url_for("user_page", user_id=user_id)))
+            # Se não for dev, verificar se o usuário esta inserindo a senha e email corretos
+            else:
+                user = User.query.filter_by(id=user_id).first()
+                if user and check_password_hash(user.password_hash, login_form.password.data) and login_form.email.data==user.email:
+                    db.session.delete(user)
+                    db.session.commit()
+                    flash("Usuario deletado")
+                    return(redirect(url_for("home")))
+                else:
+                    flash("Senha incorreta ou Email incorreto!", "danger")
+                    return(redirect(url_for("user_page", user_id=user_id)))
+        return render_template('user_page.html', user=user, login_form=login_form)
     else: 
         return redirect(url_for('home'))
 
-@app.route("/logout")
-def logout():
-   logout_user()
-   return redirect(url_for('login'))
+@app.route("/logout/<user_id>")
+@login_required
+def logout(user_id):
+    user = User.query.filter_by(id=user_id).first_or_404()
+    if user.id == current_user.id:
+        logout_user()
+    return redirect(url_for('login'))
 
 @app.route('/admin')
 @login_required
@@ -389,15 +415,6 @@ def edit_user(user_id):
     else:
         flash("Você não possui acesso a esta página!")
         return(redirect(url_for('home')))
-
-@app.route("/user/<user_id>/delete")
-def delete_user(user_id):
-    user = User.query.filter_by(id=user_id).first()
-    print(user)
-    db.session.delete(user)
-    db.session.commit()
-    flash("usuario deletado")
-    return(redirect(url_for("home")))
 
 if __name__ == "__main__":
     app.run(debug=True)
