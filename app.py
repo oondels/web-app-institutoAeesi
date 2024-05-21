@@ -366,7 +366,7 @@ def user_page(user_id):
 @login_required
 def logout(user_id):
     user = User.query.filter_by(id=user_id).first_or_404()
-    if user_id == current_user.id:
+    if user.id == current_user.id:
         logout_user()
     return redirect(url_for('login'))
 
