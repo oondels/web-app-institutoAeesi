@@ -222,13 +222,13 @@ def pagamentos():
                         flash("Erro ao efetuar pagamento do aluno!")
 
                 # Verificando se existe o caminho, caso contrário criando o folder
-                save_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"\\{selection}" + f"\\{aluno_pesquisado.id}")
+                save_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.id}" + "/")
                 if os.path.exists(save_path):
-                    arquivo.save(os.path.join(save_path, filename))
+                    arquivo.save(os.path.join(save_path + filename))
                     flash("Arquivo enviado")
                 else:
                     os.makedirs(save_path)
-                    arquivo.save(os.path.join(save_path, filename))
+                    arquivo.save(os.path.join(save_path + filename))
                     flash("Arquivo enviado")
             except:
                 flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
@@ -242,7 +242,7 @@ def pagamentos():
 @admin_access
 def comprovantes(aluno_id):
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"comprovantes/{aluno.id}")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno.id}" + "/")
     
     if os.path.exists(file_path):
         files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, file))]
