@@ -244,11 +244,13 @@ def pagamentos():
 def comprovantes(aluno_id):
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"comprovantes\\{aluno.id}")
-    files=[]
     
     if os.path.exists(file_path):
         files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, file))]
-        mes_pagamento = [mes.split("$")[0] for mes in files]  
+        mes_pagamento = [mes.split("$")[0] for mes in files]
+    else:
+        files = "Sem comprovantes"
+        mes_pagamento = 0
     
     return render_template("comprovantes.html", aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
 
