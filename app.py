@@ -242,10 +242,10 @@ def pagamentos():
 @admin_access
 def comprovantes(aluno_id):
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno.id}" + "/")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno_id}" + "/")
     
     if os.path.exists(file_path):
-        files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, file))]
+        files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path + file))]
         mes_pagamento = [mes.split("$")[0] for mes in files]
     else:
         files = "Sem comprovantes"
@@ -258,7 +258,7 @@ def comprovantes(aluno_id):
 @login_required
 @admin_access
 def download(aluno_id, filename):
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno.id}" + "/")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno_id}" + "/")
     return send_from_directory(file_path, filename, as_attachment=True)
 
 @app.route("/professores")
