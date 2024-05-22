@@ -31,9 +31,13 @@
   </div>
 
   <div class="button">
-    <a
-      href="{{url_for('editar_aluno', aluno_name=aluno.nome, aluno_id=aluno.id)}}"
+    <a href="{{url_for('editar_aluno', aluno_id=aluno.id)}}"
       ><button class="btn">Editar informações</button></a
+    >
+  </div>
+  <div class="butto">
+    <a href="{{ url_for('comprovantes', aluno_id=aluno.id) }}"
+      ><button class="btn">Comprovantes</button></a
     >
   </div>
 </div>

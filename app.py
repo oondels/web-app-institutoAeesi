@@ -1,6 +1,6 @@
 
-import os
-from flask import Flask, render_template, redirect, url_for, flash, request
+import os, os.path
+from flask import Flask, render_template, redirect, url_for, flash, request, send_from_directory, send_file
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
@@ -17,7 +17,7 @@ from flask_mail import Mail, Message
 load_dotenv()
 
 path = os.path.abspath(os.path.dirname(__file__))
-folder = os.path.join(path, "database/files")
+folder = os.path.join(path, "static\\database\\files")
 
 app = Flask(__name__)
 
@@ -158,10 +158,10 @@ def cadastro_aluno():
     return render_template("cadastro.html", template_form=cadastrar_form)
 
 
-@app.route('/editar_aluno/<aluno_name>/<aluno_id>', methods=["GET", "POST"])
+@app.route('/editar_aluno/<aluno_id>', methods=["GET", "POST"])
 @login_required
 @admin_access
-def editar_aluno(aluno_name, aluno_id):
+def editar_aluno(aluno_id):
     editar_form = Editar_Form()
     aluno_edite = Aluno.query.filter_by(id=aluno_id).first()
     if editar_form.validate_on_submit():
@@ -202,8 +202,8 @@ def pagamentos():
         if file_form.validate_on_submit():
             selection = file_form.directory.data
             arquivo = file_form.file_up.data
-            filename = secure_filename(arquivo.filename)
             mes_pagamento = request.form.get("mes-pagamento").replace("/", "-").strip()
+            filename = mes_pagamento + "$" + secure_filename(arquivo.filename)
 
             # Formarto de Data
             format = "%d-%m-%Y"
@@ -223,9 +223,10 @@ def pagamentos():
                         flash("Erro ao efetuar pagamento do aluno!")
 
                 # Verificando se existe o caminho, caso contrário criando o folder
-                save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.nome}-{aluno_pesquisado.id}" + f"/{mes_pagamento}")
+                save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"\\{selection}" + f"\\{aluno_pesquisado.id}")
                 if os.path.exists(save_path):
                     arquivo.save(os.path.join(save_path, filename))
+                    flash("Arquivo enviado")
                 else:
                     os.makedirs(save_path)
                     arquivo.save(os.path.join(save_path, filename))
@@ -235,6 +236,29 @@ def pagamentos():
             return redirect(url_for('pagamentos'))
 
         return render_template("pagamentos.html", file_form=file_form, alunos=alunos)
+
+# Comprovantes de pagamentos dos alunos
+@app.route("/comprovantes/<aluno_id>")
+@login_required
+@admin_access
+def comprovantes(aluno_id):
+    aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"comprovantes\\{aluno.id}")
+    files=[]
+    
+    if os.path.exists(file_path):
+        files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, file))]
+        mes_pagamento = [mes.split("$")[0] for mes in files]  
+    
+    return render_template("comprovantes.html", aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
+
+# Realizar downloads downloads
+@app.route("/download/<aluno_id>/<filename>", methods=["GET", "POST"])
+@login_required
+@admin_access
+def download(aluno_id, filename):
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"comprovantes\\{aluno_id}")
+    return send_from_directory(file_path, filename, as_attachment=True)
 
 @app.route("/professores")
 def professores():

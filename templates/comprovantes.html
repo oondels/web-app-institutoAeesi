@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Aluno: {{ aluno.nome }}{% endblock %}
+{% block head %} {{ super() }} {% endblock %} {% block content %}
+<div class="container">
+  <div class="wrapper">
+    <h1>Comprovantes de {{ aluno }}</h1>
+    <br />
+    {% if files != None %} {% for i,file in enumerate(files) %}
+    <div class="download-pagamento">
+      Pagamento do mês: {{ mes_pagamento[i] }} -
+      <a href="{{ url_for('download', aluno_id=aluno.id, filename=file) }}"
+        >Download</a
+      >
+    </div>
+    {% endfor %} {% endif %}
+  </div>
+</div>
+{% endblock %}
