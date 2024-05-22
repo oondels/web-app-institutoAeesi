@@ -258,7 +258,7 @@ def comprovantes(aluno_id):
 @login_required
 @admin_access
 def download(aluno_id, filename):
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno_id}")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno.id}" + "/")
     return send_from_directory(file_path, filename, as_attachment=True)
 
 @app.route("/professores")
