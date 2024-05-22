@@ -16,8 +16,7 @@ from flask_mail import Mail, Message
 
 load_dotenv()
 
-path = os.path.abspath(os.path.dirname(__file__))
-folder = os.path.join(path, "static\\database\\files")
+path = os.path.dirname(__file__)
 
 app = Flask(__name__)
 
@@ -25,7 +24,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL_AWS") 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY_APP") 
-app.config["UPLOAD_FOLDER"] = folder
+app.config["UPLOAD_FOLDER"] = "static/database/files/"
 app.config["SECURITY_PASSWORD_SALT"] = os.environ.get("SECURITY_PASSWORD_SALT")
 
 app.config["MAIL_SERVER"] = "smtp.gmail.com"
@@ -223,7 +222,7 @@ def pagamentos():
                         flash("Erro ao efetuar pagamento do aluno!")
 
                 # Verificando se existe o caminho, caso contrário criando o folder
-                save_path = os.path.join(app.config['UPLOAD_FOLDER'] + f"\\{selection}" + f"\\{aluno_pesquisado.id}")
+                save_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"\\{selection}" + f"\\{aluno_pesquisado.id}")
                 if os.path.exists(save_path):
                     arquivo.save(os.path.join(save_path, filename))
                     flash("Arquivo enviado")
@@ -243,7 +242,7 @@ def pagamentos():
 @admin_access
 def comprovantes(aluno_id):
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"comprovantes\\{aluno.id}")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"comprovantes/{aluno.id}")
     
     if os.path.exists(file_path):
         files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, file))]
@@ -259,7 +258,7 @@ def comprovantes(aluno_id):
 @login_required
 @admin_access
 def download(aluno_id, filename):
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], f"comprovantes\\{aluno_id}")
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" +  f"comprovantes/{aluno_id}")
     return send_from_directory(file_path, filename, as_attachment=True)
 
 @app.route("/professores")
