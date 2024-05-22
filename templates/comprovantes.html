@@ -4,14 +4,14 @@
   <div class="wrapper">
     <h1>Comprovantes de {{ aluno }}</h1>
     <br />
-    {% if files != "Sem comprovantes" %} {% for i,file in enumerate(files) %}
+    {% for i,file in enumerate(files) %}
     <div class="download-comprovante">
       Pagamento do mês: {{ mes_pagamento[i] }} -
       <a href="{{ url_for('download', aluno_id=aluno.id, filename=file) }}"
         >Download</a
       >
     </div>
-    {% endfor %} {% else %} Sem comprovantes para Exibir {% endif %}
+    {% endfor %}
   </div>
 </div>
 {% endblock %}
