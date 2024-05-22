@@ -7,7 +7,7 @@
     {% for i,file in enumerate(files) %}
     <div class="download-comprovante">
       Pagamento do mês: {{ mes_pagamento[i] }} -
-      <a href="{{ url_for('download', aluno_id=34, filename=file) }}"
+      <a href="{{ url_for('download', aluno_id=aluno.id, filename=file) }}"
         >Download</a
       >
     </div>

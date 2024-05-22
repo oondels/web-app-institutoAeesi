@@ -1,6 +1,6 @@
 
 import os, os.path
-from flask import Flask, render_template, redirect, url_for, flash, request, send_from_directory, send_file
+from flask import Flask, render_template, redirect, url_for, flash, request, send_file
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
@@ -258,8 +258,8 @@ def comprovantes(aluno_id):
 @login_required
 @admin_access
 def download(aluno_id, filename):
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno_id}" + "/")
-    return send_from_directory(file_path, filename, as_attachment=True)
+    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER']+ "/" + f"comprovantes/{aluno_id}" + "/")
+    return send_file(file_path, filename)
 
 @app.route("/professores")
 def professores():
