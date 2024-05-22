@@ -1020,6 +1020,28 @@ h3 {
   width: 200px !important;
 }
 
+/* Comprovantes */
+.download-comprovante {
+  font-weight: 300;
+}
+
+.download-comprovante a {
+  width: 150px;
+  padding: 15px;
+  border-radius: 25px;
+  background-color: #018749;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  cursor: pointer;
+  font-family: Montserrat, sans-serif;
+}
+
+.download-comprovante a:hover {
+  text-decoration: none;
+  background-color: #0d9757;
+}
+
 /* Login */
 .input-box i {
   position: absolute;
