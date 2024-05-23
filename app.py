@@ -1,6 +1,7 @@
 
 import os, os.path
-from flask import Flask, render_template, redirect, url_for, flash, request, send_file
+import boto3
+from flask import Flask, render_template, redirect, url_for, flash, request, send_file, jsonify
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
@@ -33,6 +34,8 @@ app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
+app.config["AWS_ACCESS_KEY_ID"] = os.environ.get("AWS_ACCESS_KEY_ID")
+app.config["AWS_SECRET_ACCESS_KEY"] = os.environ.get("AWS_SECRET_ACCESS_KEY")
 
 db.init_app(app)
 
@@ -41,6 +44,11 @@ mail = Mail(app)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
+
+# AWS S3 configuration
+S3_BUCKET = 'aeesi-app'
+s3 = boto3.client('s3', aws_access_key=app.config["AWS_ACCESS_KEY_ID"], 
+                  aws_secret_access_key=app.config["AWS_SECRET_ACCESS_KEY"])
 
 # Função para enviar email
 def send_mail(to, subject, template):
