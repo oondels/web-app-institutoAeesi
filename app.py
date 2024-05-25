@@ -1,6 +1,7 @@
 
 import os, os.path
 import boto3
+import botocore
 from flask import Flask, render_template, redirect, url_for, flash, request, send_file, jsonify
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from models import db, User, Aluno, Pagamento
@@ -34,8 +35,10 @@ app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
+
 app.config["AWS_ACCESS_KEY_ID"] = os.environ.get("AWS_ACCESS_KEY_ID")
 app.config["AWS_SECRET_ACCESS_KEY"] = os.environ.get("AWS_SECRET_ACCESS_KEY")
+app.config["S3_BUCKET"] = os.environ.get("S3_BUCKET")
 
 db.init_app(app)
 
@@ -46,8 +49,8 @@ login_manager = LoginManager(app)
 login_manager.login_view = "login"
 
 # AWS S3 configuration
-S3_BUCKET = 'aeesi-app'
-s3 = boto3.client('s3', aws_access_key=app.config["AWS_ACCESS_KEY_ID"], 
+S3_BUCKET = app.config["S3_BUCKET"]
+s3 = boto3.client('s3', aws_access_key_id=app.config["AWS_ACCESS_KEY_ID"], 
                   aws_secret_access_key=app.config["AWS_SECRET_ACCESS_KEY"])
 
 # Função para enviar email
@@ -193,7 +196,7 @@ def curso(nameCourse):
 @app.route("/pagamentos", methods=["GET", "POST"])
 @login_required
 @admin_access
-def pagamentos():    
+def pagamentos():
         file_form = Upload_File()
         alunos = Aluno.query.all()
 
@@ -207,10 +210,11 @@ def pagamentos():
 
         # Verificando se tem envio de dados
         if file_form.validate_on_submit():
+            aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
             selection = file_form.directory.data
             arquivo = file_form.file_up.data
             mes_pagamento = request.form.get("mes-pagamento").replace("/", "-").strip()
-            filename = mes_pagamento + "$" + secure_filename(arquivo.filename)
+            filename = "$" + mes_pagamento + "$" + str(aluno_pesquisado.id) + "$" + secure_filename(arquivo.filename)
 
             # Formarto de Data
             format = "%d-%m-%Y"
@@ -222,7 +226,6 @@ def pagamentos():
                 if request.method == "POST":
                 # Atualizando informação de pagamento
                     try:
-                        aluno_pesquisado = Aluno.query.filter_by(id=int(request.form.get("aluno-pesquisa"))).first()
                         for pay in aluno_pesquisado.pagamento:
                             pay.pagamento = True
                             db.session.commit() 
@@ -230,14 +233,15 @@ def pagamentos():
                         flash("Erro ao efetuar pagamento do aluno!")
 
                 # Verificando se existe o caminho, caso contrário criando o folder
-                save_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"/{selection}" + f"/{aluno_pesquisado.id}" + "/")
-                if os.path.exists(save_path):
-                    arquivo.save(os.path.join(save_path + filename))
+                if arquivo:
+                    arquivo.save(filename)
+                    s3.upload_file(
+                        Bucket = S3_BUCKET,
+                        Filename = filename,
+                        Key = f"{selection}/{aluno_pesquisado.id}/{filename}",
+                    )
                     flash("Arquivo enviado")
-                else:
-                    os.makedirs(save_path)
-                    arquivo.save(os.path.join(save_path + filename))
-                    flash("Arquivo enviado")
+                
             except:
                 flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
             return redirect(url_for('pagamentos'))
@@ -249,25 +253,38 @@ def pagamentos():
 @login_required
 @admin_access
 def comprovantes(aluno_id):
+    try:
+        s3.download_file(Bucket=app.config["S3_BUCKET"],Key="comprovantes/4/$23-07-2023$4$logo2.png", Filename="$23-07-2023$4$logo2.png")
+    except botocore.exceptions.ClientError as e:
+        if e.response['Error']['Code'] == "404":
+            print("The object does not exist.")
+        else:
+            raise Exception
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + "/" + f"comprovantes/{aluno_id}" + "/")
+    files = []
+    mes_pagamentos = []
     
-    if os.path.exists(file_path):
-        files = [file for file in os.listdir(file_path) if os.path.isfile(os.path.join(file_path + file))]
-        mes_pagamento = [mes.split("$")[0] for mes in files]
-    else:
-        files = "Sem comprovantes"
+    # Verificando na amazon s3 se existem arquivos ou buckets (keys)
+    try:
+        # fazendo loop em todas as keys (arquivos) e colocando a key em uma lista -> files
+        for key in s3.list_objects(Bucket=app.config["S3_BUCKET"])['Contents']:
+                if key['Key']:
+                    files.append(key["Key"])
+        mes_pagamento = [mes.split("$")[1] for mes in files]
+    except:
+        # Caso não tenha, manda valor padrão para mes_pagamento e files
         mes_pagamento = 0
+        files = 0
     
     return render_template("comprovantes.html", aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
 
 # Realizar downloads downloads
-@app.route("/download/<aluno_id>/<filename>", methods=["GET", "POST"])
+@app.route("/download/<s3_key>", methods=["GET", "POST"])
 @login_required
 @admin_access
-def download(aluno_id, filename):
-    file_path = os.path.join(path + "/" + app.config['UPLOAD_FOLDER'] + f"comprovantes/{aluno_id}" + "/" + filename)
-    return send_file(file_path, filename)
+def download(s3_key):
+
+    return(render_template("home.html"))
 
 @app.route("/professores")
 def professores():
