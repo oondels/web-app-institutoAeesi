@@ -7,9 +7,13 @@
     {% if files %} {% for i,file in enumerate(files) %}
     <div class="download-comprovante">
       Pagamento do mês: {{ mes_pagamento[i] }} -
-      <a href="#">Download</a>
+      <a
+        href="{{ url_for('download', aluno_id=aluno.id, file_name=file_name) }}"
+        >Download</a
+      >
     </div>
-    {{file}} {% endfor %} {% else %} Sem comprovantes para exibir! {% endif %}
+    {% endfor %} {{file_name}}{% else %} Sem comprovantes para exibir! {% endif
+    %}
   </div>
 </div>
 {% endblock %}

@@ -1,4 +1,3 @@
-
 import os, os.path
 import boto3
 import botocore
@@ -50,7 +49,7 @@ login_manager.login_view = "login"
 
 # AWS S3 configuration
 S3_BUCKET = app.config["S3_BUCKET"]
-s3 = boto3.client('s3', aws_access_key_id=app.config["AWS_ACCESS_KEY_ID"], 
+s3 = boto3.resource('s3', aws_access_key_id=app.config["AWS_ACCESS_KEY_ID"], 
                   aws_secret_access_key=app.config["AWS_SECRET_ACCESS_KEY"])
 
 # Função para enviar email
@@ -117,6 +116,10 @@ def not_found(e):
 
 @app.route('/')
 def home():
+
+    for bucket in s3.buckets.all():
+        print(bucket)
+    
     return render_template('home.html')
 
 @app.route("/alunos", methods=["GET", "POST"])
@@ -253,38 +256,34 @@ def pagamentos():
 @login_required
 @admin_access
 def comprovantes(aluno_id):
-    try:
-        s3.download_file(Bucket=app.config["S3_BUCKET"],Key="comprovantes/4/$23-07-2023$4$logo2.png", Filename="$23-07-2023$4$logo2.png")
-    except botocore.exceptions.ClientError as e:
-        if e.response['Error']['Code'] == "404":
-            print("The object does not exist.")
-        else:
-            raise Exception
     aluno = Aluno.query.filter_by(id=aluno_id).first_or_404()
     files = []
     mes_pagamentos = []
     
     # Verificando na amazon s3 se existem arquivos ou buckets (keys)
-    try:
+
         # fazendo loop em todas as keys (arquivos) e colocando a key em uma lista -> files
-        for key in s3.list_objects(Bucket=app.config["S3_BUCKET"])['Contents']:
-                if key['Key']:
-                    files.append(key["Key"])
-        mes_pagamento = [mes.split("$")[1] for mes in files]
-    except:
-        # Caso não tenha, manda valor padrão para mes_pagamento e files
-        mes_pagamento = 0
-        files = 0
+    for bucket in s3.Bucket("aeesi-app").objects.filter(Prefix="4"):
+            print(bucket.key)
+        
+    mes_pagamento = [mes.split("$")[1] for mes in files]
+    file_name = [mes.split("/$")[1] for mes in files]
+
     
-    return render_template("comprovantes.html", aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
+    # ("comprovantes.html", file_name=file_name[0], aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
+    return render_template("comprovantes.html", aluno=aluno, enumerate=enumerate)
 
 # Realizar downloads downloads
-@app.route("/download/<s3_key>", methods=["GET", "POST"])
+@app.route("/download/<aluno_id>/<file_name>", methods=["GET"])
 @login_required
 @admin_access
-def download(s3_key):
+def download(aluno_id, file_name):
+    file = "$"+file_name
+    
+    s3.download_file(app.config["S3_BUCKET"], f"comprovantes/{str(aluno_id)}/{file}", file)
+    flash("Baixando arquivo...")
+    return redirect(url_for("home"))
 
-    return(render_template("home.html"))
 
 @app.route("/professores")
 def professores():
