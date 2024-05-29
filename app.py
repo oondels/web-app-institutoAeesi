@@ -205,7 +205,7 @@ def pagamentos():
         alunos = Aluno.query.all()
 
         # Resetando pagamento de todos os alunos para falso no primeiro dia do mês (Menos bolsistas)
-        if date.today().day == 1:
+        if date.today().day == 29:
             for aluno in alunos:
                 if aluno.bolsa == False:
                     for pag in aluno.pagamento:
@@ -230,21 +230,21 @@ def pagamentos():
                 if request.method == "POST":
                 # Atualizando informação de pagamento
                     try:
-                        for pay in aluno_pesquisado.pagamento:
-                            pay.pagamento = True
-                            db.session.commit() 
+                        # Verificando se existe o caminho, caso contrário criando o folder
+                        if arquivo:
+                            arquivo.save(filename)
+                            s3.meta.client.upload_file(
+                                Bucket = S3_BUCKET,
+                                Filename = filename,
+                                Key = f"{selection}/{aluno_pesquisado.id}/{filename}",
+                            )
+                            flash("Arquivo enviado")
+                            for pay in aluno_pesquisado.pagamento:
+                                pay.pagamento = True
+                                db.session.commit() 
                     except:
                         flash("Erro ao efetuar pagamento do aluno!")
-
-                # Verificando se existe o caminho, caso contrário criando o folder
-                if arquivo:
-                    arquivo.save(filename)
-                    s3.upload_file(
-                        Bucket = S3_BUCKET,
-                        Filename = filename,
-                        Key = f"{selection}/{aluno_pesquisado.id}/{filename}",
-                    )
-                    flash("Arquivo enviado")
+                
                 
             except:
                 flash("Formato de Data inválido - Utilize o formato <Dia/Mês/Ano>") 
