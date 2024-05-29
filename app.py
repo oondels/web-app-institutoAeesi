@@ -1,7 +1,8 @@
 import os, os.path
+import re
 import boto3
 import botocore
-from flask import Flask, render_template, redirect, url_for, flash, request, send_file, jsonify
+from flask import Flask, render_template, redirect, url_for, flash, request, send_from_directory
 from forms import Cadastro_Form, Upload_File, Register_User, Login_User, Editar_Form
 from models import db, User, Aluno, Pagamento
 from werkzeug.utils import secure_filename
@@ -260,30 +261,39 @@ def comprovantes(aluno_id):
     files = []
     mes_pagamentos = []
     
-    # Verificando na amazon s3 se existem arquivos ou buckets (keys)
-
-        # fazendo loop em todas as keys (arquivos) e colocando a key em uma lista -> files
-    for bucket in s3.Bucket("aeesi-app").objects.filter(Prefix="4"):
-            print(bucket.key)
-        
-    mes_pagamento = [mes.split("$")[1] for mes in files]
-    file_name = [mes.split("/$")[1] for mes in files]
-
+    # Filtro para aluno
+    aluno_directory = f"comprovantes/{str(aluno_id)}/"
     
+    # Fazendo loop em todas as keys (arquivos) da pasta do aluno e colocando a key em uma lista -> files
+    for bucket in s3.Bucket("aeesi-app").objects.all():
+        if re.search(aluno_directory, bucket.key):
+            print(bucket.key)
+            files.append(bucket.key)
+
+    # Separando mês do pagamento no nome do arquivo
+    mes_pagamento = [mes.split("$")[1] for mes in files]
+    file_name = ["$"+mes.split("/$")[1] for mes in files]
+    
+    print(mes_pagamento)
+    print(file_name)
+
     # ("comprovantes.html", file_name=file_name[0], aluno=aluno, files=files, mes_pagamento=mes_pagamento, enumerate=enumerate)
-    return render_template("comprovantes.html", aluno=aluno, enumerate=enumerate)
+    return render_template("comprovantes.html", aluno=aluno, enumerate=enumerate, files=files, file_name=file_name, mes_pagamento=mes_pagamento)
 
 # Realizar downloads downloads
 @app.route("/download/<aluno_id>/<file_name>", methods=["GET"])
 @login_required
 @admin_access
 def download(aluno_id, file_name):
-    file = "$"+file_name
-    
-    s3.download_file(app.config["S3_BUCKET"], f"comprovantes/{str(aluno_id)}/{file}", file)
-    flash("Baixando arquivo...")
-    return redirect(url_for("home"))
-
+    # Verificando se arquivo existe e baixando
+    try:
+        # Baixando arquivo
+        s3.Bucket("aeesi-app").download_file(f"comprovantes/{str(aluno_id)}/{file_name}", file_name)
+        return send_from_directory("./" ,file_name, as_attachment=True)
+    except botocore.exceptions.ClientError as e:
+        print(e)
+        flash("Arquivo não encontrado!")
+        return redirect(request.referrer)
 
 @app.route("/professores")
 def professores():
