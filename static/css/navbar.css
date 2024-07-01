@@ -137,18 +137,23 @@ a:is(:link, :active, :visited).active {
   font-weight: 600;
 }
 
-/*  Home */
+/* Home */
 .banner-home img {
   object-fit: cover;
   width: 100%;
   height: 100%;
   position: relative;
-  top: 0%;
-  bottom: 0%;
-  left: 0%;
-  right: 0%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   box-shadow: 10px 10px 20px rgba(185, 185, 185, 0.6);
   z-index: -1;
+  transition: transform 0.3s ease; /* Adicionado */
+}
+
+.banner-home img:hover {
+  transform: scale(1.05); /* Adicionado */
 }
 
 .text-matricula {
@@ -157,7 +162,6 @@ a:is(:link, :active, :visited).active {
   text-align: justify;
   color: #000;
   margin-bottom: 0;
-  font-family: Montserrat, sans-serif;
   line-height: 1.5;
 }
 
@@ -171,10 +175,12 @@ a:is(:link, :active, :visited).active {
   font-weight: 400;
   cursor: pointer;
   font-family: Montserrat, sans-serif;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adicionado */
 }
 
 .assinar-button a:hover {
   background-color: #0d9757;
+  transform: scale(1.05); /* Adicionado */
 }
 
 .sobre-vantagens {
@@ -184,6 +190,7 @@ a:is(:link, :active, :visited).active {
   grid-row-start: initial;
   padding-bottom: 70px;
   padding-top: 30px;
+  gap: 2rem; /* Adicionado */
 }
 
 .sobre-vantagens .wrapper-cards {
@@ -192,6 +199,12 @@ a:is(:link, :active, :visited).active {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
   margin: 3rem auto;
   overflow: hidden;
+  border-radius: 15px; /* Adicionado */
+  transition: box-shadow 0.3s ease; /* Adicionado */
+}
+
+.sobre-vantagens .wrapper-cards:hover {
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.8); /* Adicionado */
 }
 
 .sobre-vantagens .slide-cards {
@@ -269,7 +282,13 @@ a:is(:link, :active, :visited).active {
 .slide-buttons a {
   background-color: black;
   padding: 15px;
-  border: 50%;
+  border-radius: 50%; /* Alterado */
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Adicionado */
+}
+
+.slide-buttons a:hover {
+  background-color: #333;
+  transform: scale(1.1); /* Adicionado */
 }
 
 .matricular {
@@ -292,8 +311,9 @@ a:is(:link, :active, :visited).active {
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
   margin: 3rem auto;
   overflow: hidden;
-  transition: 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s; /* Alterado */
   cursor: pointer;
+  border-radius: 15px; /* Adicionado */
 }
 
 .slide p {
@@ -302,48 +322,19 @@ a:is(:link, :active, :visited).active {
   width: 100%;
   height: 30%;
   opacity: 0.8;
+  color: white; /* Adicionado */
+  font-weight: bold; /* Adicionado */
 }
 
 .slide:hover {
   transform: scale(1.1);
-  border-radius: 20px;
+  box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.8); /* Adicionado */
 }
 
-.slider-foto-1 {
-  background-image: linear-gradient(transparent 30%, #2b2a2a),
-    url(../img/cards/maefilhas.jpg);
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  font-size: 35px;
-  font-family: Montserrat, sans-serif;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-}
-
-.slider-foto-2 {
-  background-image: linear-gradient(transparent 30%, #2b2a2a),
-    url(../img/cards/colegio.jpg);
-  background-position: center;
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  font-size: 35px;
-  font-family: Montserrat, sans-serif;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-}
-
+.slider-foto-1,
+.slider-foto-2,
 .slider-foto-3 {
-  background-image: linear-gradient(transparent 30%, #2b2a2a),
-    url(../img/cards/medalhas.jpg);
+  background-image: linear-gradient(transparent 30%, #2b2a2a);
   background-position: center;
   background-size: cover;
   display: flex;
@@ -355,6 +346,13 @@ a:is(:link, :active, :visited).active {
   font-weight: bold;
   text-align: center;
   color: white;
+  transition: transform 0.3s ease; /* Adicionado */
+}
+
+.slider-foto-1:hover,
+.slider-foto-2:hover,
+.slider-foto-3:hover {
+  transform: scale(1.05); /* Adicionado */
 }
 
 .frase-efeito {
@@ -364,6 +362,10 @@ a:is(:link, :active, :visited).active {
   width: 100%;
   height: 20vh;
   font-size: 25px;
+  background-color: #f5f5f5; /* Adicionado */
+  padding: 1rem; /* Adicionado */
+  border-radius: 10px; /* Adicionado */
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1); /* Adicionado */
 }
 
 /* User */
@@ -503,6 +505,10 @@ a:is(:link, :active, :visited).active {
 
 .aulas-info .resume {
   font-weight: 300;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-top: 20px;
+  color: #555;
 }
 
 .cursos-info {
@@ -1023,6 +1029,7 @@ h3 {
 /* Comprovantes */
 .download-comprovante {
   font-weight: 300;
+  padding: 15px;
 }
 
 .download-comprovante a {

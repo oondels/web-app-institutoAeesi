@@ -457,7 +457,6 @@ main .recent-alunos a {
   }
 
   main {
-    margin-top: 8rem;
     padding: 0 1rem;
   }
 
@@ -509,6 +508,19 @@ main .recent-alunos a {
   .right-section .nav button span {
     font-size: 2rem;
   }
+
+  .analyse .parametro {
+    flex: 1 1 100%;
+  }
+
+  .right-section {
+    padding-top: 50px;
+    order: -1; /* Garante que este elemento venha depois */
+  }
+
+  .analyse {
+    order: 2; /* Coloca este elemento primeiro */
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -523,4 +535,24 @@ main .recent-alunos a {
   main .analyse .progresso-bar {
     width: 370px;
   }
+
+  .analyse .parametro {
+    min-width: 100%;
+  }
 }
+
+@media screen and (max-width: 320px){
+
+  html {
+    font-size: 50%;
+  }
+
+  .main h1 {
+    font-size: 1.8rem;
+  }
+
+  .nav .profile .info p {
+    font-size: 0.8rem;
+  }
+}
+  
