@@ -1026,27 +1026,213 @@ h3 {
   width: 200px !important;
 }
 
+/* Geral */
+.pagamentos {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+.pagamentos h1 {
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Input de Pesquisa */
+.input-box {
+  margin-bottom: 10px;
+}
+
+#input-pesquisa {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* Lista de Alunos */
+#aluno-pesquisa {
+  list-style-type: none;
+  padding: 0;
+}
+
+#aluno-pesquisa li {
+  margin-bottom: 10px;
+}
+
+.checkbox-wrapper-13 {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-wrapper-13 img {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.checkbox-wrapper-13 a {
+  color: #018749;
+  text-decoration: none;
+}
+
+.checkbox-wrapper-13 input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: 21px;
+  width: 21px;
+  outline: none;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.2s;
+}
+
+.checkbox-wrapper-13 input[type="checkbox"]:checked {
+  background-color: #0d9757;
+  border-color: #0d9757;
+}
+
+.checkbox-wrapper-13 input[type="checkbox"]:hover {
+  background-color: #f0f0f0;
+  border-color: #0d9757;
+}
+
+.checkbox-wrapper-13 input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.checkbox-wrapper-13 input[type="checkbox"] + label {
+  margin-left: 5px;
+}
+
+/* Botões */
+.upload-submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.upload-submit .btn {
+  background-color: #0d9757;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.upload-submit .btn:hover {
+  background-color: #018749;
+}
+
+.upload {
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload legend {
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.upload fieldset {
+  border: none;
+  padding: 0;
+}
+
+.upload .directory-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.upload .directory-container label {
+  font-size: 1rem;
+  margin-right: 10px;
+}
+
+.upload .directory-container input[type="text"] {
+  width: 300px;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+}
+
+.upload-submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.upload-submit .btn {
+  background-color: #0d9757;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.upload-submit .btn:hover {
+  background-color: #018749;
+}
+
 /* Comprovantes */
 .download-comprovante {
-  font-weight: 300;
+  margin-bottom: 20px;
   padding: 15px;
+  border-radius: 8px;
+  background-color: #f0f0f0; /* Cor de fundo suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: transform 0.3s ease;
+}
+
+.download-comprovante:hover {
+  transform: translateY(-5px); /* Efeito de elevação no hover */
+}
+
+.download-comprovante p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #555; /* Cor do texto mais suave */
 }
 
 .download-comprovante a {
-  width: 150px;
-  padding: 15px;
-  border-radius: 25px;
-  background-color: #018749;
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: #0d9757; /* Verde conforme sua preferência */
   color: white;
   font-size: 1rem;
-  font-weight: 400;
-  cursor: pointer;
-  font-family: Montserrat, sans-serif;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .download-comprovante a:hover {
-  text-decoration: none;
-  background-color: #0d9757;
+  background-color: #018749; /* Verde mais escuro no hover */
 }
 
 /* Login */
