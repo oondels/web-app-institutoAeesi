@@ -1,18 +1,29 @@
-{% extends "base.html" %} {% block title %}Aluno: {{ aluno.nome }}{% endblock %}
-{% block head %} {{ super() }} {% endblock %} {% block content %}
+{% extends "base.html" %}
+
+{% block title %}
+  Aluno: {{ aluno.nome }}
+{% endblock %}
+
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+{% endblock %}
+
+{% block content %}
 <div class="container">
   <div class="wrapper">
-    <h1>Comprovantes de {{ aluno }}</h1>
+    <h1>Comprovantes de {{ aluno.nome }}</h1>
     <br />
-    {% if files %} {% for i,file in enumerate(files) %}
-    <div class="download-comprovante">
-      Pagamento do mês: {{ mes_pagamento[i] }} -
-      <a
-        href="{{ url_for('download', aluno_id=aluno.id, file_name=file_name[i]) }}"
-        >Download</a
-      >
-    </div>
-    {% endfor %}{% else %} Sem comprovantes para exibir! {% endif %}
+    {% if files %}
+      {% for i, file in enumerate(files) %}
+      <div class="download-comprovante animate__animated animate__fadeInUp">
+        <p>{{ mes_pagamento[i] }}</p>
+        <a href="{{ url_for('download', aluno_id=aluno.id, file_name=file_name[i]) }}">Download</a>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p>Sem comprovantes para exibir!</p>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
